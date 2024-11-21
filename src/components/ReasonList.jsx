@@ -15,7 +15,7 @@ const ReasonList = () => {
                     #1 for Some Genuine Reasons
                 </h4>
                 <p className="text-center text-sm md:text-md text-[#707070]">
-                    We offer a wide range of unique rental vehicles for any occasion or destination. From economy cars to SUVs, we've
+                    We offer a wide range of unique rental vehicles for any occasion or destination. From economy cars to SUVs, we&apos;ve
                     <br className="hidden md:block" /> got you covered. Take advantage of our exclusive loyalty program for money-saving rewards.
                     Choose from luxury, <br className="hidden md:block" /> mid-range, and cheap vehicles according to your budget. Get the best car rental in Dubai.
                 </p>
