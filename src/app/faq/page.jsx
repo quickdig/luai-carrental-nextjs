@@ -7,7 +7,7 @@ import { GoPlus } from "react-icons/go";
 import { RxCross2 } from "react-icons/rx";
 import FaqCard from "@/components/FaqCard";
 
-const page = () => {
+const Faq = () => {
 
     useEffect(() => {
         dropdown()
@@ -54,4 +54,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Faq
