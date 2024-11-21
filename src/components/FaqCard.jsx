@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const FaqCard = ({ idx, question, answer }) => {
@@ -19,14 +20,18 @@ const FaqCard = ({ idx, question, answer }) => {
                         className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
                         data-menu=""
                     >
-                        <img
+                        <Image
                             className="transform"
                             src="https://tuk-cdn.s3.amazonaws.com/can-uploader/faq-8-svg2.svg"
+                            width={30}
+                            height={30}
                             alt="toggler"
                         />
-                        <img
+                        <Image
                             className="transform hidden"
                             src="https://tuk-cdn.s3.amazonaws.com/can-uploader/faq-8-svg2dark.svg"
+                            width={30}
+                            height={30}
                             alt="toggler"
                         />
                     </button>
