@@ -2,7 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+.top__BannerBack {
+  background-image: url("../../src/public/assets/banner_back.png");
+}
+
+.journey_BannerBack {
+  background-image: url("../../src/public/assets/backdrop_two.png");
+}
+
+.footer__Cardback {
+  background-image: url("../../src/public/assets/footer_back.png");
+}
+
+.aboutus__Back {
+  background-image: url("../../src/public/assets/aboutus.jpg");
+}
+
+.footer__LowerBack {
+  background-image: url("../../src/public/assets/footer_lowerback.jpg");
+}
+
+#CardTwo {
+  flex-direction: row-reverse;
+}
+
+.clip-triangle {
+  clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
+  rotate: 0deg;
+}
+
+.clip-triangle-2{
+  clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
+}
+
+.clip-triangle-3{
+  clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
+}
+
+/* Rectangle 42 */
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -18,4 +56,4 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
