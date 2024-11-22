@@ -23,7 +23,7 @@ const Banner = () => {
                     {/* Image Section with Red Triangle */}
                     <div className="relative flex-shrink-0 mt-8 sm:mt-0 sm:ml-8 lg:mr-0">
                         {/* Red Triangle Background */}
-                        <div className="absolute inset-0 right-0 -z-10 w-full h-full flex justify-center items-center">
+                        {/* <div className="absolute inset-0 right-0 -z-10 w-full h-full flex justify-center items-center">
                             <div
                                 className="w-full -ml-[120px] h-[120%] md:w-[150%] md:h-[204%] 
                                 bg-red-600 opacity-40 clip-triangle"
@@ -37,7 +37,7 @@ const Banner = () => {
                                 bg-red-600 opacity-90 clip-triangle-2"
                             ></div>
 
-                        </div>
+                        </div> */}
 
                         {/* Car Image */}
                         <Image

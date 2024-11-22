@@ -14,7 +14,7 @@ const ReasonList = () => {
                 <h4 className="text-black text-center text-2xl md:text-3xl font-bold mb-5">
                     #1 for Some Genuine Reasons
                 </h4>
-                <p className="text-center text-sm md:text-md text-[#707070]">
+                <p className="text-center text-sm md:text-md leading-7 text-[#707070]">
                     We offer a wide range of unique rental vehicles for any occasion or destination. From economy cars to SUVs, we&apos;ve
                     <br className="hidden md:block" /> got you covered. Take advantage of our exclusive loyalty program for money-saving rewards.
                     Choose from luxury, <br className="hidden md:block" /> mid-range, and cheap vehicles according to your budget. Get the best car rental in Dubai.
@@ -65,7 +65,7 @@ const ReasonList = () => {
                     </div>
                 </div>
 
-                <p className="text-center text-sm md:text-md text-[#707070] mt-8 md:mt-10">
+                <p className="text-center text-sm md:text-md text-[#707070] mt-8 md:mt-10 leading-7">
                     Whether short-term or long-term rentals, there is something perfect for everyone here at Hala Drive.
                     Book now <br className="hidden md:block" /> and start taking advantage of these excellent benefits today!
                 </p>

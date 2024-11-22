@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: "Poppins", serif;
+}
+
 .top__BannerBack {
   background-image: url("../../src/public/assets/banner_back.png");
 }
@@ -26,16 +30,48 @@
   flex-direction: row-reverse;
 }
 
+@media only screen and (max-width: 400px) {
+  #CardTwo {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  #CardOne {
+    padding: 10px;
+  }
+
+  #CardThree {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #CardTwo {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  #CardOne {
+    padding: 10px;
+  }
+
+  #CardThree {
+    padding: 10px;
+  }
+}
+
 .clip-triangle {
   clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
   rotate: 0deg;
 }
 
-.clip-triangle-2{
+.clip-triangle-2 {
   clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
 }
 
-.clip-triangle-3{
+.clip-triangle-3 {
   clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
 }
 
