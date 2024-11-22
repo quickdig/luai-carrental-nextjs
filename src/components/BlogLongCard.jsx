@@ -22,7 +22,7 @@ const BlogLongCard = () => {
                     <Link href={"/blog/lotus-dubai"} className="text-xl sm:text-2xl font-semibold text-gray-800 hover:underline">Lotus Dubai</Link>
                     <div className="flex items-center text-gray-500 text-sm mt-2">
                         <Image
-                            src={userImage} // Replace with the profile image URL
+                            src={userImage}
                             alt="Author"
                             width={30}
                             height={30}

@@ -56,7 +56,7 @@ const page = () => {
                         <div className="author_box flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:gap-4 text-gray-500">
                             <div className="flex items-center">
                                 <Image
-                                    src={userImage} // Replace with the profile image URL
+                                    src={userImage}
                                     alt="Author"
                                     width={30}
                                     height={30}
