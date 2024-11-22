@@ -1,0 +1,14 @@
+# Query: class
+# Flags: WordMatch
+# ContextLines: 1
+
+2 results - 1 file
+
+src\components\CarCard.jsx:
+  17              {/* Image Box */}
+  18:             <div class="relative w-full h-40 overflow-hidden object-contain group">
+  19                  <Image
+
+  22                      width={270}
+  23:                     class="object-contain transform transition-transform duration-300 group-hover:scale-110"
+  24                  />

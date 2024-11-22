@@ -1,17 +1,16 @@
-import banner_car from "../../src/public/assets/banner_img.png";
+import banner_car2 from "../public/assets/banner_back.png";
+import banner_car from "../public/assets/banner_img.png";
+import bgimg from "../public/assets/bgimg.png"
 import Image from "next/image";
 
 const Banner = () => {
     return (
-        <section className="relative banner_Section">
-            <div className="relative flex items-center justify-center bg-cover bg-center h-[30rem] w-full top__BannerBack">
-                {/* Background Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/20"></div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between w-full max-w-screen-lg p-4 sm:p-8">
-                    {/* Text Section */}
-                    <div className="text-white max-w-lg space-y-6">
+        <section className="relative overflow-hidden banner_Section">
+            <Image src={banner_car2} className="w-full object-cover blur-[2px] max-[1024px]:absolute max-[1024px]:h-full" alt="" /> 
+            <Image src={bgimg} className="absolute h-full max-w-[60%] right-0 top-0 z-[9]" alt="" /> 
+            <div className="banner_SectionMain w-[90%]  items-center grid grid-cols-[40%,60%] mx-auto  right-0 absolute z-10 top-[50%] transform translate-y-[-50%] max-[1024px]:top-0  max-[1024px]:translate-y-[0] max-[1024px]:mt-[2rem] max-[1024px]:block max-[1024px]:relative">
+                <div className="banner_SectionMainl">
+                <div className="text-white max-w-lg space-y-6">
                         <h1 className="text-3xl md:text-5xl font-bold leading-tight">
                             Experience Dubai <br /> on four wheels <br /> with us!
                         </h1>
@@ -19,33 +18,9 @@ const Banner = () => {
                             Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
                         </p>
                     </div>
-
-                    {/* Image Section with Red Triangle */}
-                    <div className="relative flex-shrink-0 mt-8 sm:mt-0 sm:ml-8 lg:mr-0">
-                        {/* Red Triangle Background */}
-                        {/* <div className="absolute inset-0 right-0 -z-10 w-full h-full flex justify-center items-center">
-                            <div
-                                className="w-full -ml-[120px] h-[120%] md:w-[150%] md:h-[204%] 
-                                bg-red-600 opacity-40 clip-triangle"
-                            ></div>
-
-                        </div>
-
-                        <div className="absolute inset-0 -z-10 w-full h-full flex justify-center items-center">
-                            <div
-                                className="w-full -mr-[194px] h-[120%] md:w-[150%] md:h-[204%] 
-                                bg-red-600 opacity-90 clip-triangle-2"
-                            ></div>
-
-                        </div> */}
-
-                        {/* Car Image */}
-                        <Image
-                            src={banner_car}
-                            alt="Car rental"
-                            className="w-72 md:w-96 lg:w-[30rem] object-contain"
-                        />
-                    </div>
+                </div>
+                <div className="banner_SectionMainr">
+                    <Image src={banner_car} className="w-full relative mt-[6rem] max-[1024px]:mt-[3rem]"  alt="test"/>
                 </div>
             </div>
         </section>

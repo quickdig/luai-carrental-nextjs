@@ -15,12 +15,12 @@ const CarCard = ({ image, rating, title, model, pricing }) => {
             </div>
 
             {/* Image Box */}
-            <div class="relative w-full h-40 overflow-hidden object-contain group">
+            <div className="relative w-full h-40 overflow-hidden object-contain group">
                 <Image
                     src={car_img}
                     alt="Zoomable"
                     width={270}
-                    class="object-contain transform transition-transform duration-300 group-hover:scale-110"
+                    className="object-contain transform transition-transform duration-300 group-hover:scale-110"
                 />
             </div>
 
