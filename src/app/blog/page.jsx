@@ -6,6 +6,7 @@ import carImage from "../../public/assets/car_img_1.png"
 import userImage from "../../public/assets/ecllipsTwo.png"
 import Button from "@/components/Button";
 import BlogLongCard from "@/components/BlogLongCard";
+import Link from "next/link";
 
 const page = () => {
     return (
@@ -32,14 +33,19 @@ const page = () => {
                 <h2 className="text-left text-xl font-bold">Blogs</h2>
             </div>
 
-            <div className="relative flex flex-row md:flex-row max-w-screen-lg w-full gap-5 mx-auto px-4 sm:px-6 lg:px-0 mt-5">
-                {/* Card 1 */}
+            <div className="relative grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-screen-lg mx-auto sm:px-6 lg:px-0 mt-5">
+                {/* Blog Card 1 */}
                 <BlogLongCard />
 
-                {/* Card 2 */}
+                {/* Blog Card 2 */}
+                <BlogLongCard />
+
+                {/* Blog Card 3 */}
+                <BlogLongCard />
+
+                {/* Blog Card 4 */}
                 <BlogLongCard />
             </div>
-
         </div>
     )
 }
