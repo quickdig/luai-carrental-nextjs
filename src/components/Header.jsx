@@ -10,44 +10,30 @@ import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 const Header = () => {
   const pathname = usePathname();
   const [language, setLanguage] = useState("English");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For brand dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("Select a Brand");
 
-  const brands = ["Toyota", "BMW", "Mercedes", "Tesla"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
-    , "Audi"
+  const brands = [
+    "Toyota",
+    "BMW",
+    "Mercedes",
+    "Tesla",
+    "Audi"
+  ];
 
-  ]
-  ;
-
-  // Toggle language
   const toggleLanguage = () => {
     setLanguage((prevLanguage) =>
       prevLanguage === "English" ? "Arabic" : "English"
     );
   };
 
-  // Toggle brand dropdown
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
-  // Handle brand selection
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
-    setIsDropdownOpen(false); // Close dropdown after selection
+    setIsDropdownOpen(false); 
   };
 
   const isActive = (path) => pathname === path;
@@ -110,7 +96,6 @@ const Header = () => {
               );
             })}
 
-            {/* Brand Dropdown */}
             <li className="relative">
               <button
                 onClick={toggleDropdown}
