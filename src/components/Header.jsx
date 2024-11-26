@@ -11,15 +11,9 @@ const Header = () => {
   const pathname = usePathname();
   const [language, setLanguage] = useState("English");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedBrand, setSelectedBrand] = useState("Select a Brand");
+  const [selectedBrand, setSelectedBrand] = useState("Brands");
 
-  const brands = [
-    "Toyota",
-    "BMW",
-    "Mercedes",
-    "Tesla",
-    "Audi"
-  ];
+  const brands = ["Toyota", "BMW", "Mercedes", "Tesla", "Audi"];
 
   const toggleLanguage = () => {
     setLanguage((prevLanguage) =>
@@ -27,13 +21,9 @@ const Header = () => {
     );
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prevState) => !prevState);
-  };
-
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
-    setIsDropdownOpen(false); 
+    setIsDropdownOpen(false);
   };
 
   const isActive = (path) => pathname === path;
@@ -49,7 +39,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md z-20">
-      <div className="relative flex max-w-screen-xl flex-col  px-4 py-4 md:mx-auto md:flex-row md:items-center">
+      <div className="relative flex max-w-screen-xl flex-col px-4 py-4 md:mx-auto md:flex-row md:items-center">
         <Link href={"/"} className="flex items-center lg:pl-0 md:pl-4">
           <Image src={off_logo} className="object-contain h-10 md:h-12" alt="Logo" />
         </Link>
@@ -74,7 +64,7 @@ const Header = () => {
 
         <nav
           aria-label="Header Navigation"
-          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6  transition-all md:ml-32 md:max-h-full md:flex-row"
+          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6 transition-all md:ml-32 md:max-h-full md:flex-row"
         >
           <ul className="flex flex-col items-center space-y-4 justify-end md:space-y-0 md:flex-row md:space-x-6 text-sm">
             {navlink.map((item) => {
@@ -82,7 +72,7 @@ const Header = () => {
               return (
                 <li
                   key={name}
-                  className={`group transition duration-300 uppercase font-medium ${
+                  className={`group transition duration-300 uppercase font-medium hover:text-primary hover:border-primary hover:border-b-2 ${
                     isActive(path)
                       ? "text-primary border-b-2 border-primary"
                       : "text-black"
@@ -96,21 +86,24 @@ const Header = () => {
               );
             })}
 
-            <li className="relative">
+            <li
+              className="relative"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
               <button
-                onClick={toggleDropdown}
-                className="text-black font-medium bg-white border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100"
+                className="text-black font-medium bg-white px-4 py-2 hover:bg-primary hover:text-white"
               >
                 {selectedBrand}
               </button>
 
               {isDropdownOpen && (
-                <ul className="absolute left-0 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-30 grid grid-cols-2">
+                <ul className="absolute left-0 bg-[#f1f4f8] w-64  border border-gray-200 rounded-md shadow-lg z-30 grid grid-cols-2">
                   {brands.map((brand) => (
                     <li
                       key={brand}
                       onClick={() => handleBrandSelect(brand)}
-                      className="px-4 py-2 text-sm text-black hover:bg-gray-100 cursor-pointer text-start"
+                      className="px-4 py-2 text-sm text-black hover:bg-[#e9ecef] cursor-pointer text-start"
                     >
                       {brand}
                     </li>
