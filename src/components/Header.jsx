@@ -10,12 +10,27 @@ import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 const Header = () => {
   const pathname = usePathname();
   const [language, setLanguage] = useState("English");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For brand dropdown
+  const [selectedBrand, setSelectedBrand] = useState("Select a Brand");
 
- 
+  const brands = ["Toyota", "BMW", "Mercedes", "Tesla", "Audi"];
+
+  // Toggle language
   const toggleLanguage = () => {
     setLanguage((prevLanguage) =>
       prevLanguage === "English" ? "Arabic" : "English"
     );
+  };
+
+  // Toggle brand dropdown
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
+  };
+
+  // Handle brand selection
+  const handleBrandSelect = (brand) => {
+    setSelectedBrand(brand);
+    setIsDropdownOpen(false); // Close dropdown after selection
   };
 
   const isActive = (path) => pathname === path;
@@ -31,7 +46,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md z-20">
-      <div className="relative flex max-w-screen-xl flex-col overflow-hidden px-4 py-4 md:mx-auto md:flex-row md:items-center">
+      <div className="relative flex max-w-screen-xl flex-col  px-4 py-4 md:mx-auto md:flex-row md:items-center">
         <Link href={"/"} className="flex items-center lg:pl-0 md:pl-4">
           <Image src={off_logo} className="object-contain h-10 md:h-12" alt="Logo" />
         </Link>
@@ -56,7 +71,7 @@ const Header = () => {
 
         <nav
           aria-label="Header Navigation"
-          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6 overflow-hidden transition-all md:ml-32 md:max-h-full md:flex-row"
+          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6  transition-all md:ml-32 md:max-h-full md:flex-row"
         >
           <ul className="flex flex-col items-center space-y-4 justify-end md:space-y-0 md:flex-row md:space-x-6 text-sm">
             {navlink.map((item) => {
@@ -72,18 +87,41 @@ const Header = () => {
                 >
                   <Link href={path} className="relative">
                     {name}
-                    <span className="absolute left-0 bottom-0 w-0 h-1 bg-primary "></span>
+                    <span className="absolute left-0 bottom-0 w-0 h-1 bg-primary"></span>
                   </Link>
                 </li>
               );
             })}
+
+            {/* Brand Dropdown */}
+            <li className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="text-black font-medium bg-white border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100"
+              >
+                {selectedBrand}
+              </button>
+
+              {isDropdownOpen && (
+                <ul className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-30">
+                  {brands.map((brand) => (
+                    <li
+                      key={brand}
+                      onClick={() => handleBrandSelect(brand)}
+                      className="px-4 py-2 text-sm text-black hover:bg-gray-100 cursor-pointer"
+                    >
+                      {brand}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
           </ul>
 
           <ul className="flex flex-col items-center mt-4 space-y-4 text-xs md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
-           
             <li>
               <button
-                onClick={toggleLanguage} 
+                onClick={toggleLanguage}
                 className="bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded inline-flex items-center"
               >
                 <FaEarthAmericas className="mr-2" />
@@ -91,11 +129,8 @@ const Header = () => {
               </button>
             </li>
 
-            
             <li>
-              <button
-                className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center"
-              >
+              <button className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center">
                 <FaPhone className="mr-2" />
                 Book Ride
               </button>
