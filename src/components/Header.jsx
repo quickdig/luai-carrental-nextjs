@@ -13,7 +13,24 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For brand dropdown
   const [selectedBrand, setSelectedBrand] = useState("Select a Brand");
 
-  const brands = ["Toyota", "BMW", "Mercedes", "Tesla", "Audi"];
+  const brands = ["Toyota", "BMW", "Mercedes", "Tesla"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+    , "Audi"
+
+  ]
+  ;
 
   // Toggle language
   const toggleLanguage = () => {
@@ -103,12 +120,12 @@ const Header = () => {
               </button>
 
               {isDropdownOpen && (
-                <ul className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-30">
+                <ul className="absolute left-0 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-30 grid grid-cols-2">
                   {brands.map((brand) => (
                     <li
                       key={brand}
                       onClick={() => handleBrandSelect(brand)}
-                      className="px-4 py-2 text-sm text-black hover:bg-gray-100 cursor-pointer"
+                      className="px-4 py-2 text-sm text-black hover:bg-gray-100 cursor-pointer text-start"
                     >
                       {brand}
                     </li>
