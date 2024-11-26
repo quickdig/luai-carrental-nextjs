@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import off_logo from "../../src/public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 import Button from "./Button";
+import FormModal from "./FormModal";
 
 const Header = () => {
   const router = useRouter();
@@ -14,6 +15,12 @@ const Header = () => {
   const [language, setLanguage] = useState("English");
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Modal Form Open
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  // const closeModal = () => setIsModalOpen(false);
 
   // Toggle the language
   const toggleLanguage = () => {
@@ -70,16 +77,16 @@ const Header = () => {
           {/* Top Main Links */}
           <ul className="flex flex-col items-center space-y-4 justify-end md:space-y-0 md:flex-row md:space-x-6 text-sm">
             {navlink.map((item) => {
-                const {path,name} = item
-                return (
-                    <li key={name} className={`group transition duration-300 uppercase font-medium ${ isActive(path) ? "text-primary border-b-2 border-primary" : "text-black"}`}>
-                    <Link href={path} className="relative">
-                      {name}
-                      <span className="absolute left-0 bottom-0 w-0 h-1 bg-primary "></span>
-                    </Link>
-                  </li>
-            )
-})}
+              const { path, name } = item
+              return (
+                <li key={name} className={`group transition duration-300 uppercase font-medium ${isActive(path) ? "text-primary border-b-2 border-primary" : "text-black"}`}>
+                  <Link href={path} className="relative">
+                    {name}
+                    <span className="absolute left-0 bottom-0 w-0 h-1 bg-primary "></span>
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
 
           <ul className="flex flex-col items-center mt-4 space-y-4 text-xs md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
@@ -95,18 +102,34 @@ const Header = () => {
               />
             </li>
             <li>
-              <Button
-                text={"Book Ride"}
+
+              <button
+                type="button"
+                onClick={openModal}
+                className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center"
+              >
+                <FaPhone />&nbsp;Book Ride
+              </button>
+              {/* <Button
                 type={"button"}
+                aria-haspopup="dialog"
+                aria-expanded={isOpen}
+                onClick={openModel}
+                aria-controls="hs-scale-animation-modal"
+                data-hs-overlay="#hs-scale-animation-modal"
+                text={"Book Ride"}
                 style={
                   "bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center"
                 }
-                icon={<FaPhone />}
-              />
+                icon={<FaPhone openMod={isOpen} />}
+              /> */}
             </li>
           </ul>
         </nav>
       </div>
+      {
+        isModalOpen && <FormModal setOpenTrue={() => setIsModalOpen(false)} />
+      }
     </header>
   );
 };

@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "./custom.css";
+import "./_arabic.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
