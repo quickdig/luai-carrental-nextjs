@@ -1,6 +1,10 @@
 "use client"
 
 import Breadcrumb from "@/components/Breadcrumb"
+import Image from "next/image";
+// import carImage from "../../public/assets/car_img_1.png"
+// import userImage from "../../public/assets/ecllipsTwo.png"
+import Button from "@/components/Button";
 import BlogLongCard from "@/components/BlogLongCard";
 
 const page = () => {

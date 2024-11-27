@@ -141,8 +141,8 @@ const Header = () => {
                 <li
                   key={name}
                   className={`group transition duration-300 uppercase font-medium hover:text-primary hover:border-primary hover:border-b-2 ${isActive(path)
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-black"
+                      ? "text-primary border-b-2 border-primary"
+                      : "text-black"
                     }`}
                 >
                   <Link href={path} className="relative">
@@ -154,11 +154,15 @@ const Header = () => {
             })}
 
             <li
-              className="relative text-black group transition duration-300 uppercase font-medium hover:text-primary hover:border-primary hover:border-b-2"
+              className="relative"
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
-              Brands
+              <button
+                className="text-black font-medium capitalize bg-white px-4 py-2 hover:bg-primary hover:text-white"
+              >
+                {selectedBrand}
+              </button>
 
               {isDropdownOpen && (
                 <ul className="absolute left-0 bg-[#f1f4f8] w-64  border border-gray-200 rounded-md shadow-lg z-30 grid grid-cols-2">
@@ -183,7 +187,7 @@ const Header = () => {
                 className="bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded inline-flex items-center"
               >
                 <FaEarthAmericas className="mr-2" />
-                {language === 'en' ? 'English' : 'Arabic'}
+                {language}
               </button>
             </li>
 

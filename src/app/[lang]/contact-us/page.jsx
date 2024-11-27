@@ -5,7 +5,7 @@ import Link from "next/link";
 import BrandDetailSidebar from "@/components/BrandDetailSidebar";
 import { FaCheck } from "react-icons/fa6";
 import Button from "@/components/Button";
-import mapImage from "../../public/assets/map.png"
+import mapImage from "../../../public/assets/map.png"
 
 const page = () => {
     return (
