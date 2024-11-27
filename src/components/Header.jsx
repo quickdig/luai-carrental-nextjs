@@ -8,6 +8,27 @@ import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 import FormModal from "./FormModal";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
+
+
+const items = [
+  {
+    label: "En",
+    key: 'en',
+  },
+  // {
+  //   label: "Ch",
+  //   key: 'ch',
+  // },
+  {
+    label: "Ar",
+    key: 'ar',
+  },
+  // {
+  //   label: "Ru",
+  //   key: 'ru',
+  // },
+];
+
 const Header = () => {
   const languages = ['en', 'ar'];
   const router = useRouter();
