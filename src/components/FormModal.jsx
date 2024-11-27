@@ -68,7 +68,7 @@ const FormModal = ({ setOpenTrue }) => {
                         <Button
                             text="Submit"
                             type="submit"
-                            style="bg-secondary hover:bg-[#c9281a] text-white text-sm md:text-base lg:text-md py-2 px-4 md:px-6 rounded uppercase font-medium"
+                            style="bg-secondary hover:bg-[#c9281a] text-white text-sm md:text-base lg:text-md py-1 px-4 md:px-6 rounded uppercase font-medium"
                         />
                     </div>
                 </form>

@@ -36,10 +36,10 @@ const page = () => {
                 </div>
             </div>
 
-            <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"About Us"} />
+            <div className="relative">
+                <Breadcrumb linkOne={"Home"} linkTwo={"About Us"} linkThree={"Test Three"} linkFour={"Test Four"} />
             </div>
-            <div className="relative z-10 flex flex-col max-w-screen-lg w-full mx-auto items-center">
+            <div className="relative z-10 flex flex-col max-w-screen-lg w-full mt-0 mx-auto items-center">
                 <div className="flex flex-col lg:flex-row justify-between items-center sm:px-6 lg:px-0">
 
                     <div className="w-full lg:w-1/2 mt-6 lg:mt-10 sm:mx-2 md:mx-2 sm:px-2 md:px-2 px-2 lg:px-0 lg:mx-0">

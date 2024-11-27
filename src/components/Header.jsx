@@ -6,11 +6,13 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import off_logo from "../../src/public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
+import FormModal from "./FormModal";
 
 const Header = () => {
   const pathname = usePathname();
   const [language, setLanguage] = useState("English");
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleLanguage = () => {
     setLanguage((prevLanguage) =>
@@ -65,8 +67,8 @@ const Header = () => {
                 <li
                   key={name}
                   className={`group transition duration-300 uppercase font-medium ${isActive(path)
-                      ? "text-primary border-b-2 border-primary"
-                      : "text-black"
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-black"
                     }`}
                 >
                   <Link href={path} className="relative">
@@ -93,6 +95,8 @@ const Header = () => {
 
             <li>
               <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
                 className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center"
               >
                 <FaPhone className="mr-2" />
