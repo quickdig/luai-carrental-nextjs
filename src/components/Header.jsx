@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import off_logo from "../public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 import FormModal from "./FormModal";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 const Header = () => {
   const languages = ['en', 'ar'];
