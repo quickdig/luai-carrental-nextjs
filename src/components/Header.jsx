@@ -5,6 +5,9 @@ import Image from "next/image";
 import { usePathname, useRouter } from 'next/navigation';
 import off_logo from "../public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
+<<<<<<< HEAD
+import FormModal from "./FormModal";
+=======
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 
@@ -29,6 +32,7 @@ const items = [
 
 
 
+>>>>>>> 838663b04f45b50d491c1dc53768e98f074a0fc2
 
 const Header = () => {
   const languages = ['en', 'ar'];
@@ -42,6 +46,9 @@ const Header = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(`${langValue}`);
   const [language, setLanguage] = useState(`${langValue}`);
 
+<<<<<<< HEAD
+  const [isModalOpen, setIsModalOpen] = useState(false)
+=======
   useEffect(() => {
     // Update the body class whenever selectedLanguage changes
     if (selectedLanguage) {
@@ -52,6 +59,7 @@ const Header = () => {
       };
     }
   }, [selectedLanguage]);
+>>>>>>> 838663b04f45b50d491c1dc53768e98f074a0fc2
 
   const toggleLanguage = (e) => {
     setLanguage((prevLanguage) =>
@@ -139,11 +147,18 @@ const Header = () => {
               return (
                 <li
                   key={name}
+<<<<<<< HEAD
+                  className={`group transition duration-300 uppercase font-medium ${isActive(path)
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-black"
+                    }`}
+=======
                   className={`group transition duration-300 uppercase font-medium hover:text-primary hover:border-primary hover:border-b-2 ${
                     isActive(path)
                       ? "text-primary border-b-2 border-primary"
                       : "text-black"
                   }`}
+>>>>>>> 838663b04f45b50d491c1dc53768e98f074a0fc2
                 >
                   <Link href={path} className="relative">
                     {name}
@@ -192,7 +207,15 @@ const Header = () => {
             </li>
 
             <li>
+<<<<<<< HEAD
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center"
+              >
+=======
               <button className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center">
+>>>>>>> 838663b04f45b50d491c1dc53768e98f074a0fc2
                 <FaPhone className="mr-2" />
                 Book Ride
               </button>
