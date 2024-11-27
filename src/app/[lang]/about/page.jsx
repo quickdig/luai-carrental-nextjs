@@ -1,22 +1,22 @@
 "Use Client"
 import Image from "next/image"
-import carImage from "../../../src/public/assets/aboutus-img1.jpg"
+import carImage from "../../../public/assets/aboutus-img1.jpg"
 import Button from "@/components/Button"
 import ACommonCard from "@/components/ACommonCard"
-import EcllipseOne from "../../../src/public/assets/ecllipsOne.png";
-import EcllipseTwo from "../../../src/public/assets/ecllipsTwo.png";
-import EcllipseThree from "../../../src/public/assets/ecllipsThree.png";
-import EcllipseFour from "../../../src/public/assets/ecllipsFour.png";
-import EcllipseFive from "../../../src/public/assets/ecllipsFive.png";
+import EcllipseOne from "../../../public/assets/ecllipsOne.png";
+import EcllipseTwo from "../../../public/assets/ecllipsTwo.png";
+import EcllipseThree from "../../../public/assets/ecllipsThree.png";
+import EcllipseFour from "../../../public/assets/ecllipsFour.png";
+import EcllipseFive from "../../../public/assets/ecllipsFive.png";
 import Brands from "@/components/Brands"
-import bOne from "../../../src/public/assets/car-brands/chevrolet.png";
-import bTwo from "../../../src/public/assets/car-brands/mazda.svg";
-import bThree from "../../../src/public/assets/car-brands/honda.png";
-import bFour from "../../../src/public/assets/car-brands/bmw.webp";
-import bFive from "../../../src/public/assets/car-brands/mg.png";
-import bSix from "../../../src/public/assets/car-brands/rr.png";
-import bSeven from "../../../src/public/assets/car-brands/toyota.png";
-import bEight from "../../../src/public/assets/car-brands/kia.svg";
+import bOne from "../../../public/assets/car-brands/chevrolet.png";
+import bTwo from "../../../public/assets/car-brands/mazda.svg";
+import bThree from "../../../public/assets/car-brands/honda.png";
+import bFour from "../../../public/assets/car-brands/bmw.webp";
+import bFive from "../../../public/assets/car-brands/mg.png";
+import bSix from "../../../public/assets/car-brands/rr.png";
+import bSeven from "../../../public/assets/car-brands/toyota.png";
+import bEight from "../../../public/assets/car-brands/kia.svg";
 import Breadcrumb from "@/components/Breadcrumb"
 
 const page = () => {
