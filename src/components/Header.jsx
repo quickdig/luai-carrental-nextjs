@@ -1,24 +1,92 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from 'next/navigation';
 import off_logo from "../../src/public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+
+
+const items = [
+  {
+    label: "En",
+    key: 'en',
+  },
+  // {
+  //   label: "Ch",
+  //   key: 'ch',
+  // },
+  {
+    label: "Ar",
+    key: 'ar',
+  },
+  // {
+  //   label: "Ru",
+  //   key: 'ru',
+  // },
+];
+
+
+
 
 const Header = () => {
+  const languages = ['en', 'ar'];
+  const router = useRouter();
   const pathname = usePathname();
-  const [language, setLanguage] = useState("English");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState("Brands");
-
+  
   const brands = ["Toyota", "BMW", "Mercedes", "Tesla", "Audi"];
+  const { langValue, handleLanguage } = useContext(MainLanguageValueContext);
+  const [selectedLanguage, setSelectedLanguage] = useState(`${langValue}`);
+  const [language, setLanguage] = useState(`${langValue}`);
 
-  const toggleLanguage = () => {
+  useEffect(() => {
+    // Update the body class whenever selectedLanguage changes
+    if (selectedLanguage) {
+      document.body.classList.add(selectedLanguage.toLowerCase());
+      // Clean up by removing the class when the component unmounts or selectedLanguage changes
+      return () => {
+        document.body.classList.remove(selectedLanguage.toLowerCase());
+      };
+    }
+  }, [selectedLanguage]);
+
+  const toggleLanguage = (e) => {
     setLanguage((prevLanguage) =>
-      prevLanguage === "English" ? "Arabic" : "English"
+      prevLanguage === "en" ? "ar" : "en"
     );
+
+    const selectedItem = items.find(item => item.key === (e===  "ar" ? "en" : "ar") );
+    setSelectedLanguage(selectedItem.label);
+    handleLanguage(selectedItem.key);
+    const newLang = selectedItem.key;
+    
+    // Construct new path with selected language
+    let pathParts = pathname.split('/');
+
+    // Remove the existing language segment if present
+    if (languages.includes(pathParts[1])) {
+      pathParts.splice(1, 1);
+    }
+
+
+    if (newLang !== 'en') {
+      pathParts = ['', newLang, ...pathParts.slice(1)];
+    } else {
+      pathParts = ['', ...pathParts.slice(1)];
+    }
+    // Construct the new path
+    const newPath = pathParts.join('/');
+    if(newPath) {
+      router.push(newPath);
+      
+    }
+    else {
+      router.push("/");
+    }
   };
 
   const handleBrandSelect = (brand) => {
@@ -92,7 +160,7 @@ const Header = () => {
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
               <button
-                className="text-black font-medium bg-white px-4 py-2 hover:bg-primary hover:text-white"
+                className="text-black font-medium capitalize bg-white px-4 py-2 hover:bg-primary hover:text-white"
               >
                 {selectedBrand}
               </button>
@@ -116,7 +184,7 @@ const Header = () => {
           <ul className="flex flex-col items-center mt-4 space-y-4 text-xs md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
             <li>
               <button
-                onClick={toggleLanguage}
+                onClick={() => toggleLanguage(language)}
                 className="bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded inline-flex items-center"
               >
                 <FaEarthAmericas className="mr-2" />
