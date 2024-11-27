@@ -1,10 +1,9 @@
 "use client";
-
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from 'next/navigation';
-import off_logo from "../../src/public/assets/off_logo.png";
+import off_logo from "../public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 

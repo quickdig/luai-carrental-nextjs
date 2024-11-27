@@ -1,13 +1,13 @@
 import Breadcrumb from "@/components/Breadcrumb"
-import carImage from "../../../public/assets/car_img_1.png"
-import userImage from "../../../public/assets/ecllipsTwo.png"
+import carImage from "@/public/assets/car_img_1.png"
+import userImage from "@/public/assets/ecllipsTwo.png"
 import Image from "next/image"
 import Button from "@/components/Button";
-import catImageOne from "../../../public/assets/cat_img1.jpg";
-import catImageTwo from "../../../public/assets/cat_img2.jpg";
-import catImageThree from "../../../public/assets/cat_img3.jpg";
-import catImageFour from "../../../public/assets/cat_img4.jpg";
-import catImageFive from "../../../public/assets/cat_img5.jpg";
+import catImageOne from "@/public/assets/cat_img1.jpg";
+import catImageTwo from "@/public/assets/cat_img2.jpg";
+import catImageThree from "@/public/assets/cat_img3.jpg";
+import catImageFour from "@/public/assets/cat_img4.jpg";
+import catImageFive from "@/public/assets/cat_img5.jpg";
 import CategoryCard from "@/components/CategoryCard";
 
 const page = () => {
