@@ -28,9 +28,6 @@ const items = [
   // },
 ];
 
-
-
-
 const Header = () => {
   const languages = ['en', 'ar'];
   const router = useRouter();
@@ -141,8 +138,8 @@ const Header = () => {
                 <li
                   key={name}
                   className={`group transition duration-300 uppercase font-medium hover:text-primary hover:border-primary hover:border-b-2 ${isActive(path)
-                      ? "text-primary border-b-2 border-primary"
-                      : "text-black"
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-black"
                     }`}
                 >
                   <Link href={path} className="relative">
