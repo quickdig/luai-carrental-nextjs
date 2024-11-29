@@ -38,7 +38,12 @@
   inset: 0;
   background: #000000b7;
   z-index: 2;
-  }
+}
+
+/* a.link_active {
+  border: 1px solid red;
+  color: red;
+} */
 
 @media only screen and (max-width: 400px) {
   #CardTwo {
@@ -85,6 +90,34 @@
   clip-path: polygon(100% -50%, 100% 200%, 0% 100%);
 }
 
+/* Pagination style */
+
+div.ant-select-selector {
+  display: none !important;
+}
+
+span.ant-select-arrow {
+  display: none !important;
+}
+
+li.ant-pagination-item-active {
+  background: #ef4444 !important;
+  border: none !important;
+}
+
+li.ant-pagination-item:hover {
+  background: #1f2937 !important;
+  border: none !important;
+}
+
+li.ant-pagination-item:hover a {
+  color: #fff !important;
+}
+
+li.ant-pagination-item-active a {
+  color: #fff !important;
+}
+
 /* Rectangle 42 */
 /* :root {
   --background: #ffffff;
@@ -103,6 +136,3 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 } */
-
-
-

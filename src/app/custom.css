@@ -1,10 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-nav button::after {
+/* nav button::after {
     border: none;
     content: "\f107";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     vertical-align: middle;
     margin-left: 8px;
+} */
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 20px;
+    aspect-ratio: 1;
+    background: #ef4444;
+    box-shadow: 0 0 0 0 #ef4444;
+    animation: l2 1.5s infinite linear, fade-out 2s ease 1 forwards;
+    position: relative;
+    transition: 1s all ease;
+  }
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 #ef4444;
+    animation: inherit;
+    animation-delay: -0.5s;
+    transition: 1s all ease;
+  }
+  .loader:after {
+    animation-delay: -1s;
+    transition: 1s all ease;
+  }
+  @keyframes l2 {
+      100% {box-shadow: 0 0 0 40px #fd313136}
+  }
+
+  @keyframes fade-out {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

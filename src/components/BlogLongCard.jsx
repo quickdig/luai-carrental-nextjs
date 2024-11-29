@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image";
 import carImage from "../public/assets/car_img_1.png"
 import userImage from "../public/assets/ecllipsTwo.png"
@@ -7,12 +5,31 @@ import Button from "@/components/Button";
 import Link from "next/link";
 
 
-const BlogLongCard = () => {
+const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date, readtime, description }) => {
+    const basePath = lang === "en" ? '' : `${lang}/`;
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+
+        const day = date.getDate();
+        const ordinalSuffix =
+            day % 10 === 1 && day !== 11
+                ? "st"
+                : day % 10 === 2 && day !== 12
+                    ? "nd"
+                    : day % 10 === 3 && day !== 13
+                        ? "rd"
+                        : "th";
+
+        const month = date.toLocaleString("default", { month: "long" });
+
+        return `${day}${ordinalSuffix} ${month}`;
+    }
+
     return (
         <div className="flex flex-col sm:flex-row bg-white p-2 gap-4 border border-gray-300 rounded-md">
             <div className="img_box flex relative w-full sm:w-2/5 h-48 sm:h-auto object-contain">
-                <Image
-                    src={carImage}
+                <img
+                    src={image}
                     alt="Car"
                     className="rounded-md object-cover w-full h-full"
                 />
@@ -20,10 +37,10 @@ const BlogLongCard = () => {
             <div className="contain_box flex flex-col justify-between w-full sm:w-2/3">
                 <div className="mt-2">
                     <Link
-                        href={"/blog/lotus-dubai"}
-                        className="text-xl sm:text-2xl font-semibold text-gray-800 hover:underline"
+                        href={`blog/${slug}`}
+                        className="text-xl sm:text-2xl font-semibold text-gray-800 hover:underline line-clamp-1"
                     >
-                        Lotus Dubai
+                        {title}
                     </Link>
                     <div className="flex items-center text-gray-500 text-sm mt-2">
                         <Image
@@ -33,19 +50,17 @@ const BlogLongCard = () => {
                             height={25}
                             className="rounded-full"
                         />
-                        <span className="ml-2 font-semibold">Dasteen</span>
+                        <span className="ml-2 text-xs font-normal">{authorname}</span>
                     </div>
                     <div className="flex flex-row items-center mt-2 text-gray-400">
-                        <span className="text-[10px]">Jan 10, 2024</span>
+                        <span className="text-[10px]">{formatDate(date)}</span>
                         <span className="text-sm mx-2">•</span>
-                        <span className="text-[10px]">3 Min Read</span>
+                        <span className="text-[10px]">{readtime}</span>
                     </div>
-                    <p className="text-gray-600 mt-2 text-xs line-clamp-3">
-                        Lorem Ipsum Dolor Sit Amet Consectetur. Consectetur Risus Quis Diam
-                        Hendrerit. Interdum Mattis In Sed Diam Egestas Metus At Duis
-                        Commodo. Cursus Quis Cursus.
+                    <p className="text-gray-600 mt-2 text-xs line-clamp-3" dangerouslySetInnerHTML={{ __html: description }}>
+
                     </p>
-                    <Link href="blog/lotus-dubai">
+                    <Link href={`/blog/${slug}`}>
                         <Button
                             text="Read more →"
                             type="submit"

@@ -3,7 +3,7 @@ import axios from "axios";
 axios.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response.status === 404) {
+    if (err.response) {
       throw new Error(`${err.config.url} not found1`);
     }
     throw err;

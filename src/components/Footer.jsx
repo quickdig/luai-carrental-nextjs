@@ -19,7 +19,7 @@ const Footer = () => {
             >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/95 to-black/95"></div>
                 <footer className="flex flex-col max-w-screen-lg w-full mx-auto items-center px-4 md:px-6 z-10">
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3 w-full">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3 sm:grid-cols-1 w-full my-16">
                         {/* Logo and Description */}
                         <div className="col-span-1 w-full text-center md:text-left">
                             <Image
@@ -63,7 +63,7 @@ const Footer = () => {
 
                         {/* Quick Links */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg border-l-4 border-l-primary pl-3">Quick Links</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">Quick Links</h4>
                             <ul className="text-white mt-3 space-y-3 ml-4">
                                 <li>
                                     <Link href={"#"}>Home</Link>
@@ -88,7 +88,7 @@ const Footer = () => {
 
                         {/* Contact Details */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg border-l-4 border-l-primary pl-3">Contact Details</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">Contact Details</h4>
                             <ul className="text-white mt-3 space-y-3 ml-3">
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
                                     <span className="p-2 rounded-full bg-primary text-white mr-2">

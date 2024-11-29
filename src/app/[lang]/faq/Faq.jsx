@@ -6,8 +6,11 @@ import { useEffect } from "react";
 import { GoPlus } from "react-icons/go";
 import { RxCross2 } from "react-icons/rx";
 import FaqCard from "@/components/FaqCard";
+import useFetch from "@/app/customHooks/useFetch";
 
-const Faq = () => {
+const Faq = ({ params, lang }) => {
+
+    const { loading, data } = useFetch(`faq/${lang}`);
 
     useEffect(() => {
         dropdown()
@@ -42,11 +45,19 @@ const Faq = () => {
                     {/* FAQ Section */}
                     {/* Questions */}
                     {/* Q1 */}
-                    <FaqCard idx={"01"} question={"Alright, but what exactly do you do?"} />
-                    <FaqCard idx={"02"} question={"I don't need a brand strategist but I need help executing an upcoming campaign. Can we still work together?"} />
+
+                    {
+                        data?.data?.map((item, idx) => {
+                            return (
+                                <FaqCard key={idx} idx={idx + 1} question={item.Question} answer={item.Answer} />
+                            )
+                        })
+                    }
+
+                    {/* <FaqCard idx={"02"} question={"I don't need a brand strategist but I need help executing an upcoming campaign. Can we still work together?"} />
                     <FaqCard idx={"03"} question={"Are your rates competitive?"} />
                     <FaqCard idx={"04"} question={"Why do you have a monthly project cap?"} />
-                    <FaqCard idx={"05"} question={"I don't need a brand strategist but I need help executing an upcoming campaign. Can we still work together?"} />
+                    <FaqCard idx={"05"} question={"I don't need a brand strategist but I need help executing an upcoming campaign. Can we still work together?"} /> */}
                 </div>
             </div>
 

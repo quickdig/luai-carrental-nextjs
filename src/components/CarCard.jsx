@@ -4,8 +4,9 @@ import whatsApp from "../../src/public/assets/whatsApp.png";
 import Link from "next/link"
 import Button from "./Button";
 import Image from "next/image";
+import { keywords } from "../../dataset";
 
-const CarCard = ({ image, rating, title, model, pricing }) => {
+const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, slug, id, btnText }) => {
     return (
         <div className="bg-white rounded-md px-4 py-5 space-y-4">
             {/* Star Rating */}
@@ -15,38 +16,38 @@ const CarCard = ({ image, rating, title, model, pricing }) => {
             </div>
 
             {/* Image Box */}
-            <div className="relative w-full h-40 overflow-hidden object-contain group">
-                <Image
-                    src={car_img}
+            <div className="relative w-full h-40 overflow-hidden mx-auto object-contain group">
+                <img
+                    src={image}
                     alt="Zoomable"
-                    width={270}
-                    className="object-contain transform transition-transform duration-300 group-hover:scale-110"
+                    width={200}
+                    className="object-contain transform mx-auto transition-transform duration-300 group-hover:scale-110"
                 />
             </div>
 
             {/* Car Name and Year */}
             <div className="flex flex-col text-center sm:text-left px-2">
-                <Link href={"/brand/audi/audi-a3-2023"} className="text-lg font-medium">
-                    Kia Pegas
+                <Link href={"/brand/audi/audi-a3-2023"} className="text-lg font-medium uppercase">
+                    {title}
                 </Link>
-                <span className="text-xs sm:text-sm text-secondary">2023</span>
+                {/* <span className="text-xs sm:text-sm text-secondary">2023</span> */}
             </div>
 
             {/* Price Section */}
             <div className="flex flex-row lg:flex-row md:flex-row sm:flex-col justify-between items-center gap-2">
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
-                    <span className="text-md font-semibold text-primary">99 AED</span>
-                    <span className="text-gray-400 font-light text-xs">/Daily</span>
+                    <span className="text-sm font-[500] text-primary">{daily}&nbsp;AED</span>
+                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.daily.en : keywords.commonText.pricing.daily.ar}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
-                    <span className="text-md font-semibold text-primary">99 AED</span>
-                    <span className="text-gray-400 font-light text-xs">/Daily</span>
+                    <span className="text-sm font-[500] text-primary">{weekly}&nbsp;AED</span>
+                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.weekly.en : keywords.commonText.pricing.weekly.ar}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
-                    <span className="text-md font-semibold text-primary">99 AED</span>
-                    <span className="text-gray-400 font-light text-xs">/Daily</span>
+                    <span className="text-sm font-[500] text-primary">{monthly}&nbsp;AED</span>
+                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.monthly.en : keywords.commonText.pricing.monthly.ar}</span>
                 </div>
             </div>
 
@@ -54,7 +55,7 @@ const CarCard = ({ image, rating, title, model, pricing }) => {
             <div className="flex flex-row lg:flex-row md:flex-row gap-2 sm:flex-row">
                 {/* Book Ride Button */}
                 <Button
-                    text={"Book Ride"}
+                    text={btnText}
                     type={"submit"}
                     style={
                         "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white"

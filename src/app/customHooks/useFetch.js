@@ -25,11 +25,13 @@ const useFetch = (url) => {
       const { data } = await http.get(`${config.apiEndPoint}${url}`, {
 
       });
-        setData(data);
-        setLoading(false);
-      } catch (e) {
-        if(e.response) {
-        }
+      setData(data);
+      setLoading(false);
+
+      console.log("url is here", url);
+    } catch (e) {
+      if (e.response) {
+      }
       setLoading(true);
       setError(e)
     }

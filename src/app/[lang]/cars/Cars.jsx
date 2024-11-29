@@ -11,13 +11,43 @@ import bFive from "../../../../src/public/assets/car-brands/mg.png";
 import bSix from "../../../../src/public/assets/car-brands/rr.png";
 import bSeven from "../../../../src/public/assets/car-brands/toyota.png";
 import bEight from "../../../../src/public/assets/car-brands/kia.svg";
-import carBrandOne from "../../../../src/public/assets/carBrand1.png";
 import Breadcrumb from "@/components/Breadcrumb"
 import Button from "@/components/Button";
 import Link from "next/link";
 import CarSingleCard from "@/components/CarSingleCard";
+import useFetch from "@/app/customHooks/useFetch";
+import { useEffect, useState } from "react";
+import useGet from "@/app/customHooks/useGet";
+import { Pagination } from "antd";
 
-const page = () => {
+const Cars = ({ params, lang }) => {
+
+    const { loading, data } = useFetch(`car/all/${lang}/12?page=1`);
+
+    const [carData, setCarData] = useState("");
+    const [resget, apiMethodGet] = useGet()
+    const [activePage, setActivePage] = useState(1);
+
+    useEffect(() => {
+        if (data) {
+            setCarData(data?.data)
+        }
+
+    }, [data])
+
+    useEffect(() => {
+        if (resget.data) {
+            setCarData(resget?.data?.data)
+        }
+    }, [resget.data])
+
+    console.log(carData);
+    const onChange = (current) => {
+        setActivePage(current)
+        apiMethodGet(`car/all/${lang}/12?page=${current}`)
+    }
+    if (loading) return;
+
     return (
         <div className="bg-[#F1F4F8]">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -25,7 +55,7 @@ const page = () => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Brands
+                            Cars
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
                             Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
@@ -43,7 +73,7 @@ const page = () => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">
-                <div className="w-full bg-[#1C1C1C] lg:w-4/12 rounded-md p-5">
+                <div className="w-full h-full bg-[#1C1C1C] lg:w-4/12 rounded-md p-5">
                     {/* Type of Cars Section */}
                     <div className="grid grid-cols-1 space-y-2">
                         <span className="text-left text-sm text-white">Type of cars:</span>
@@ -246,16 +276,24 @@ const page = () => {
                     </div>
                 </div>
 
-                <div className="w-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 items-center justify-center">
+                <div className="w-full h-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 justify-center">
                     {/* Data Card Area */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-2">
-                        <CarSingleCard />
-                        <CarSingleCard />
-                        <CarSingleCard />
-                        <CarSingleCard />
+                        {
+                            Array.isArray(carData?.data) && carData?.data?.map((item, idx) => {
+                                return (
+                                    <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
+                                        price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
+                                        cruise_control={item.cruise}
+                                        engine={item.engine} luggage={item.luggage} />
+                                )
+                            })
+                        }
                     </div>
                 </div>
-
+            </div>
+            <div className="relative flex flex-row justify-center items-center my-10">
+                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
 
             <div className="flex justify-center mt-10 p-0 w-full bg-white">
@@ -275,4 +313,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Cars

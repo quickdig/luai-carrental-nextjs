@@ -1,13 +1,41 @@
 "use client"
-
 import Breadcrumb from "@/components/Breadcrumb"
 import Image from "next/image";
 // import carImage from "../../public/assets/car_img_1.png"
 // import userImage from "../../public/assets/ecllipsTwo.png"
 import Button from "@/components/Button";
 import BlogLongCard from "@/components/BlogLongCard";
+import useFetch from "@/app/customHooks/useFetch";
+import { useEffect, useState } from "react";
+import useGet from "@/app/customHooks/useGet";
+import { Pagination } from "antd";
 
-const page = () => {
+const Blogs = ({ params, lang }) => {
+
+    const { loading, data } = useFetch(`blog/${lang}/12?page=1`);
+    const [blogData, setBlogData] = useState("");
+    const [resget, apiMethodGet] = useGet()
+    const [activePage, setActivePage] = useState(1);
+
+    useEffect(() => {
+        if (data) {
+            setBlogData(data?.data)
+        }
+
+    }, [data])
+
+    useEffect(() => {
+        if (resget.data) {
+            setBlogData(resget?.data?.data)
+        }
+    }, [resget.data])
+
+    console.log(blogData);
+    const onChange = (current) => {
+        setActivePage(current)
+        apiMethodGet(`blog/${lang}/12?page=${current}`)
+    }
+    if (loading) return;
     return (
         <div className="bg-[#F1F4F8]">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -33,20 +61,21 @@ const page = () => {
             </div>
 
             <div className="relative grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-screen-lg mx-auto sm:px-6 lg:px-0 mt-5">
-                {/* Blog Card 1 */}
-                <BlogLongCard />
+                {
+                    Array.isArray(blogData?.data) && blogData?.data.map((item, idx) => {
+                        return (
+                            <BlogLongCard key={idx} lang={lang} image={item.image} slug={item.slug} title={item.heading} authorimage={null}
+                                authorname={"Test Author"} date={item.date} readtime={"3 min read"} description={item.description} />
+                        )
+                    })
+                }
+            </div>
 
-                {/* Blog Card 2 */}
-                <BlogLongCard />
-
-                {/* Blog Card 3 */}
-                <BlogLongCard />
-
-                {/* Blog Card 4 */}
-                <BlogLongCard />
+            <div className="relative flex flex-row justify-center items-center my-10">
+                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
         </div>
     )
 }
 
-export default page
+export default Blogs

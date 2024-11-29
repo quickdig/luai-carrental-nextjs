@@ -6,8 +6,10 @@ import BrandDetailSidebar from "@/components/BrandDetailSidebar";
 import { FaCheck } from "react-icons/fa6";
 import Button from "@/components/Button";
 import mapImage from "../../../public/assets/map.png"
+import { contactData } from "./data";
 
-const page = () => {
+const ContactUs = ({ params, lang }) => {
+
     return (
         <div className="bg-[#F1F4F8]">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -39,21 +41,21 @@ const page = () => {
                         <li className="flex items-start text-sm font-normal">
                             <span className="text-primary flex items-center gap-2">
                                 <FaCheck className="text-lg" />
-                                <b className="text-black">Address:</b>
-                                <span className="text-gray-600 font-light">Shop No. 02, Azurite tower, Al-Jaddaf</span>
+                                <b className="text-black">{contactData(lang).header_one}</b>
+                                <span className="text-gray-600 font-light">{contactData(lang).header_one_value}</span>
                             </span>
                         </li>
                         <li className="flex items-start text-sm font-normal">
                             <span className="text-primary flex items-center gap-2">
                                 <FaCheck className="text-lg" />
-                                <b className="text-black">Open Hours:</b>
-                                <span className="text-gray-600 font-light">9:00 AM to 7:00 PM</span>
+                                <b className="text-black">{contactData(lang).header_two}</b>
+                                <span className="text-gray-600 font-light">{contactData(lang).header_two_value}</span>
                             </span>
                         </li>
                         <li className="flex items-start text-sm font-normal">
                             <span className="text-primary flex items-center gap-2">
                                 <FaCheck className="text-lg" />
-                                <b className="text-black">Customer Support:</b>
+                                <b className="text-black">{contactData(lang).header_three}</b>
                                 <span className="text-gray-600 font-light">(+971) 501837000 / (+971) 42711000</span>
                             </span>
                         </li>
@@ -104,13 +106,16 @@ const page = () => {
                 {/* Right Section */}
                 <div className="relative w-full lg:w-1/2 h-[300px] sm:h-[400px] lg:h-[500px] mt-5">
                     <div className="relative w-full h-full rounded-md overflow-hidden lg:mt-0">
-                        <Image
-                            src={mapImage}
-                            alt="map"
-                            layout="fill"
-                            objectFit="cover"
-                            className="rounded-md"
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.355110835512!2d55.36797777538259!3d25.224961677693063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6781dee26a3d%3A0xf7ce5de9084822ff!2z2YTYpNmKINin2YTYrti32YrYqCDZhNiq2KPYrNmK2LEg2KfZhNiz2YrYp9ix2KfYqi8gTHVhaSBBbGtoYXRpYiBDYXIgUmVudGFs!5e0!3m2!1sen!2sae!4v1732780450743!5m2!1sen!2sae"
+                            width={600}
+                            height={450}
+                            style={{ border: 0 }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
                         />
+
                     </div>
                 </div>
             </div>
@@ -120,4 +125,4 @@ const page = () => {
     )
 }
 
-export default page
+export default ContactUs

@@ -1,3 +1,4 @@
+"use client"
 import Breadcrumb from "@/components/Breadcrumb"
 import carImage from "@/public/assets/car_img_1.png"
 import userImage from "@/public/assets/ecllipsTwo.png"
@@ -9,8 +10,17 @@ import catImageThree from "@/public/assets/cat_img3.jpg";
 import catImageFour from "@/public/assets/cat_img4.jpg";
 import catImageFive from "@/public/assets/cat_img5.jpg";
 import CategoryCard from "@/components/CategoryCard";
+import { useParams } from "next/navigation";
+import useFetch from "@/app/customHooks/useFetch"
 
-const page = () => {
+const BlogDetail = ({ lang }) => {
+
+    const params = useParams()
+
+    const { loading, data } = useFetch(`blog/single/${lang}/${params.slug}`);
+
+    if (loading) return;
+    const allData = data?.data;
     return (
         <div className="bg-[#F1F4F8] pb-10">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -39,8 +49,8 @@ const page = () => {
                 {/* Blog Content Section */}
                 <div className="w-full">
                     <div className="img_box flex w-full h-[16rem] sm:h-[24rem] lg:h-[30rem] p-2 sm:p-4 lg:p-5">
-                        <Image
-                            src={carImage}
+                        <img
+                            src={allData.image}
                             alt="Car"
                             className="rounded-md object-cover w-full h-full"
                         />
@@ -49,7 +59,7 @@ const page = () => {
                     <div className="blog_details_content flex flex-col w-full space-y-4 px-4 sm:px-6 lg:px-10">
                         <div className="header_box">
                             <h2 className="text-left text-lg sm:text-2xl lg:text-3xl font-bold">
-                                Lotus Dubai
+                                {allData.Title}
                             </h2>
                         </div>
 
@@ -71,31 +81,15 @@ const page = () => {
                             </div>
                         </div>
 
-                        <div className="blog_content_box space-y-4">
-                            <h4 className="text-base sm:text-lg lg:text-xl text-left font-bold">
-                                The Quick Brown Fox Jumps Over The Lazy Dog
-                            </h4>
-                            <p className="text-sm sm:text-base text-justify text-[#232536]">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec.
-                            </p>
+                        <div className="blog_content_box space-y-4" dangerouslySetInnerHTML={{ __html: allData.Description }}>
 
-                            <h4 className="text-base sm:text-lg lg:text-xl text-left font-bold">
-                                The Quick Brown Fox Jumps Over The Lazy Dog
-                            </h4>
-                            <p className="text-sm sm:text-base text-justify text-[#232536]">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec.
-                            </p>
-
-                            <p className="text-sm sm:text-base text-justify text-[#232536]">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Non blandit massa enim nec.
-                            </p>
                         </div>
 
-                        <Button
+                        {/* <Button
                             text="Read more →"
                             type="button"
                             style="bg-primary w-full sm:w-[10rem] font-bold text-white text-sm px-4 py-2 rounded hover:bg-secondary mt-2 uppercase"
-                        />
+                        /> */}
                     </div>
                 </div>
 
@@ -125,4 +119,4 @@ const page = () => {
     )
 }
 
-export default page
+export default BlogDetail

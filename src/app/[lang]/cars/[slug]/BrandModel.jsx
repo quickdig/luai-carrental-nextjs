@@ -1,3 +1,4 @@
+"use client"
 
 import Image from "next/image";
 import Brands from "@/components/Brands"
@@ -14,8 +15,15 @@ import carBrandOne from "../../../../../src/public/assets/carBrand1.png";
 import { FaCheck } from "react-icons/fa6";
 import Link from "next/link";
 import BrandDetailSidebar from "@/components/BrandDetailSidebar";
+import useFetch from "@/app/customHooks/useFetch";
+import { useParams } from "next/navigation";
 
-const page = () => {
+const BrandModel = ({ lang }) => {
+    const params = useParams();
+    const { loading, data } = useFetch(`car/detail/${lang}/${params.slug}`);
+
+    if (loading) return;
+    const { name, description, price_daily, price_weekly, price_monthly, image, engine, bluetooth, cruise, luggage, deposit, stock } = data?.data
     return (
         <div className="bg-[#F1F4F8]">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -37,15 +45,15 @@ const page = () => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">Audi A3 2023</h2>
+                <h2 className="text-left text-xl font-bold">{name}</h2>
             </div>
 
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto sm:px-2 md:px-2 lg:px-0">
                 <div className="relative top-0 w-full lg:w-8/12 px-4 md:px-6 lg:px-0">
                     <div className="w-full">
-                        <Image
-                            src={carBrandOne}
+                        <img
+                            src={image}
                             alt="car_brand"
                             layout="responsive"
                             objectFit="contain"
@@ -56,10 +64,14 @@ const page = () => {
                     <div className="w-full bg-white my-5 rounded-md shadow-md">
                         <div className="content_area w-full space-y-4 px-4 md:px-6 lg:px-10 py-5">
                             <h4 className="text-left text-secondary font-bold text-lg md:text-xl lg:text-2xl">
-                                Audi A3 Turbo 2023
+                                {name}
                             </h4>
                             <p className="text-[#707070] text-sm md:text-base text-justify leading-6">
                                 Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.
+                            </p>
+
+                            <p dangerouslySetInnerHTML={{ __html: description }}>
+
                             </p>
 
                             <div className="flex flex-col md:flex-row justify-between p-0 m-0 space-y-6 md:space-y-0">
@@ -150,4 +162,4 @@ const page = () => {
     )
 }
 
-export default page
+export default BrandModel

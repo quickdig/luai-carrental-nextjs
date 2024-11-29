@@ -3,7 +3,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { i18n } from '../i18n.config'; // Adjust path if needed
+import { i18n } from '../../i18n.config'; // Adjust path if needed
 
 const RedirectComponent = () => {
   const router = useRouter();

@@ -11,7 +11,7 @@ const Main = ({ children }) => {
   return (
     <>
       <MainLanguageValueProvider>
-      <Header />
+        <Header />
         <main>{children}</main>
         <Footer />
       </MainLanguageValueProvider>
