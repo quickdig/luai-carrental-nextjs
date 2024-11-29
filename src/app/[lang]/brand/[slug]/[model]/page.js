@@ -1,8 +1,6 @@
 import React from 'react'
 import config from "../../../../services/config.json";
 import axios from 'axios';
-import Brand from './Brand';
-import BrandModel from '../../../cars/[slug]/BrandModel';
 
 export async function generateMetadata({ params, searchParams }, parent) {
     // read route params
