@@ -21,6 +21,9 @@ import useFetch from "@/app/customHooks/useFetch";
 import useGet from "@/app/customHooks/useGet";
 import { useEffect, useState } from "react";
 import { Pagination } from "antd";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
+import { keywords } from "../../../../../dataset";
+
 
 const Brand = ({ lang }) => {
     const params = useParams()
@@ -30,6 +33,7 @@ const Brand = ({ lang }) => {
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     useEffect(() => {
         if (data) {
@@ -67,7 +71,7 @@ const Brand = ({ lang }) => {
                 </div>
             </div>
 
-            <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
+            <div className="relative flex flex-row md:flex-row max-w-screen-lg sm:mt-5 md:mt-5+6 lg:mt-5 w-full mt-10 mx-auto items-center">
                 <Breadcrumb linkOne={"Home"} linkTwo={"Brand"} linkThree={"Audi"} />
             </div>
 
@@ -75,208 +79,219 @@ const Brand = ({ lang }) => {
                 <h2 className="text-left text-xl font-bold">Audi Rental Dubai</h2>
             </div>
 
+            {/* Filter bar section */}
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">
-                <div className="w-full h-full bg-[#1C1C1C] lg:w-4/12 rounded-md p-5">
-                    {/* Type of Cars Section */}
-                    <div className="grid grid-cols-1 space-y-2">
-                        <span className="text-left text-sm text-white">Type of cars:</span>
-
-                        <div className="inline-flex items-center">
-                            <label className="relative flex items-center cursor-pointer" htmlFor="type_of_car">
-                                <input
-                                    name="framework-custom-icon"
-                                    type="radio"
-                                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                    id="type_of_car"
-                                />
-                                <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <IoCheckmarkCircle />
-                                </span>
-                            </label>
-                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
-                                Economy <span className="text-[#90A3BF]">(99)</span>
-                            </label>
-                        </div>
-
-                        <div className="inline-flex items-center">
-                            <label className="relative flex items-center cursor-pointer" htmlFor="type_of_car">
-                                <input
-                                    name="framework-custom-icon"
-                                    type="radio"
-                                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                    id="type_of_car"
-                                />
-                                <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <IoCheckmarkCircle />
-                                </span>
-                            </label>
-                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
-                                SUV <span className="text-[#90A3BF]">(99)</span>
-                            </label>
-                        </div>
+                <div className="w-[90%] mx-auto h-full bg-[#1C1C1C] lg:w-4/12 rounded-md p-5">
+                    <div className="flex flex-row justify-between items-center mb-5 px-1 text-white" onClick={() => setIsExpanded(!isExpanded)}>
+                        <span className="text-md font-normal">Filters</span>
+                        {isExpanded ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
                     </div>
+                    {
+                        isExpanded && (
+                            <div className="filters_Options">
+                                {/* Type of Cars Section */}
+                                <div className="grid grid-cols-1 space-y-2">
+                                    <span className="text-left text-sm text-white">Type of cars:</span>
 
-                    {/* Availability Section */}
-                    <div className="grid grid-cols-1 space-y-2 mt-5">
-                        <span className="text-left text-sm text-white">Availability</span>
-                        <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
-                            <div className="inline-flex items-center">
-                                <label className="relative flex items-center cursor-pointer" htmlFor="availability">
-                                    <input
-                                        name="framework-custom-icon"
-                                        type="radio"
-                                        className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                        id="availability"
-                                    />
-                                    <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
-                                        <IoCheckmarkCircle />
-                                    </span>
-                                </label>
-                                <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
-                                    In Stock
-                                </label>
+                                    <div className="inline-flex items-center">
+                                        <label className="relative flex items-center cursor-pointer" htmlFor="type_of_car">
+                                            <input
+                                                name="framework-custom-icon"
+                                                type="radio"
+                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
+                                                id="type_of_car"
+                                            />
+                                            <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
+                                                <IoCheckmarkCircle />
+                                            </span>
+                                        </label>
+                                        <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
+                                            Economy <span className="text-[#90A3BF]">(99)</span>
+                                        </label>
+                                    </div>
+
+                                    <div className="inline-flex items-center">
+                                        <label className="relative flex items-center cursor-pointer" htmlFor="type_of_car">
+                                            <input
+                                                name="framework-custom-icon"
+                                                type="radio"
+                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
+                                                id="type_of_car"
+                                            />
+                                            <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
+                                                <IoCheckmarkCircle />
+                                            </span>
+                                        </label>
+                                        <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
+                                            SUV <span className="text-[#90A3BF]">(99)</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {/* Availability Section */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                    <span className="text-left text-sm text-white">Availability</span>
+                                    <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
+                                        <div className="inline-flex items-center">
+                                            <label className="relative flex items-center cursor-pointer" htmlFor="availability">
+                                                <input
+                                                    name="framework-custom-icon"
+                                                    type="radio"
+                                                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
+                                                    id="availability"
+                                                />
+                                                <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
+                                                    <IoCheckmarkCircle />
+                                                </span>
+                                            </label>
+                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
+                                                In Stock
+                                            </label>
+                                        </div>
+
+                                        <div className="inline-flex items-center">
+                                            <label className="relative flex items-center cursor-pointer" htmlFor="availability">
+                                                <input
+                                                    name="framework-custom-icon"
+                                                    type="radio"
+                                                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
+                                                    id="availability"
+                                                />
+                                                <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
+                                                    <IoCheckmarkCircle />
+                                                </span>
+                                            </label>
+                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
+                                                Out of Stock
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Date Selection */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                    <span className="text-left text-sm text-white">Select a date:</span>
+                                    <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
+                                        <input
+                                            type="date"
+                                            placeholder="Select Date"
+                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                        />
+                                        <input
+                                            type="date"
+                                            placeholder="Select Date"
+                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Special Offers Section */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                    <span className="text-left text-sm text-white">Special Offers</span>
+                                    <div className="flex flex-row items-center justify-center">
+                                        <input
+                                            type="text"
+                                            placeholder="Special Offers"
+                                            className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Pricing Section */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                    <div className="flex flex-row justify-between items-center">
+                                        <span className="text-left text-sm text-white">Pricing</span>
+                                    </div>
+                                    <div className="flex flex-row text-white justify-between items-center">
+                                        <span>From AED 0</span>
+                                        <span>To AED 9999</span>
+                                    </div>
+                                    <div className="flex flex-row items-center justify-center">
+                                        <input
+                                            type="range"
+                                            className="w-full cursor-pointer accent-primary"
+
+                                        />
+                                    </div>
+
+                                    <div className="flex flex-row items-center gap-2 justify-between">
+                                        <input
+                                            type="number"
+                                            placeholder="From"
+                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                        />
+                                        <input
+                                            type="number"
+                                            placeholder="To"
+                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Sort By Brands Section */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                    <div className="flex flex-row justify-between items-center">
+                                        <span className="text-left text-sm text-white">Sort By Brands</span>
+                                    </div>
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
+                                        {/* Brand 1 */}
+                                        <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
+                                            <input
+                                                type="radio"
+                                                name="car_brands"
+                                                className="hidden peer"
+                                            />
+                                            <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                <Image
+                                                    src={bOne}
+                                                    alt="Background Image"
+                                                    layout="fill"
+                                                    objectFit="contain"
+                                                    className="rounded-lg p-2"
+                                                />
+                                            </div>
+                                        </label>
+
+                                        {/* Brand 2 */}
+                                        <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
+                                            <input
+                                                type="radio"
+                                                name="car_brands"
+                                                className="hidden peer"
+                                            />
+                                            <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                <Image
+                                                    src={bTwo}
+                                                    alt="Background Image"
+                                                    layout="fill"
+                                                    objectFit="contain"
+                                                    className="rounded-lg p-2"
+                                                />
+                                            </div>
+                                        </label>
+
+                                        {/* Brand 3 */}
+                                        <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
+                                            <input
+                                                type="radio"
+                                                name="car_brands"
+                                                className="hidden peer"
+                                            />
+                                            <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                <Image
+                                                    src={bThree}
+                                                    alt="Background Image"
+                                                    layout="fill"
+                                                    objectFit="contain"
+                                                    className="rounded-lg p-2"
+                                                />
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div className="inline-flex items-center">
-                                <label className="relative flex items-center cursor-pointer" htmlFor="availability">
-                                    <input
-                                        name="framework-custom-icon"
-                                        type="radio"
-                                        className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                        id="availability"
-                                    />
-                                    <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
-                                        <IoCheckmarkCircle />
-                                    </span>
-                                </label>
-                                <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
-                                    Out of Stock
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Date Selection */}
-                    <div className="grid grid-cols-1 space-y-2 mt-5">
-                        <span className="text-left text-sm text-white">Select a date:</span>
-                        <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
-                            <input
-                                type="date"
-                                placeholder="Select Date"
-                                className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                            />
-                            <input
-                                type="date"
-                                placeholder="Select Date"
-                                className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Special Offers Section */}
-                    <div className="grid grid-cols-1 space-y-2 mt-5">
-                        <span className="text-left text-sm text-white">Special Offers</span>
-                        <div className="flex flex-row items-center justify-center">
-                            <input
-                                type="text"
-                                placeholder="Special Offers"
-                                className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Pricing Section */}
-                    <div className="grid grid-cols-1 space-y-2 mt-5">
-                        <div className="flex flex-row justify-between items-center">
-                            <span className="text-left text-sm text-white">Pricing</span>
-                        </div>
-                        <div className="flex flex-row text-white justify-between items-center">
-                            <span>From AED 0</span>
-                            <span>To AED 9999</span>
-                        </div>
-                        <div className="flex flex-row items-center justify-center">
-                            <input
-                                type="range"
-                                className="w-full cursor-pointer accent-primary"
-
-                            />
-                        </div>
-
-                        <div className="flex flex-row items-center justify-between">
-                            <input
-                                type="number"
-                                placeholder="From"
-                                className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                            />
-                            <input
-                                type="number"
-                                placeholder="To"
-                                className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Sort By Brands Section */}
-                    <div className="grid grid-cols-1 space-y-2 mt-5">
-                        <div className="flex flex-row justify-between items-center">
-                            <span className="text-left text-sm text-white">Sort By Brands</span>
-                        </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
-                            {/* Brand 1 */}
-                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
-                                <input
-                                    type="radio"
-                                    name="car_brands"
-                                    className="hidden peer"
-                                />
-                                <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
-                                    <Image
-                                        src={bOne}
-                                        alt="Background Image"
-                                        layout="fill"
-                                        objectFit="contain"
-                                        className="rounded-lg p-2"
-                                    />
-                                </div>
-                            </label>
-
-                            {/* Brand 2 */}
-                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
-                                <input
-                                    type="radio"
-                                    name="car_brands"
-                                    className="hidden peer"
-                                />
-                                <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
-                                    <Image
-                                        src={bTwo}
-                                        alt="Background Image"
-                                        layout="fill"
-                                        objectFit="contain"
-                                        className="rounded-lg p-2"
-                                    />
-                                </div>
-                            </label>
-
-                            {/* Brand 3 */}
-                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
-                                <input
-                                    type="radio"
-                                    name="car_brands"
-                                    className="hidden peer"
-                                />
-                                <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
-                                    <Image
-                                        src={bThree}
-                                        alt="Background Image"
-                                        layout="fill"
-                                        objectFit="contain"
-                                        className="rounded-lg p-2"
-                                    />
-                                </div>
-                            </label>
-                        </div>
-                    </div>
+                        )
+                    }
                 </div>
 
                 <div className="w-full h-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 justify-center">
@@ -288,7 +303,7 @@ const Brand = ({ lang }) => {
                                     <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
                                         price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
                                         cruise_control={item.cruise}
-                                        engine={item.engine} luggage={item.luggage} />
+                                        engine={item.engine} luggage={item.luggage} btnText={lang == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar} />
                                 )
                             })
                         }

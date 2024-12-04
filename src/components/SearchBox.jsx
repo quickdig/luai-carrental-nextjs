@@ -4,18 +4,19 @@ import { useState, useEffect } from "react";
 import { FaCarRear, FaCalendarDays, FaClock } from "react-icons/fa6";
 import Button from "./Button";
 import { keywords } from "../../dataset";
+import useFetch from "@/app/customHooks/useFetch";
 
 const SearchBox = ({ lang }) => {
-    const [brands, setBrands] = useState([]);
+    const [brands, setBrands] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
+    const { data } = useFetch(`brands/all/${lang}`)
 
     useEffect(() => {
-        async function fetchBrands() {
-            const fetchedBrands = ["Toyota", "Honda", "BMW", "Mercedes", "Audi", "Nissan"];
-            setBrands(fetchedBrands);
+        if (data) {
+            console.log(data);
+            setBrands(data?.data)
         }
-        fetchBrands();
-    }, []);
+    }, [data])
 
     return (
         <section className="searchform_Section relative bg-secondary py-6">
@@ -49,11 +50,18 @@ const SearchBox = ({ lang }) => {
                                 <option value="" disabled>
                                     {lang == 'en' ? keywords.buttonText.pick_brand.en : keywords.buttonText.pick_brand.ar}
                                 </option>
-                                {brands.map((brand, index) => (
-                                    <option key={index} value={brand}>
-                                        {brand}
+                                {
+                                    Array.isArray(brands) && brands.map((item, idx) => {
+                                        return (<option key={idx} value={item.id}>
+                                            {item.name}
+                                        </option>)
+                                    })
+                                }
+                                {/* {brands?.map((item, idx) => (
+                                    <option key={idx} value={item.id}>
+                                        {item.name}
                                     </option>
-                                ))}
+                                ))} */}
                             </select>
                             <div className="absolute left-4 text-gray-400">
                                 <FaCarRear />

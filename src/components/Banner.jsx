@@ -17,8 +17,8 @@ const Banner = ({ bannerData, allData }) => {
                         <h1 className="text-3xl lg:text-[50px] md:text-5xl font-bold leading-tight line-clamp-3">
                             {banner_heading}
                         </h1>
-                        <p className="text-sm md:text-xl">
-                            {banner_text}
+                        <p className="text-sm md:text-xl" dangerouslySetInnerHTML={{ __html: banner_text }}>
+                            {/* {banner_text} */}
                             {/* Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service! */}
                         </p>
                     </div>

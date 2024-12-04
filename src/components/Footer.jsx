@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect } from 'react'
 import footer_logo from "../../src/public/assets/logo_black.png";
 import footer_back from "../../src/public/assets/footer_back.png";
 import social_imgOne from "../../src/public/assets/fb.png";
@@ -9,8 +11,22 @@ import Image from 'next/image';
 import { FiPhoneCall } from "react-icons/fi";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
+import { useParams } from 'next/navigation';
+import useFetch from '@/app/customHooks/useFetch';
+import { keywords } from '../../dataset';
 
 const Footer = () => {
+
+    const params = useParams();
+    const { loading, data } = useFetch(`footer/${params.lang}`);
+
+
+    useEffect(() => {
+        console.log(params);
+    }, [data])
+
+    if (loading) return;
+    const footerData = data?.data;
     return (
         <section className="footer_Card relative mt-10">
             <div
@@ -29,12 +45,10 @@ const Footer = () => {
                             />
                             <p className="text-white text-sm font-light leading-6 mt-4">
                                 <b className="font-medium">
-                                    Here comes a top-rated car rental service in Dubai.
+                                    {footerData.Header}
                                 </b>
                                 <br />
-                                Enjoy low prices and great deals when you rent a car with us. Convenient
-                                pick-up locations and top-notch customer service ensure you get a smooth,
-                                stress-free rental experience.
+                                {footerData.Description}
                             </p>
                             <div className="flex flex-row justify-center md:justify-start items-center mt-3">
                                 <Link href={"#"}>
@@ -63,32 +77,33 @@ const Footer = () => {
 
                         {/* Quick Links */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">Quick Links</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">{params.lang === 'en' ? 'Quick Links' : 'روابط سريعة'}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-4">
                                 <li>
-                                    <Link href={"#"}>Home</Link>
+                                    <Link href={"#"}>{params.lang === 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar}</Link>
+                                    {/* {langValue == 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar} */}
                                 </li>
                                 <li>
-                                    <Link href={"#"}>About</Link>
+                                    <Link href={"#"}>{params.lang === 'en' ? keywords.navMenu.about_us.en : keywords.navMenu.about_us.ar}</Link>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <Link href={"#"}>Brands</Link>
+                                </li> */}
+                                <li>
+                                    <Link href={"#"}>{params.lang === 'en' ? keywords.navMenu.cars.en : keywords.navMenu.cars.ar}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>Cars</Link>
+                                    <Link href={"#"}>{params.lang === 'en' ? keywords.navMenu.faq.en : keywords.navMenu.faq.ar}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>Faqs</Link>
-                                </li>
-                                <li>
-                                    <Link href={"#"}>Contact Us</Link>
+                                    <Link href={"#"}>{params.lang === 'en' ? keywords.navMenu.contact_us.en : keywords.navMenu.contact_us.ar}</Link>
                                 </li>
                             </ul>
                         </div>
 
                         {/* Contact Details */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">Contact Details</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">{params.lang === 'en' ? 'Contact Details' : 'تفاصيل الاتصال'}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-3">
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
                                     <span className="p-2 rounded-full bg-primary text-white mr-2">
@@ -106,9 +121,9 @@ const Footer = () => {
                                     <span className="p-2 rounded-full bg-primary text-white mr-2">
                                         <FaLocationDot />
                                     </span>
-                                    <Link href={"#"}>
-                                        Shop No. 02, <br />
-                                        Azurite Tower, Al Jaddaf
+                                    <Link href={"#"} className='line-clamp-2' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
+                                        {/* Shop No. 02, <br />
+                                        Azurite Tower, Al Jaddaf */}
                                     </Link>
                                 </li>
                             </ul>

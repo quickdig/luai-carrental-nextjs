@@ -76,6 +76,56 @@ export const keywords = {
             on_request: {
                 en: "On Request",
                 ar: "عند الطلب"
+            },
+            per: {
+                day: {
+                    en: "Per Day",
+                    ar: "لكل يوم"
+                },
+                week: {
+                    en: "Per Week",
+                    ar: "في الأسبوع"
+                },
+                month: {
+                    en: "Per Month",
+                    ar: "كل شهر"
+                }
+            }
+        }
+    },
+    carFeatures: {
+        bluetooth: {
+            yes: {
+                en: "Blutooth Yes",
+                ar: "بلوتوث نعم"
+            },
+            no: {
+                en: "Blutooth No",
+                ar: "رقم البلوتوث"
+            }
+        },
+        cruise_control: {
+            yes: {
+                en: "Cruise Control Yes",
+                ar: "التحكم في السرعة نعم"
+            },
+            no: {
+                en: "Cruise Control No",
+                ar: "رقم التحكم في السرعة"
+            }
+        },
+        engine: {
+            en: "Engine",
+            ar: "محرك"
+        },
+        luggage: {
+            yes: {
+                en: "Luggage Yes",
+                ar: "الأمتعة نعم"
+            },
+            no: {
+                en: "Luggage No",
+                ar: "رقم الأمتعة"
             }
         }
     }

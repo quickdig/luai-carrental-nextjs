@@ -70,7 +70,7 @@ const BrandModel = ({ lang }) => {
                                 Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.
                             </p>
 
-                            <p dangerouslySetInnerHTML={{ __html: description }}>
+                            <p className="text-justify leading-7" dangerouslySetInnerHTML={{ __html: description }}>
 
                             </p>
 

@@ -19,19 +19,35 @@ import bSeven from "../../../public/assets/car-brands/toyota.png";
 import bEight from "../../../public/assets/car-brands/kia.svg";
 import Breadcrumb from "@/components/Breadcrumb"
 import useFetch from "@/app/customHooks/useFetch"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+import useGet from "@/app/customHooks/useGet"
 
-const AboutUs = ({ params, lang }) => {
+const AboutUs = ({ lang }) => {
 
+    const params = usePathname();
     const { loading, data } = useFetch(`aboutus/${lang}`);
+    const [resget, apiMethodGet] = useGet()
 
-    console.log(data);
+    const [bannerData, setBannerData] = useState("");
+    // const { bannerData } = useFetch(`banner_data/${lang}/about-us`);
+
+    console.log(bannerData);
 
     useEffect(() => {
-        console.log(data);
-    }, [])
-    if (loading) return;
+        if (lang) {
+            apiMethodGet(`banner_data/${lang}/about-us`);
+        }
+    }, [lang]);
 
+    useEffect(() => {
+        if (resget.data) {
+            setBannerData(resget?.data)
+        }
+    }, [resget.data])
+    if (loading) return;
+    const valueData = data?.aboutvalue
+    const dataBanner = bannerData?.data
     return (
         <>
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -39,10 +55,10 @@ const AboutUs = ({ params, lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            About Us
+                            {dataBanner?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, <br /> convenient pick-up, top-notch service!
+                            {dataBanner?.text}
                         </p>
                     </div>
                 </div>
@@ -67,7 +83,7 @@ const AboutUs = ({ params, lang }) => {
                                 {data?.data?.header}
                             </h4>
 
-                            <p className="text-[#707070] text-sm sm:text-md my-4 text-justify">
+                            <p className="text-[#707070] text-sm sm:text-md my-4 leading-7 text-justify">
                                 {data?.data?.description}
                             </p>
 
@@ -90,10 +106,11 @@ const AboutUs = ({ params, lang }) => {
 
             <div className="flex flex-col bg-[#F1F4F8] mx-auto w-full px-4 sm:px-8 py-20 mt-10">
                 <div className="flex flex-wrap items-center justify-between w-full mx-auto max-w-screen-lg">
-                    <ACommonCard />
-                    <ACommonCard />
-                    <ACommonCard />
-                    <ACommonCard />
+
+                    <ACommonCard icon={valueData.image_one} title={valueData.header_one} desc={valueData.brief_one} />
+                    <ACommonCard icon={valueData.image_two} title={valueData.header_two} desc={valueData.brief_two} />
+                    <ACommonCard icon={valueData.image_three} title={valueData.header_three} desc={valueData.brief_three} />
+                    <ACommonCard icon={valueData.image_four} title={valueData.header_four} desc={valueData.brief_four} />
                 </div>
             </div>
 

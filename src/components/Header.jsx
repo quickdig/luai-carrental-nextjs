@@ -179,7 +179,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.brands.en : keywords.navMenu.brands.ar}
               </button>
               {isDropdownOpen && (
-                <ul className="absolute left-0 bg-[#f1f4f8] w-64 border border-gray-200 rounded-md shadow-lg z-30 grid grid-cols-2">
+                <ul className="absolute left-0 bg-[#f1f4f8] h-full w-64 border border-gray-200 rounded-md shadow-lg z-[999] grid grid-cols-2">
                   {brands?.map((item, idx) => (
                     <Link
                       href={`/${basePath}brand/${item.slug}`}
