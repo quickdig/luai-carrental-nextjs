@@ -37,17 +37,17 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
             <div className="flex flex-row lg:flex-row md:flex-row sm:flex-col justify-between items-center gap-2">
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{daily}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.daily.en : keywords.commonText.pricing.daily.ar}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{lang == 'en' ? keywords.commonText.pricing.daily.en : keywords.commonText.pricing.daily.ar}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{weekly}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.weekly.en : keywords.commonText.pricing.weekly.ar}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{lang == 'en' ? keywords.commonText.pricing.weekly.en : keywords.commonText.pricing.weekly.ar}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{monthly}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.monthly.en : keywords.commonText.pricing.monthly.ar}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{lang == 'en' ? keywords.commonText.pricing.monthly.en : keywords.commonText.pricing.monthly.ar}</span>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
                     text={btnText}
                     type={"submit"}
                     style={
-                        "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white"
+                        "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white ar_text_center"
                     }
                 />
 

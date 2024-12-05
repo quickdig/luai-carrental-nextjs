@@ -32,16 +32,13 @@ const Header = () => {
   const [brands, setBrands] = useState("");
   const [resget, apiMethodGet] = useGet();
 
-  // const brands = ["Toyota", "BMW", "Mercedes", "Tesla", "Audi"];
   const { langValue, handleLanguage } = useContext(MainLanguageValueContext);
   const [selectedLanguage, setSelectedLanguage] = useState(`${langValue}`);
   const [language, setLanguage] = useState(`${langValue}`);
 
   useEffect(() => {
-    // Update the body class whenever selectedLanguage changes
     if (selectedLanguage) {
       document.body.classList.add(selectedLanguage.toLowerCase());
-      // Clean up by removing the class when the component unmounts or selectedLanguage changes
       return () => {
         document.body.classList.remove(selectedLanguage.toLowerCase());
       };
@@ -75,10 +72,8 @@ const Header = () => {
     handleLanguage(selectedItem.key);
     const newLang = selectedItem.key;
 
-    // Construct new path with selected language
     let pathParts = pathname.split('/');
 
-    // Remove the existing language segment if present
     if (languages.includes(pathParts[1])) {
       pathParts.splice(1, 1);
     }
@@ -89,7 +84,6 @@ const Header = () => {
     } else {
       pathParts = ['', ...pathParts.slice(1)];
     }
-    // Construct the new path
     const newPath = pathParts.join('/');
     if (newPath) {
       router.push(newPath);
@@ -120,13 +114,12 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md z-20">
       <div className="flex flex-col max-w-screen-xl sm:flex-col md:flex-col lg:flex-row items-center mx-auto px-4 py-4">
-        {/* relative flex flex-col px-4 py-4 max-w-screen-xl sm:flex-row lg:flex-col md:mx-auto md:flex-row md:items-center */}
-        {/* Logo */}
+
         <Link href="/" className="flex items-center ml-0 lg:pl-0 md:pl-4 sm:pl-0 pl-0">
           <Image src={off_logo} className="object-contain h-10 md:h-12" alt="Logo" />
         </Link>
 
-        {/* Mobile Menu Toggle */}
+
         <input type="checkbox" className="peer hidden" id="navbar-open" />
         <label
           htmlFor="navbar-open"
@@ -145,15 +138,14 @@ const Header = () => {
           </svg>
         </label>
 
-        {/* Navigation Menu */}
+
         <nav
           aria-label="Header Navigation"
-          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6 transition-all md:ml-32 md:max-h-full md:flex-row"
+          className="peer-checked:mt-8 text-center peer-checked:max-h-[33rem] flex max-h-0 w-full flex-col items-center justify-end gap-6 transition-all md:ml-32 md:max-h-full md:flex-row"
         >
-          {/* peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-32 md:max-h-full md:flex-row */}
-          {/* Main Links */}
-          <ul className="flex flex-col items-center space-y-4 justify-end md:space-y-0 md:flex-row md:space-x-6 text-sm">
-            <li className="group transition duration-300 uppercase font-medium hover:text-primary">
+
+          <ul className="flex flex-col items-center space-y-4 justify-end md:space-y-0 md:flex-row  text-sm gap-7">
+            <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
               <Link
                 href={`/${basePath}`}
                 className={`relative ${isActive(`/${basePath}`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
@@ -161,7 +153,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar}
               </Link>
             </li>
-            <li className="group transition duration-300 uppercase font-medium hover:text-primary">
+            <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
               <Link
                 href={`/${basePath}about`}
                 className={`relative ${isActive(`/${basePath}about`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
@@ -169,7 +161,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.about_us.en : keywords.navMenu.about_us.ar}
               </Link>
             </li>
-            {/* Dropdown */}
+
             <li
               className="relative"
               onMouseEnter={() => setIsDropdownOpen(true)}
@@ -192,7 +184,7 @@ const Header = () => {
                 </ul>
               )}
             </li>
-            <li className="group transition duration-300 uppercase font-medium hover:text-primary">
+            <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
               <Link
                 href={`/${basePath}cars`}
                 className={`relative ${isActive(`/${basePath}cars`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
@@ -200,7 +192,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.cars.en : keywords.navMenu.cars.ar}
               </Link>
             </li>
-            <li className="group transition duration-300 uppercase font-medium hover:text-primary">
+            <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
               <Link
                 href={`/${basePath}faq`}
                 className={`relative ${isActive(`/${basePath}faq`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
@@ -208,7 +200,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.faq.en : keywords.navMenu.faq.ar}
               </Link>
             </li>
-            <li className="group transition duration-300 uppercase font-medium hover:text-primary">
+            <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
               <Link
                 href={`/${basePath}contact-us`}
                 className={`relative ${isActive(`/${basePath}contact-us`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
@@ -216,7 +208,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.contact_us.en : keywords.navMenu.contact_us.ar}
               </Link>
             </li>
-            <li className="group transition duration-300 uppercase font-medium hover:text-primary">
+            <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
               <Link
                 href={`/${basePath}blog`}
                 className={`relative ${isActive(`/${basePath}blog`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
@@ -227,7 +219,6 @@ const Header = () => {
 
 
           </ul>
-          {/* Buttons */}
           <ul className="flex flex-col items-center mt-4 space-y-4 text-xs gap-3 md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
             <li>
               <button

@@ -50,7 +50,7 @@ const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date,
                             height={25}
                             className="rounded-full"
                         />
-                        <span className="ml-2 text-xs font-normal">{authorname}</span>
+                        <span className="mx-2 text-xs font-normal">{authorname}</span>
                     </div>
                     <div className="flex flex-row items-center mt-2 text-gray-400">
                         <span className="text-[10px]">{formatDate(date)}</span>

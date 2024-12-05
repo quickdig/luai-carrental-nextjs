@@ -73,3 +73,35 @@ body.ar .ar_icon{
   margin-left: 10px;
   margin-right: 0px !important;
 }
+body.ar .ar_banner{
+  text-align: right;
+}
+body.ar *{
+  text-align: right ;
+}
+body.ar .ar_pagination ul li a{
+  text-align: center !important;
+}
+body.ar .ar_footer{
+  /* border-right-width: 4px; */
+  border: none;
+  padding-right: 0.75rem;
+  border-right: 4px solid #ef4444;
+}
+body.ar .ar_text_center{
+  text-align: center;
+}
+body.ar .ar_img{
+  margin-right: 0px;
+}
+
+
+.ant-modal-content {
+  background-color: #f2f6fa !important;
+  padding: 0 !important;
+}
+.ant-modal-footer{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

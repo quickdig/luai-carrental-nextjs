@@ -1,27 +1,30 @@
-import { IoCheckmarkCircle } from "react-icons/io5";
+
 import { MdStar } from "react-icons/md";
-import Image from "next/image";
-import carBrandOne from "../../src/public/assets/carBrand1.png";
-import Button from "@/components/Button";
 import Link from "next/link";
 import { keywords } from "../../dataset";
+import { useState } from "react";
+import { Modal } from "antd";
 
-const CarSingleCard = ({ btnText, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
-    // const basePath = lang === "en" ? '' : `${lang}/`;
+const CarSingleCard = ({ slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
+    // const { }  = props
 
+    const { commonText, carFeatures } = keywords
+    const { day, week, month } = commonText.pricing.per
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleBookingModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
     return (
         <div className="rounded-md h-full bg-white mx-2 px-2">
-            {/* <img
-                src={image}
-                className="rounded-t-md object-contain"
-            /> */}
 
             <div className="img_box object-contain p-5">
-                <img
-                    src={image}
-                    alt="Car"
-                    className="rounded-t-md object-contain"
-                />
+                <img src={image} alt="Car" className="rounded-t-md object-contain" />
             </div>
 
             <div className="w-full mx-4 my-2">
@@ -30,17 +33,17 @@ const CarSingleCard = ({ btnText, slug, image, title, price_daily, price_weekly,
 
             <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-0 px-3 mx-4 border-[.5px] border-gray-300">
                 <div className="flex flex-col items-center sm:items-start">
-                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? keywords.commonText.pricing.per.day.en : keywords.commonText.pricing.per.day.ar}</span>
+                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? day.en : day.ar}</span>
                     <span className="price_cat text-sm font-medium">AED {price_daily}</span>
                 </div>
 
                 <div className="flex flex-col items-center sm:items-start">
-                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? keywords.commonText.pricing.per.week.en : keywords.commonText.pricing.per.week.ar}</span>
+                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? week.en : week.ar}</span>
                     <span className="price_cat text-sm font-medium">AED {price_weekly}</span>
                 </div>
 
                 <div className="flex flex-col items-center sm:items-start">
-                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? keywords.commonText.pricing.per.month.en : keywords.commonText.pricing.per.month.ar}</span>
+                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? month.en : month.ar}</span>
                     <span className="price_cat text-sm font-medium">AED {price_monthly}</span>
                 </div>
             </div>
@@ -64,11 +67,60 @@ const CarSingleCard = ({ btnText, slug, image, title, price_daily, price_weekly,
                 </li>
             </ul>
 
-            <Button
-                text={btnText}
-                type={"submit"}
-                style={"bg-secondary float-right mx-auto my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center"}
-            />
+            <button onClick={handleBookingModal} className="bg-secondary float-right mx-auto my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center">Book Ride</button>
+
+            <Modal className="p-0" width={"80%"} height={"100vh"} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} >
+                <div className="flex overflow-auto h-[100vh]">
+                    <div className="w-1/2 bg-white p-6">
+                        <h2 className="uppercase text-[40px] font-light">{title}</h2>
+                        <p className="text-[#2c9248] text-[18px]">Total Price: AED 1005.25</p>
+                        <img src={image} alt="Car" className="rounded-t-md object-contain w-80" />
+                        <h3>Coverages/Extras</h3>
+                        <div>
+                            <ul>
+                                <li className="flex justify-between">
+                                    <div>Refundable Security Deposit </div>
+                                    <div>1000.00</div>
+                                    <button>Added</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="p-6 w-1/2">
+                    <h2 className="">Book Now</h2>
+                        <form action="">
+                            <input type="text" placeholder="Name" className=" py-2 px-5 m-2 rounded-md" />
+                            <input type="number" placeholder="Phone" className=" py-2 px-5 m-2 rounded-md" />
+                            <input type="email" placeholder="Email" className="py-2 px-5 m-2 rounded-md" />
+
+                            <div className="flex">
+                                <div className="w-1/2">
+                                    <label htmlFor="Start from Date" className="pb-4">Start from Date</label>
+                                    <input type="date" className="py-2 px-8" />
+                                </div>
+                                <div className="w-1/2">
+                                    <label htmlFor="Start from Date" className="pb-4">Start from Date</label>
+                                    <input type="time" className="py-2 px-8 " />
+                                </div>
+                            </div>
+                            <div className="flex">
+                                <div className="w-1/2">
+                                    <label htmlFor="End from Date" className="mb-4">End from Date</label>
+                                    <input type="date" className="py-2 px-8" />
+                                </div>
+                                <div className="w-1/2">
+                                    <label htmlFor="End from Date" className="pb-4">End from Date</label>
+                                    <input type="time" className="py-2 px-8 " />
+                                </div>
+                            </div>
+                            
+
+
+                        </form>
+                    </div>
+                </div>
+
+            </Modal>
         </div>
     )
 }

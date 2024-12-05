@@ -56,7 +56,7 @@ const Cars = ({ params, lang }) => {
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
-                    <div className="text-white space-y-4 sm:space-y-6">
+                    <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
                             Cars
                         </h1>
@@ -100,7 +100,7 @@ const Cars = ({ params, lang }) => {
                                                 <IoCheckmarkCircle />
                                             </span>
                                         </label>
-                                        <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
+                                        <label className="mx-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
                                             Economy <span className="text-[#90A3BF]">(99)</span>
                                         </label>
                                     </div>
@@ -117,7 +117,7 @@ const Cars = ({ params, lang }) => {
                                                 <IoCheckmarkCircle />
                                             </span>
                                         </label>
-                                        <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
+                                        <label className="mx-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
                                             SUV <span className="text-[#90A3BF]">(99)</span>
                                         </label>
                                     </div>
@@ -139,7 +139,7 @@ const Cars = ({ params, lang }) => {
                                                     <IoCheckmarkCircle />
                                                 </span>
                                             </label>
-                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
+                                            <label className="mx-2 text-white cursor-pointer text-sm" htmlFor="availability">
                                                 In Stock
                                             </label>
                                         </div>
@@ -156,7 +156,7 @@ const Cars = ({ params, lang }) => {
                                                     <IoCheckmarkCircle />
                                                 </span>
                                             </label>
-                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
+                                            <label className="mx-2 text-white cursor-pointer text-sm" htmlFor="availability">
                                                 Out of Stock
                                             </label>
                                         </div>
@@ -170,12 +170,12 @@ const Cars = ({ params, lang }) => {
                                         <input
                                             type="date"
                                             placeholder="Select Date"
-                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                            className="p-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                         <input
                                             type="date"
                                             placeholder="Select Date"
-                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                            className="p-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@ const Cars = ({ params, lang }) => {
                                         <input
                                             type="text"
                                             placeholder="Special Offers"
-                                            className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                            className="p-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
                                 </div>
@@ -213,12 +213,12 @@ const Cars = ({ params, lang }) => {
                                         <input
                                             type="number"
                                             placeholder="From"
-                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                            className="p-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="To"
-                                            className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                            className="p-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
                                 </div>
@@ -305,7 +305,7 @@ const Cars = ({ params, lang }) => {
                     </div>
                 </div>
             </div>
-            <div className="relative flex flex-row justify-center items-center my-10">
+            <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
                 <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
 

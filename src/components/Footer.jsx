@@ -54,21 +54,21 @@ const Footer = () => {
                                 <Link href={"#"}>
                                     <Image
                                         src={social_imgOne}
-                                        className="object-contain w-8 mr-3"
+                                        className="object-contain w-8 mx-2"
                                         alt="footer_social1"
                                     />
                                 </Link>
                                 <Link href={"#"}>
                                     <Image
                                         src={social_imgTwo}
-                                        className="object-contain w-8 mr-3"
+                                        className="object-contain w-8 mx-2"
                                         alt="footer_social2"
                                     />
                                 </Link>
                                 <Link href={"#"}>
                                     <Image
                                         src={social_imgThree}
-                                        className="object-contain w-8"
+                                        className="object-contain w-8 mx-2"
                                         alt="footer_social3"
                                     />
                                 </Link>
@@ -77,7 +77,7 @@ const Footer = () => {
 
                         {/* Quick Links */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">{params.lang === 'en' ? 'Quick Links' : 'روابط سريعة'}</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{params.lang === 'en' ? 'Quick Links' : 'روابط سريعة'}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-4">
                                 <li>
                                     <Link href={"#"}>{params.lang === 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar}</Link>
@@ -103,25 +103,25 @@ const Footer = () => {
 
                         {/* Contact Details */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">{params.lang === 'en' ? 'Contact Details' : 'تفاصيل الاتصال'}</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{params.lang === 'en' ? 'Contact Details' : 'تفاصيل الاتصال'}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-3">
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
-                                    <span className="p-2 rounded-full bg-primary text-white mr-2">
+                                    <span className="p-2 rounded-full bg-primary text-white ">
                                         <FiPhoneCall />
                                     </span>
-                                    <Link href={"#"}>(+971) 505 123 558</Link>
+                                    <Link href={"#"} className='mx-3'>(+971) 505 123 558</Link>
                                 </li>
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
-                                    <span className="p-2 rounded-full bg-primary text-white mr-2">
+                                    <span className="p-2 rounded-full bg-primary text-white ">
                                         <FaRegEnvelope />
                                     </span>
-                                    <Link href={"#"}>sales@luai.ae</Link>
+                                    <Link href={"#"} className='mx-3'>sales@luai.ae</Link>
                                 </li>
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
-                                    <span className="p-2 rounded-full bg-primary text-white mr-2">
+                                    <span className="p-2 rounded-full bg-primary text-white">
                                         <FaLocationDot />
                                     </span>
-                                    <Link href={"#"} className='line-clamp-2' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
+                                    <Link href={"#"} className='line-clamp-2 mx-3' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
                                         {/* Shop No. 02, <br />
                                         Azurite Tower, Al Jaddaf */}
                                     </Link>

@@ -1,11 +1,7 @@
 "use client"
 import Image from "next/image"
-import carImage from "../../../public/assets/aboutus-img1.jpg"
 import Button from "@/components/Button"
 import ACommonCard from "@/components/ACommonCard"
-import EcllipseOne from "../../../public/assets/ecllipsOne.png";
-import EcllipseTwo from "../../../public/assets/ecllipsTwo.png";
-import EcllipseThree from "../../../public/assets/ecllipsThree.png";
 import EcllipseFour from "../../../public/assets/ecllipsFour.png";
 import EcllipseFive from "../../../public/assets/ecllipsFive.png";
 import Brands from "@/components/Brands"
@@ -22,6 +18,7 @@ import useFetch from "@/app/customHooks/useFetch"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import useGet from "@/app/customHooks/useGet"
+import { EcllipseOne, EcllipseThree, EcllipseTwo } from "@/ImagesImport/image"
 
 const AboutUs = ({ lang }) => {
 
@@ -53,7 +50,7 @@ const AboutUs = ({ lang }) => {
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
-                    <div className="text-white space-y-4 sm:space-y-6">
+                    <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
                             {dataBanner?.header}
                         </h1>
@@ -73,7 +70,7 @@ const AboutUs = ({ lang }) => {
                     <div className="w-full lg:w-1/2 mt-6 lg:mt-10 sm:mx-2 md:mx-2 sm:px-2 md:px-2 px-2 lg:px-0 lg:mx-0">
                         <img
                             src={data?.data?.image}
-                            className="rounded-md ml-0 h-[20rem] sm:h-[25rem] lg:h-[30rem] object-cover w-full max-w-[25rem] mx-auto"
+                            className="rounded-md ml-0 h-[20rem] sm:h-[25rem] lg:h-[30rem] object-cover w-full max-w-[25rem] mx-auto ar_img"
                             alt="car_image"
                         />
                     </div>

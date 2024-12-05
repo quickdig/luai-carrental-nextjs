@@ -45,7 +45,7 @@ const SearchBox = ({ lang }) => {
                             <select
                                 value={selectedBrand}
                                 onChange={(e) => setSelectedBrand(e.target.value)}
-                                className="pr-4 pl-14 py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                className="pr-4 pl-14 p-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                             >
                                 <option value="" disabled>
                                     {lang == 'en' ? keywords.buttonText.pick_brand.en : keywords.buttonText.pick_brand.ar}
