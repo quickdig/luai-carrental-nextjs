@@ -16,11 +16,11 @@ const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_
                 className="rounded-t-md object-contain"
             /> */}
 
-            <div className="img_box object-contain p-5">
+            <div className="img_box inline-block p-5">
                 <img
                     src={image}
                     alt="Car"
-                    className="rounded-t-md object-contain"
+                    className="rounded-t-md w-full h-auto"
                 />
             </div>
 

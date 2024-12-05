@@ -173,7 +173,7 @@ const Brand = ({ lang }) => {
                                 {/* Availability Section */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <span className="text-left text-sm text-white">Availability</span>
-                                    <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
+                                    <div className="flex flex-row items-center justify-start gap-5">
                                         <div className="inline-flex items-center">
                                             <label className="relative flex items-center cursor-pointer" htmlFor="in_stock">
                                                 <input
@@ -295,15 +295,14 @@ const Brand = ({ lang }) => {
                                                             value={item.id}
                                                             onClick={onFilterSelect}
                                                         />
-                                                        <div className="w-full h-full object-contain bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                        <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
                                                             <img
                                                                 src={item.image}
                                                                 alt="brand_back_img"
-                                                                // layout="fill"
-                                                                // objectFit="contain"
-                                                                className="rounded-lg p-2 object-contain"
+                                                                className="rounded-lg p-2 object-contain object-center w-full h-full"
                                                             />
                                                         </div>
+
                                                     </label>
                                                 )
                                             })
