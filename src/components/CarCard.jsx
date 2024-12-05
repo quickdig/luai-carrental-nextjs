@@ -7,6 +7,8 @@ import Image from "next/image";
 import { keywords } from "../../dataset";
 
 const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, slug, id, btnText }) => {
+
+    const basePath = lang === "en" ? '' : `${lang}/`;
     return (
         <div className="bg-white rounded-md px-4 py-5 space-y-4">
             {/* Star Rating */}
@@ -27,7 +29,7 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
 
             {/* Car Name and Year */}
             <div className="flex flex-col text-center sm:text-left px-2">
-                <Link href={"/brand/audi/audi-a3-2023"} className="text-lg font-medium uppercase">
+                <Link href={`${basePath}cars/${slug}`} className="text-lg font-medium uppercase">
                     {title}
                 </Link>
                 {/* <span className="text-xs sm:text-sm text-secondary">2023</span> */}

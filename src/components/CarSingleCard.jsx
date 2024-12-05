@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import { keywords } from "../../dataset";
 
-const CarSingleCard = ({ btnText, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
+const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
     // const basePath = lang === "en" ? '' : `${lang}/`;
 
     return (
@@ -24,8 +24,9 @@ const CarSingleCard = ({ btnText, slug, image, title, price_daily, price_weekly,
                 />
             </div>
 
-            <div className="w-full mx-4 my-2">
+            <div className="w-full flex flex-col mx-4 my-2">
                 <Link href={`/cars/${slug}`} className="text-xl font-semibold uppercase">{title}</Link>
+                <span>{model}</span>
             </div>
 
             <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-0 px-3 mx-4 border-[.5px] border-gray-300">

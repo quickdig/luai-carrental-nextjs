@@ -31,14 +31,39 @@ const Brand = ({ lang }) => {
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
     const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
+    const filters = useFetch(`brands/filters/${lang}/${params.slug}`);
 
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
     const [isExpanded, setIsExpanded] = useState(true);
+    const [filterData, setFilterData] = useState("");
+    const [filtersAll, setFiltersAll] = useState({
+        type_of_car: 1,
+        availability: 1,
+        from_value: null,
+        to_value: null,
+        car_brands: null,
+    });
+
+    const [isFilterSet, setIsFilterSet] = useState({
+        type_of_car: false,
+        availability: false,
+        from_value: false,
+        to_value: false,
+        car_brands: false,
+    });
 
     const [bannerData, setBannerData] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/brand`);
+
+    useEffect(() => {
+        if (filters) {
+            // console.log(filters?.data?.data);
+            setFilterData(filterData?.data)
+        }
+    }, [filters])
+
     useEffect(() => {
         if (dataBanner) {
             setBannerData(dataBanner?.data?.data)
@@ -56,9 +81,26 @@ const Brand = ({ lang }) => {
         if (resget.data) {
             setCarData(resget?.data?.data)
         }
+
+        console.log(resget);
     }, [resget.data])
 
-    console.log(params);
+    const onFilterSelect = (e) => {
+        const { name, value } = e.target;
+
+        // if (!isFilterSet[name]) {
+        //     setFiltersAll((prevState) => ({ ...prevState, [name]: value }));
+        //     setIsFilterSet((prevState) => ({ ...prevState, [name]: true }));
+        // }
+        setFiltersAll((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
+        handleFilter()
+    }
+
+    const handleFilter = () => {
+        // console.log(filtersAll.type_of_car, filtersAll.availability, filtersAll.car_brands, filtersAll.from_value, filtersAll.to_value);
+        apiMethodGet(`filter/${lang}/${filtersAll.type_of_car}/${filtersAll.availability}/${filtersAll.car_brands}`)
+
+    }
     const onChange = (current) => {
         setActivePage(current)
         apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
@@ -102,40 +144,30 @@ const Brand = ({ lang }) => {
                                 {/* Type of Cars Section */}
                                 <div className="grid grid-cols-1 space-y-2">
                                     <span className="text-left text-sm text-white">Type of cars:</span>
-
-                                    <div className="inline-flex items-center">
-                                        <label className="relative flex items-center cursor-pointer" htmlFor="type_of_car">
-                                            <input
-                                                name="framework-custom-icon"
-                                                type="radio"
-                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                                id="type_of_car"
-                                            />
-                                            <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
-                                                <IoCheckmarkCircle />
-                                            </span>
-                                        </label>
-                                        <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
-                                            Economy <span className="text-[#90A3BF]">(99)</span>
-                                        </label>
-                                    </div>
-
-                                    <div className="inline-flex items-center">
-                                        <label className="relative flex items-center cursor-pointer" htmlFor="type_of_car">
-                                            <input
-                                                name="framework-custom-icon"
-                                                type="radio"
-                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                                id="type_of_car"
-                                            />
-                                            <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
-                                                <IoCheckmarkCircle />
-                                            </span>
-                                        </label>
-                                        <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="html-custom-icon">
-                                            SUV <span className="text-[#90A3BF]">(99)</span>
-                                        </label>
-                                    </div>
+                                    {
+                                        Array.isArray(filters?.data?.data?.types) && filters?.data?.data?.types?.map((item, idx) => {
+                                            return (
+                                                <div className="inline-flex items-center" key={idx} >
+                                                    <label className="relative flex items-center cursor-pointer" htmlFor={`type_of_car_` + item.id}>
+                                                        <input
+                                                            name="type_of_car"
+                                                            type="radio"
+                                                            value={item.id}
+                                                            onClick={onFilterSelect}
+                                                            className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
+                                                            id={`type_of_car_` + item.id}
+                                                        />
+                                                        <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
+                                                            <IoCheckmarkCircle />
+                                                        </span>
+                                                    </label>
+                                                    <label className="ml-2 text-white cursor-pointer text-sm" htmlFor={`type_of_car_` + item.id}>
+                                                        {item.name} <span className="text-[#90A3BF]">({item.count})</span>
+                                                    </label>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
 
                                 {/* Availability Section */}
@@ -143,35 +175,39 @@ const Brand = ({ lang }) => {
                                     <span className="text-left text-sm text-white">Availability</span>
                                     <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
                                         <div className="inline-flex items-center">
-                                            <label className="relative flex items-center cursor-pointer" htmlFor="availability">
+                                            <label className="relative flex items-center cursor-pointer" htmlFor="in_stock">
                                                 <input
-                                                    name="framework-custom-icon"
+                                                    name="availability"
                                                     type="radio"
+                                                    value="1"
+                                                    onClick={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                                    id="availability"
+                                                    id="in_stock"
                                                 />
                                                 <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
                                                     <IoCheckmarkCircle />
                                                 </span>
                                             </label>
-                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
+                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="in_stock">
                                                 In Stock
                                             </label>
                                         </div>
 
                                         <div className="inline-flex items-center">
-                                            <label className="relative flex items-center cursor-pointer" htmlFor="availability">
+                                            <label className="relative flex items-center cursor-pointer" htmlFor="out_of_stock">
                                                 <input
-                                                    name="framework-custom-icon"
+                                                    name="availability"
                                                     type="radio"
+                                                    value="0"
+                                                    onClick={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
-                                                    id="availability"
+                                                    id="out_of_stock"
                                                 />
                                                 <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
                                                     <IoCheckmarkCircle />
                                                 </span>
                                             </label>
-                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="availability">
+                                            <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="out_of_stock">
                                                 Out of Stock
                                             </label>
                                         </div>
@@ -179,7 +215,7 @@ const Brand = ({ lang }) => {
                                 </div>
 
                                 {/* Date Selection */}
-                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                {/* <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <span className="text-left text-sm text-white">Select a date:</span>
                                     <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-5">
                                         <input
@@ -193,10 +229,10 @@ const Brand = ({ lang }) => {
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Special Offers Section */}
-                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                {/* <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <span className="text-left text-sm text-white">Special Offers</span>
                                     <div className="flex flex-row items-center justify-center">
                                         <input
@@ -205,7 +241,7 @@ const Brand = ({ lang }) => {
                                             className="py-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Pricing Section */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
@@ -213,14 +249,13 @@ const Brand = ({ lang }) => {
                                         <span className="text-left text-sm text-white">Pricing</span>
                                     </div>
                                     <div className="flex flex-row text-white justify-between items-center">
-                                        <span>From AED 0</span>
-                                        <span>To AED 9999</span>
+                                        <span>From AED {filters?.data?.data?.pricing?.min}</span>
+                                        <span>To AED {filters?.data?.data?.pricing?.max}</span>
                                     </div>
                                     <div className="flex flex-row items-center justify-center">
                                         <input
                                             type="range"
                                             className="w-full cursor-pointer accent-primary"
-
                                         />
                                     </div>
 
@@ -228,11 +263,15 @@ const Brand = ({ lang }) => {
                                         <input
                                             type="number"
                                             placeholder="From"
+                                            name="from_value"
+                                            value={filters?.data?.data?.pricing?.min}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="To"
+                                            name="to_value"
+                                            value={filters?.data?.data?.pricing?.max}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
@@ -245,25 +284,34 @@ const Brand = ({ lang }) => {
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
                                         {/* Brand 1 */}
-                                        <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
-                                            <input
-                                                type="radio"
-                                                name="car_brands"
-                                                className="hidden peer"
-                                            />
-                                            <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
-                                                <Image
-                                                    src={bOne}
-                                                    alt="Background Image"
-                                                    layout="fill"
-                                                    objectFit="contain"
-                                                    className="rounded-lg p-2"
-                                                />
-                                            </div>
-                                        </label>
+                                        {
+                                            Array.isArray(filters?.data?.data?.brands) && filters?.data?.data?.brands?.map((item, idx) => {
+                                                return (
+                                                    <label className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" key={idx}>
+                                                        <input
+                                                            type="radio"
+                                                            name="car_brands"
+                                                            className="hidden peer"
+                                                            value={item.id}
+                                                            onClick={onFilterSelect}
+                                                        />
+                                                        <div className="w-full h-full object-contain bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                            <img
+                                                                src={item.image}
+                                                                alt="brand_back_img"
+                                                                // layout="fill"
+                                                                // objectFit="contain"
+                                                                className="rounded-lg p-2 object-contain"
+                                                            />
+                                                        </div>
+                                                    </label>
+                                                )
+                                            })
+                                        }
+
 
                                         {/* Brand 2 */}
-                                        <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
+                                        {/* <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
                                             <input
                                                 type="radio"
                                                 name="car_brands"
@@ -278,10 +326,10 @@ const Brand = ({ lang }) => {
                                                     className="rounded-lg p-2"
                                                 />
                                             </div>
-                                        </label>
+                                        </label> */}
 
                                         {/* Brand 3 */}
-                                        <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
+                                        {/* <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
                                             <input
                                                 type="radio"
                                                 name="car_brands"
@@ -296,7 +344,7 @@ const Brand = ({ lang }) => {
                                                     className="rounded-lg p-2"
                                                 />
                                             </div>
-                                        </label>
+                                        </label> */}
                                     </div>
                                 </div>
                             </div>
