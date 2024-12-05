@@ -21,7 +21,7 @@ const Home = ({ param, lang }) => {
 
     if (loading) return <PreLoader />;
     const alldata = data?.data
-    const { bannerContent, featuredContent, sectionContent, blogContent } = data?.data
+    const { bannerContent, featuredContent, sectionContent, blogContent, reasonList, reasonSectionHeader } = data?.data
     return (
         <div>
             <Banner bannerData={bannerContent} allData={alldata} />
@@ -33,7 +33,7 @@ const Home = ({ param, lang }) => {
             <JourneyBanner lang={lang} sectionData={sectionContent.section_three} />
             <JourneyCard lang={lang} sectionData={sectionContent.section_four} section={"CardThree"} />
             <BlogContainer lang={lang} blogData={blogContent} />
-            <ReasonList lang={lang} />
+            <ReasonList lang={lang} reasonListData={reasonList} reasonHeaderData={reasonSectionHeader} />
         </div>
     )
 }

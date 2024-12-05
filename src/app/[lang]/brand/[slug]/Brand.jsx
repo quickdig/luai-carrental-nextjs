@@ -16,24 +16,34 @@ import Breadcrumb from "@/components/Breadcrumb"
 import Button from "@/components/Button";
 import Link from "next/link";
 import CarSingleCard from "@/components/CarSingleCard";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch";
 import useGet from "@/app/customHooks/useGet";
 import { useEffect, useState } from "react";
 import { Pagination } from "antd";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 import { keywords } from "../../../../../dataset";
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 
 
 const Brand = ({ lang }) => {
     const params = useParams()
-    console.log(params);
+    const pathname = usePathname();
+    const breadcrumbs = getBreadcrumb(pathname)
     const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
 
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
     const [isExpanded, setIsExpanded] = useState(true);
+
+    const [bannerData, setBannerData] = useState("");
+    const dataBanner = useFetch(`banner_data/${lang}/brand`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
 
     useEffect(() => {
         if (data) {
@@ -48,7 +58,7 @@ const Brand = ({ lang }) => {
         }
     }, [resget.data])
 
-    console.log(carData);
+    console.log(params);
     const onChange = (current) => {
         setActivePage(current)
         apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
@@ -62,21 +72,21 @@ const Brand = ({ lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Brands
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-row md:flex-row max-w-screen-lg sm:mt-5 md:mt-5+6 lg:mt-5 w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"Brand"} linkThree={"Audi"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">Audi Rental Dubai</h2>
+                <h2 className="text-left text-xl font-bold">{params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}</h2>
             </div>
 
             {/* Filter bar section */}

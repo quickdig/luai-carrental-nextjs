@@ -1,4 +1,5 @@
 
+"use client"
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb"
 import Link from "next/link";
@@ -7,8 +8,55 @@ import { FaCheck } from "react-icons/fa6";
 import Button from "@/components/Button";
 import mapImage from "../../../public/assets/map.png"
 import { contactData } from "./data";
+import useFetch from "@/app/customHooks/useFetch";
+import { useEffect, useState } from "react";
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import { usePathname } from "next/navigation";
+import usePost from "@/app/customHooks/usePost";
 
-const ContactUs = ({ params, lang }) => {
+const ContactUs = ({ lang }) => {
+
+    // field values
+    const [name, setName] = useState("");
+    const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    const pathname = usePathname();
+    const breadcrumbs = getBreadcrumb(pathname)
+    const [bannerData, setBannerData] = useState("");
+    const [res, apiMethod] = usePost()
+    const dataBanner = useFetch(`banner_data/${lang}/contact-us`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData()
+
+        formData.append("name", name);
+        formData.append("number", number);
+        formData.append("email", email);
+        formData.append("message", message);
+
+        if (name, number, email, message === "") {
+            window.alert("Required fields are empty!");
+        } else {
+            apiMethod(`contactus`, formData)
+            if (res.error == null) {
+                window.alert("Email sent successfully");
+                setName("")
+                setNumber("")
+                setEmail("")
+                setMessage("")
+            }
+        }
+
+        // console.log(...formData);
+    }
 
     return (
         <div className="bg-[#F1F4F8]">
@@ -17,21 +65,21 @@ const ContactUs = ({ params, lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Contact Us
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"Contact Us"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">Contact Us</h2>
+                <h2 className="text-left text-xl font-bold">{bannerData?.header}</h2>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mx-auto px-4 sm:px-6 lg:px-0">
@@ -63,41 +111,56 @@ const ContactUs = ({ params, lang }) => {
 
                     {/* Form Section */}
                     <div className="rounded-md bg-white py-5 px-6 mt-6 shadow-md">
-                        <form action="#" className="w-full">
+                        <form onSubmit={handleSubmit} className="w-full">
                             <div className="grid gap-6">
                                 <input
                                     type="text"
                                     name="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     placeholder="Your Name"
                                     className="block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                                // required
                                 />
                                 <div className="grid gap-6 sm:grid-cols-2">
                                     <input
                                         type="text"
                                         name="number"
+                                        value={number}
+                                        onChange={(e) => setNumber(e.target.value)}
                                         placeholder="Your Number"
                                         className="block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                                    // required
                                     />
                                     <input
                                         type="email"
                                         name="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         placeholder="Email"
                                         className="block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                                    // required
                                     />
                                 </div>
                                 <textarea
                                     name="message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     placeholder="Your Message"
                                     rows="4"
                                     className="block w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:ring-primary focus:border-primary sm:text-sm"
+                                // required
                                 ></textarea>
                             </div>
                             <div className="mt-6 text-right mb-5">
-                                <Button
+                                <button type="submit" className="bg-secondary hover:bg-[#c9281a] text-white text-sm md:text-base lg:text-md py-2 px-4 md:px-6 rounded uppercase font-medium" name="contact_usbtn">
+                                    {lang == 'en' ? 'Submit' : 'يُقدِّم'}
+                                </button>
+                                {/* <Button
                                     text="Submit"
                                     type="submit"
                                     style="bg-secondary hover:bg-[#c9281a] text-white text-sm md:text-base lg:text-md py-2 px-4 md:px-6 rounded uppercase font-medium"
-                                />
+                                /> */}
                             </div>
                         </form>
                     </div>

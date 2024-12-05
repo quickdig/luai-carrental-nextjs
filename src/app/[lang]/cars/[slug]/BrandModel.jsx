@@ -16,11 +16,23 @@ import { FaCheck } from "react-icons/fa6";
 import Link from "next/link";
 import BrandDetailSidebar from "@/components/BrandDetailSidebar";
 import useFetch from "@/app/customHooks/useFetch";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 
 const BrandModel = ({ lang }) => {
     const params = useParams();
+    const pathname = usePathname();
+    const breadcrumbs = getBreadcrumb(pathname)
     const { loading, data } = useFetch(`car/detail/${lang}/${params.slug}`);
+
+    const [bannerData, setBannerData] = useState("");
+    const dataBanner = useFetch(`banner_data/${lang}/car-details`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
 
     if (loading) return;
     const { name, description, price_daily, price_weekly, price_monthly, image, engine, bluetooth, cruise, luggage, deposit, stock } = data?.data
@@ -31,17 +43,17 @@ const BrandModel = ({ lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Brands Detail
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"Brand"} linkThree={"Audi"} linkFour={"Audi A3 2023"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">

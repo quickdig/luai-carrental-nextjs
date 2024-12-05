@@ -21,8 +21,13 @@ import useGet from "@/app/customHooks/useGet";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 import { Pagination } from "antd";
 import { keywords } from "../../../../dataset";
+import { usePathname } from "next/navigation";
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 
-const Cars = ({ params, lang }) => {
+const Cars = ({ lang }) => {
+
+    const params = usePathname();
+    const breadcrumbs = getBreadcrumb(params)
 
     const { loading, data } = useFetch(`car/all/${lang}/12?page=1`);
 
@@ -30,6 +35,14 @@ const Cars = ({ params, lang }) => {
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
     const [isExpanded, setIsExpanded] = useState(true);
+
+    const [bannerData, setBannerData] = useState("");
+    const dataBanner = useFetch(`banner_data/${lang}/cars`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
 
     useEffect(() => {
         if (data) {
@@ -58,21 +71,21 @@ const Cars = ({ params, lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Cars
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"Brand"} linkThree={"Audi"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">Audi Rental Dubai</h2>
+                <h2 className="text-left text-xl font-bold">{bannerData?.header}</h2>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">

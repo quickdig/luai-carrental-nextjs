@@ -7,67 +7,38 @@ import { BsCalendar2Check } from "react-icons/bs";
 import { RiAnchorLine } from "react-icons/ri";
 import { IoBriefcaseOutline } from "react-icons/io5";
 
-const ReasonList = () => {
+const ReasonList = ({ lang, reasonListData, reasonHeaderData }) => {
     return (
         <section className="reasonList_Card relative mt-16">
             <div className="flex flex-col max-w-screen-lg w-full mx-auto items-center px-4 lg:px-8">
                 <h4 className="text-black text-center text-2xl md:text-3xl font-bold mb-5">
-                    #1 for Some Genuine Reasons
+                    {reasonHeaderData?.header}
                 </h4>
                 <p className="text-center text-sm md:text-md leading-7 text-[#707070]">
-                    We offer a wide range of unique rental vehicles for any occasion or destination. From economy cars to SUVs, we&apos;ve
-                    <br className="hidden md:block" /> got you covered. Take advantage of our exclusive loyalty program for money-saving rewards.
-                    Choose from luxury, <br className="hidden md:block" /> mid-range, and cheap vehicles according to your budget. Get the best car rental in Dubai.
+                    {reasonHeaderData?.text_one}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mt-6 md:mt-10">
-                    <div className="col-span-1">
-                        <ReasonCard
-                            icon={<LuKey />}
-                            title="Timely Delivery"
-                            desc="We send the expert drivers to your doorstep within minutes after booking online or via phone. This is great for many of you who wait hours to receive your car on rent."
-                        />
-                    </div>
-                    <div className="col-span-1">
-                        <ReasonCard
-                            icon={<SlEnergy />}
-                            title="Unbeatable Rates"
-                            desc="We send the expert drivers to your doorstep within minutes after booking online or via phone. This is great for many of you who wait hours to receive your car on rent."
-                        />
-                    </div>
-                    <div className="col-span-1">
-                        <ReasonCard
-                            icon={<GoShieldCheck />}
-                            title="Flexible Return Policy"
-                            desc="We send the expert drivers to your doorstep within minutes after booking online or via phone. This is great for many of you who wait hours to receive your car on rent."
-                        />
-                    </div>
-                    <div className="col-span-1">
-                        <ReasonCard
-                            icon={<BsCalendar2Check />}
-                            title="Online Reservation"
-                            desc="We send the expert drivers to your doorstep within minutes after booking online or via phone. This is great for many of you who wait hours to receive your car on rent."
-                        />
-                    </div>
-                    <div className="col-span-1">
-                        <ReasonCard
-                            icon={<RiAnchorLine />}
-                            title="Fully Insured"
-                            desc="We send the expert drivers to your doorstep within minutes after booking online or via phone. This is great for many of you who wait hours to receive your car on rent."
-                        />
-                    </div>
-                    <div className="col-span-1">
-                        <ReasonCard
-                            icon={<IoBriefcaseOutline />}
-                            title="Professional Staff"
-                            desc="We send the expert drivers to your doorstep within minutes after booking online or via phone. This is great for many of you who wait hours to receive your car on rent."
-                        />
-                    </div>
+
+                    {
+                        Array.isArray(reasonListData) && reasonListData?.map((item, idx) => {
+                            return (
+                                <div className="col-span-1" key={idx}>
+                                    <ReasonCard
+                                        icon={item.image}
+                                        title={item.header}
+                                        desc={item.text}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+
+
                 </div>
 
                 <p className="text-center text-sm md:text-md text-[#707070] mt-8 md:mt-10 leading-7">
-                    Whether short-term or long-term rentals, there is something perfect for everyone here at Hala Drive.
-                    Book now <br className="hidden md:block" /> and start taking advantage of these excellent benefits today!
+                    {reasonHeaderData?.text_two}
                 </p>
 
                 <Button
