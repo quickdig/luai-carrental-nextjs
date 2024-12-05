@@ -9,8 +9,8 @@ const Banner = ({ bannerData, allData }) => {
 
     return (
         <section className="relative overflow-hidden banner_Section">
-            <img src={banner_back} className="w-full object-cover blur-[2px] max-[1024px]:absolute max-[1024px]:h-full" alt="banner_img" />
-            <Image src={bgimg} className="absolute h-full max-w-[60%] right-0 top-0 z-[9]" alt="poligon" />
+            <img src={banner_back} className=" w-full object-cover blur-[2px] max-[1024px]:absolute max-[1024px]:h-full" alt="banner_img" />
+            <Image src={bgimg} className="banner_img absolute h-full max-w-[60%] right-0 top-0 z-[9]" alt="poligon" />
             <div className="banner_SectionMain w-[90%] items-center grid grid-cols-[40%,60%] mx-auto  right-0 absolute z-10 top-[50%] transform translate-y-[-50%] max-[1024px]:top-0  max-[1024px]:translate-y-[0] max-[1024px]:mt-[2rem] max-[1024px]:block max-[1024px]:relative">
                 <div className="banner_SectionMainl">
                     <div className="text-white max-w-lg space-y-6">
@@ -24,7 +24,7 @@ const Banner = ({ bannerData, allData }) => {
                     </div>
                 </div>
                 <div className="banner_SectionMainr">
-                    <img src={banner_img} className="w-full relative mt-[6rem] h-full max-[1024px]:mt-[3rem]" alt="car image" />
+                    <img src={banner_img} className="banner_car w-full relative mt-[6rem] h-full max-[1024px]:mt-[3rem]" alt="car image" />
                 </div>
             </div>
         </section>

@@ -148,7 +148,7 @@ const Header = () => {
         {/* Navigation Menu */}
         <nav
           aria-label="Header Navigation"
-          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6 overflow-hidden transition-all md:ml-32 md:max-h-full md:flex-row"
+          className="peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-end gap-6 transition-all md:ml-32 md:max-h-full md:flex-row"
         >
           {/* peer-checked:mt-8 text-center peer-checked:max-h-96 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-32 md:max-h-full md:flex-row */}
           {/* Main Links */}
@@ -179,7 +179,7 @@ const Header = () => {
                 {langValue == 'en' ? keywords.navMenu.brands.en : keywords.navMenu.brands.ar}
               </button>
               {isDropdownOpen && (
-                <ul className="absolute left-0 bg-[#f1f4f8] h-full w-64 border border-gray-200 rounded-md shadow-lg z-[999] grid grid-cols-2">
+                <ul className="absolute left-0 bg-[#f1f4f8] w-64 border border-gray-200 rounded-md shadow-lg z-[999] grid grid-cols-2">
                   {brands?.map((item, idx) => (
                     <Link
                       href={`/${basePath}brand/${item.slug}`}
@@ -228,19 +228,19 @@ const Header = () => {
 
           </ul>
           {/* Buttons */}
-          <ul className="flex flex-col items-center mt-4 space-y-4 text-xs md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
+          <ul className="flex flex-col items-center mt-4 space-y-4 text-xs gap-3 md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
             <li>
               <button
                 onClick={() => toggleLanguage(language)}
                 className="bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded inline-flex items-center"
               >
-                <FaEarthAmericas className="mr-2" />
+                <FaEarthAmericas className="en_icon mr-2" />
                 {language === 'en' ? 'عربي' : 'English'}
               </button>
             </li>
             <li>
               <button className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center">
-                <FaPhone className="mr-2" />
+                <FaPhone className="ar_icon mr-2" />
                 {langValue == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar}
               </button>
             </li>

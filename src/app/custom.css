@@ -10,6 +10,10 @@
 } */
 
 /* HTML: <div class="loader"></div> */
+body.ar{
+  direction: rtl;
+  transition: 0.5s linear;
+}
 .loader {
     width: 20px;
     aspect-ratio: 1;
@@ -47,4 +51,25 @@
         opacity: 0;
         visibility: hidden;
     }
+}
+
+
+
+body.ar .banner_SectionMain{
+  margin-right: 5%;
+}
+body.ar .banner_img{
+  transform: scaleX(-1);
+  right: 34rem !important;
+}
+body.ar .banner_car{
+  transform: scaleX(-1);
+}
+body.ar .en_icon{
+  margin-left: 10px;
+  margin-right: 0px !important;
+}
+body.ar .ar_icon{
+  margin-left: 10px;
+  margin-right: 0px !important;
 }
