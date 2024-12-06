@@ -131,9 +131,9 @@ const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_
                             <h2 className="my-5 text-[18px]">
                                 Enter promo code
                             </h2>
-                            <div class="input-group">
-                                <input class="input-group__text" type="text" placeholder="Promo Code"/>
-                                    <span class="input-group__btn js-promo-submit">Valid</span>
+                            <div className="">
+                                <input className="w-[65%] p-2 rounded-l-md" type="text" placeholder="Promo Code"/>
+                                    <span className="py-2 px-5 bg-[#dbb6df] rounded-r-md cursor-pointer">Valid</span>
                             </div>
 
 

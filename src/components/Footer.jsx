@@ -21,9 +21,7 @@ const Footer = () => {
     const { loading, data } = useFetch(`footer/${params.lang}`);
 
 
-    useEffect(() => {
-        console.log(params);
-    }, [data])
+
 
     if (loading) return;
     const footerData = data?.data;
