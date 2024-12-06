@@ -1,15 +1,14 @@
 
 import { MdStar } from "react-icons/md";
 import Link from "next/link";
-import { keywords } from "../../dataset";
-import { useState } from "react";
+import { languageData } from "../../dataset";
+import { useContext, useState } from "react";
 import { Modal } from "antd";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
     // const basePath = lang === "en" ? '' : `${lang}/`;
-
-    const { commonText, carFeatures } = keywords
-    const { day, week, month } = commonText.pricing.per
+    const { langValue } = useContext(MainLanguageValueContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleBookingModal = () => {
         setIsModalOpen(true);
@@ -38,37 +37,33 @@ const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_
 
             <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-0 px-3 mx-4 border-[.5px] border-gray-300">
                 <div className="flex flex-col items-center sm:items-start">
-                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? day.en : day.ar}</span>
+                    <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Daily"]}</span>
                     <span className="price_cat text-sm font-medium">AED {price_daily}</span>
                 </div>
 
                 <div className="flex flex-col items-center sm:items-start">
-                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? week.en : week.ar}</span>
+                    <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Weekly"]}</span>
                     <span className="price_cat text-sm font-medium">AED {price_weekly}</span>
                 </div>
 
                 <div className="flex flex-col items-center sm:items-start">
-                    <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? month.en : month.ar}</span>
+                    <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Monthly"]}</span>
                     <span className="price_cat text-sm font-medium">AED {price_monthly}</span>
                 </div>
             </div>
 
             <ul className="list-none space-y-3 mt-4 mx-4">
                 <li className="flex items-center text-xs font-semibold">
-                    <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth && lang == 'en' ? keywords.carFeatures.bluetooth.yes.en
-                        : bluetooth && lang == 'ar' ? keywords.carFeatures.bluetooth.yes.ar : bluetooth == false && lang == 'en' ? keywords.carFeatures.bluetooth.no.en : keywords.carFeatures.bluetooth.no.ar}
+                    <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Blutooth Yes"] : languageData[langValue]["Blutooth No"]}
                 </li>
                 <li className="flex items-center text-xs font-semibold">
-                    <span className="text-primary"><MdStar /></span> &nbsp; {cruise_control && lang == 'en' ? keywords.carFeatures.cruise_control.yes.en
-                        : cruise_control && lang == 'ar' ? keywords.carFeatures.cruise_control.yes.ar : cruise_control == false && lang == 'en' ? keywords.carFeatures.cruise_control.no.en : keywords.carFeatures.cruise_control.no.ar}
+                    <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Cruise Control Yes"] : languageData[langValue]["Cruise Control No"]}
                 </li>
                 <li className="flex items-center text-xs font-semibold">
-                    <span className="text-primary"><MdStar /></span> &nbsp; {lang == 'en' ? keywords.carFeatures.engine.en
-                        : keywords.carFeatures.engine.ar} {engine}
+                    <span className="text-primary"><MdStar /></span> &nbsp; { languageData[langValue]["Engine"]} {engine}
                 </li>
                 <li className="flex items-center text-xs font-semibold">
-                    <span className="text-primary"><MdStar /></span> &nbsp; {luggage && lang == 'en' ? keywords.carFeatures.luggage.yes.en
-                        : luggage && lang == 'ar' ? keywords.carFeatures.luggage.yes.ar : luggage == false && lang == 'en' ? keywords.carFeatures.luggage.no.en : keywords.carFeatures.luggage.no.ar}
+                    <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Luggage Yes"] : languageData[langValue]["Luggage No"]}
                 </li>
             </ul>
 

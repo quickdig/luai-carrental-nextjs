@@ -14,11 +14,12 @@ import CarSingleCard from "@/components/CarSingleCard";
 import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch";
 import useGet from "@/app/customHooks/useGet";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Pagination } from "antd";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 import { languageData } from "../../../../../dataset";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 
 const Brand = ({ lang }) => {
@@ -26,6 +27,7 @@ const Brand = ({ lang }) => {
     const {slug} = params
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
+    const { langValue } = useContext(MainLanguageValueContext);
     const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
     const filters = useFetch(`brands/filters/${lang}/${slug}`);
 
