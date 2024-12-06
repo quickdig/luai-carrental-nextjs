@@ -2,19 +2,15 @@
 
 import React, { useContext } from 'react'
 import footer_logo from "../../src/public/assets/logo_black.png";
-import footer_back from "../../src/public/assets/footer_back.png";
-import social_imgOne from "../../src/public/assets/fb.png";
-import social_imgTwo from "../../src/public/assets/wa.png";
-import social_imgThree from "../../src/public/assets/insta.png";
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiPhoneCall } from "react-icons/fi";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
-import {  usePathname } from 'next/navigation';
 import useFetch from '@/app/customHooks/useFetch';
 import { keywords } from '../../dataset';
 import { MainLanguageValueContext } from '@/app/context/MainLanguageValue';
+import { social_imgOne, social_imgThree, social_imgTwo } from '@/ImagesImport/image';
 
 const Footer = () => {
     const { langValue } = useContext(MainLanguageValueContext);
@@ -120,17 +116,12 @@ const Footer = () => {
                                         <FaLocationDot />
                                     </span>
                                     <Link href={"#"} className='line-clamp-2 mx-3' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
-                                        {/* Shop No. 02, <br />
-                                        Azurite Tower, Al Jaddaf */}
                                     </Link>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </footer>
-                {/* <div className="absolute bottom-5 flex flex-row w-full h-auto border-t-[.5px] border-t-white justify-center items-center">
-                    <p className='text-xs text-white mt-5'>&copy;2024 LUAI Drive, All Rights Reserved. Powered by <Link to={"https://quickdigitals.ae/"} className='underline' target='_blank'>Quick Digitals</Link></p>
-                </div> */}
             </div>
         </section>
 
