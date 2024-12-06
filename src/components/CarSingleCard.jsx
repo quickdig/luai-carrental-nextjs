@@ -94,7 +94,7 @@ const CarSingleCard = ({ model, slug, image, title, price_daily, price_weekly, p
                             <input type="email" placeholder="Email" className="py-2 px-5 m-2 rounded-md mb-8" />
                             <div>
                                 <span className="p-4 bg-[#dbb6df] rounded-md text-[#8b2b90]">
-                                    The customer's age must be 25+
+                                    The customer&apos;s age must be 25+
                                 </span>
                             </div>
 
