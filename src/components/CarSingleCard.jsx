@@ -86,7 +86,7 @@ const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_
                                 <li className="flex justify-between">
                                     <div>Refundable Security Deposit </div>
                                     <div>1000.00</div>
-                                    <button>Added</button>
+                                    <button>Added</button>    
                                 </li>
                             </ul>
                         </div>
