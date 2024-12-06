@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import Breadcrumb from "@/components/Breadcrumb"
 import dropdown from "./script";
 import { useEffect } from "react";
@@ -7,10 +7,22 @@ import { GoPlus } from "react-icons/go";
 import { RxCross2 } from "react-icons/rx";
 import FaqCard from "@/components/FaqCard";
 import useFetch from "@/app/customHooks/useFetch";
+import { usePathname } from "next/navigation";
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 
-const Faq = ({ params, lang }) => {
+const Faq = ({ lang }) => {
 
     const { loading, data } = useFetch(`faq/${lang}`);
+    const pathname = usePathname();
+    const breadcrumbs = getBreadcrumb(pathname)
+
+    const [bannerData, setBannerData] = useState("");
+    const dataBanner = useFetch(`banner_data/${lang}/faq`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
 
     useEffect(() => {
         dropdown()
@@ -23,21 +35,21 @@ const Faq = ({ params, lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            FAQs
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"FAQs"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">FAQs</h2>
+                <h2 className="text-left text-xl font-bold">{bannerData?.header}</h2>
             </div>
 
             <div className="relative flex flex-col max-w-screen-lg bg-[#F8FBFF] w-full mx-auto px-4 py-4 sm:px-6 lg:px-4 mt-5 rounded-md">

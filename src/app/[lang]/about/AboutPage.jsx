@@ -19,32 +19,26 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import useGet from "@/app/customHooks/useGet"
 import { EcllipseOne, EcllipseThree, EcllipseTwo } from "@/ImagesImport/image"
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
 
 const AboutUs = ({ lang }) => {
 
     const params = usePathname();
     const { loading, data } = useFetch(`aboutus/${lang}`);
-    const [resget, apiMethodGet] = useGet()
+    const breadcrumbs = getBreadcrumb(params)
+
+    console.log(data);
 
     const [bannerData, setBannerData] = useState("");
-    // const { bannerData } = useFetch(`banner_data/${lang}/about-us`);
-
-    console.log(bannerData);
-
+    const dataBanner = useFetch(`banner_data/${lang}/about-us`);
     useEffect(() => {
-        if (lang) {
-            apiMethodGet(`banner_data/${lang}/about-us`);
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
         }
-    }, [lang]);
+    }, [dataBanner]);
 
-    useEffect(() => {
-        if (resget.data) {
-            setBannerData(resget?.data)
-        }
-    }, [resget.data])
     if (loading) return;
     const valueData = data?.aboutvalue
-    const dataBanner = bannerData?.data
     return (
         <>
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -52,17 +46,17 @@ const AboutUs = ({ lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            {dataBanner?.header}
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            {dataBanner?.text}
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="relative">
-                <Breadcrumb linkOne={"Home"} linkTwo={"About Us"} linkThree={"Test Three"} linkFour={"Test Four"} />
+            <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
             <div className="relative z-10 flex flex-col max-w-screen-lg w-full mt-0 mx-auto items-center">
                 <div className="flex flex-col lg:flex-row justify-between items-center sm:px-6 lg:px-0">

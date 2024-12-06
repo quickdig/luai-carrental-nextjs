@@ -10,12 +10,15 @@ import catImageThree from "@/public/assets/cat_img3.jpg";
 import catImageFour from "@/public/assets/cat_img4.jpg";
 import catImageFive from "@/public/assets/cat_img5.jpg";
 import CategoryCard from "@/components/CategoryCard";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch"
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
 
 const BlogDetail = ({ lang }) => {
 
     const params = useParams()
+    const pathname = usePathname();
+    const breadcrumbs = getBreadcrumb(pathname)
 
     const { loading, data } = useFetch(`blog/single/${lang}/${params.slug}`);
 
@@ -38,7 +41,7 @@ const BlogDetail = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"Blogs"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">

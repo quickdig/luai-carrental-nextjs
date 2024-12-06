@@ -9,6 +9,8 @@ import useFetch from "@/app/customHooks/useFetch";
 import { useEffect, useState } from "react";
 import useGet from "@/app/customHooks/useGet";
 import { Pagination } from "antd";
+import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import { usePathname } from "next/navigation";
 
 const Blogs = ({ params, lang }) => {
 
@@ -16,6 +18,16 @@ const Blogs = ({ params, lang }) => {
     const [blogData, setBlogData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
+    const pathname = usePathname();
+    const breadcrumbs = getBreadcrumb(pathname)
+
+    const [bannerData, setBannerData] = useState("");
+    const dataBanner = useFetch(`banner_data/${lang}/blog`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
 
     useEffect(() => {
         if (data) {
@@ -43,21 +55,21 @@ const Blogs = ({ params, lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Blogs
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb linkOne={"Home"} linkTwo={"Blogs"} />
+                <Breadcrumb breadcrumbs={breadcrumbs} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">Blogs</h2>
+                <h2 className="text-left text-xl font-bold">{bannerData?.header}</h2>
             </div>
 
             <div className="relative grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-screen-lg mx-auto sm:px-6 lg:px-0 mt-5">

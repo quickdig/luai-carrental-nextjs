@@ -1,13 +1,30 @@
 import Link from "next/link"
 
-const Breadcrumb = ({ linkOne, linkTwo, linkThree, linkFour }) => {
+const Breadcrumb = ({ breadcrumbs }) => {
+
     return (
-        <div className="flex flex-row text-[12px] lg:mx-auto md:ml-5 sm:ml-5 lg:flex-row justify-start max-w-screen-lg w-full mt-5 items-center ml-5">
-            <span className="text-[#92AACB]"><Link href={"#"}>{linkOne}</Link>&nbsp; &gt; </span>
-            <span className="text-primary">&nbsp;<Link href={"#"}>{linkTwo}</Link>&nbsp; &gt;</span>
-            <span className="text-primary">&nbsp;<Link href={"#"}>{linkThree}</Link>&nbsp; &gt;</span>
-            <span className="text-primary">&nbsp;<Link href={"#"}>{linkFour}</Link>&nbsp;</span>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb" style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
+                {breadcrumbs.map((crumb, index) => (
+                    <li
+                        key={crumb.href}
+                        className="breadcrumb-item"
+                        style={{ display: 'flex', alignItems: 'center' }}
+                    >
+                        {index !== breadcrumbs.length - 1 ? (
+                            <>
+                                <Link href={crumb.href}>
+                                    {crumb.name}
+                                </Link>
+                                <span style={{ margin: '0 8px' }}>→</span>
+                            </>
+                        ) : (
+                            <span style={{ fontWeight: 'bold', color: 'gray' }}>{crumb.name}</span>
+                        )}
+                    </li>
+                ))}
+            </ol>
+        </nav>
     )
 }
 
