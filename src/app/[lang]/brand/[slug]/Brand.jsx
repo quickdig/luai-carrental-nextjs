@@ -31,6 +31,13 @@ const Brand = ({ lang }) => {
     const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
     const filters = useFetch(`brands/filters/${lang}/${slug}`);
 
+    const [minmax, setMinmax] = useState({
+        "min":"",
+        "max":"",
+    })
+
+
+
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
@@ -59,6 +66,7 @@ const Brand = ({ lang }) => {
         if (filters) {
             // console.log(filters?.data?.data);
             setFilterData(filterData?.data)
+            setMinmax(filterData?.data)
         }
     }, [filters])
 
@@ -99,7 +107,7 @@ const Brand = ({ lang }) => {
         apiMethodGet(`filter/${lang}/${filtersAll.type_of_car}/${filtersAll.availability}/${filtersAll.car_brands}`)
 
     }
-    const onChange = (current) => {
+    const handleChange = (current) => {
         setActivePage(current)
         apiMethodGet(`brands/fetch_by_brand/${lang}/${slug}/12?page=${current}`)
     }
@@ -185,7 +193,7 @@ const Brand = ({ lang }) => {
                                                             name="type_of_car"
                                                             type="radio"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onChange={onFilterSelect}
                                                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                             id={`type_of_car_` + item.id}
                                                         />
@@ -212,7 +220,7 @@ const Brand = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="1"
-                                                    onClick={onFilterSelect}
+                                                    onChange={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="in_stock"
                                                 />
@@ -231,7 +239,7 @@ const Brand = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="0"
-                                                    onClick={onFilterSelect}
+                                                    onChange={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="out_of_stock"
                                                 />
@@ -292,7 +300,7 @@ const Brand = ({ lang }) => {
                                     </div>
 
                                     <div className="flex flex-row items-center gap-2 justify-between">
-                                        <input
+                                        {/* <input
                                             type="number"
                                             placeholder="From"
                                             name="from_value"
@@ -305,7 +313,7 @@ const Brand = ({ lang }) => {
                                             name="to_value"
                                             value={filters?.data?.data?.pricing?.max}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
 
@@ -325,7 +333,7 @@ const Brand = ({ lang }) => {
                                                             name="car_brands"
                                                             className="hidden peer"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onChange={onFilterSelect}
                                                         />
                                                         <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
                                                             <img
@@ -401,7 +409,7 @@ const Brand = ({ lang }) => {
 
             </div>
             <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
-                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
+                <Pagination onChange={handleChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
             <div className="flex justify-center mt-10 p-0 w-full bg-white">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 max-w-screen-lg lg:grid-cols-8 gap-5 p-5 mt-5 w-full">

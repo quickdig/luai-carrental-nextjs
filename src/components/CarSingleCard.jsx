@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { Modal } from "antd";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
-const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
+const CarSingleCard = ({ model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
     // const basePath = lang === "en" ? '' : `${lang}/`;
     const { langValue } = useContext(MainLanguageValueContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,13 +57,13 @@ const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_
                     <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Blutooth Yes"] : languageData[langValue]["Blutooth No"]}
                 </li>
                 <li className="flex items-center text-xs font-semibold">
-                    <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Cruise Control Yes"] : languageData[langValue]["Cruise Control No"]}
+                    <span className="text-primary"><MdStar /></span> &nbsp; {cruise_control ? languageData[langValue]["Cruise Control Yes"] : languageData[langValue]["Cruise Control No"]}
                 </li>
                 <li className="flex items-center text-xs font-semibold">
                     <span className="text-primary"><MdStar /></span> &nbsp; { languageData[langValue]["Engine"]} {engine}
                 </li>
                 <li className="flex items-center text-xs font-semibold">
-                    <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Luggage Yes"] : languageData[langValue]["Luggage No"]}
+                    <span className="text-primary"><MdStar /></span> &nbsp; {luggage ? languageData[langValue]["Luggage Yes"] : languageData[langValue]["Luggage No"]}
                 </li>
             </ul>
 

@@ -16,19 +16,20 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import CarSingleCard from "@/components/CarSingleCard";
 import useFetch from "@/app/customHooks/useFetch";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useGet from "@/app/customHooks/useGet";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 import { Pagination } from "antd";
-import { keywords } from "../../../../dataset";
+import { languageData } from "../../../../dataset";
 import { usePathname } from "next/navigation";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 const Cars = ({ lang }) => {
 
     const params = usePathname();
     const breadcrumbs = getBreadcrumb(params)
-
+    const { langValue } = useContext(MainLanguageValueContext);
     const { loading, data } = useFetch(`car/all/${lang}/12?page=1`);
 
     const [carData, setCarData] = useState("");
@@ -134,7 +135,7 @@ const Cars = ({ lang }) => {
                                                             name="type_of_car"
                                                             type="radio"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onChange={onFilterSelect}
                                                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                             id={`type_of_car_` + item.id}
                                                         />
@@ -161,7 +162,7 @@ const Cars = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="1"
-                                                    onClick={onFilterSelect}
+                                                    onChange={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="in_stock"
                                                 />
@@ -180,7 +181,7 @@ const Cars = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="0"
-                                                    onClick={onFilterSelect}
+                                                    onChange={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="out_of_stock"
                                                 />
@@ -213,7 +214,7 @@ const Cars = ({ lang }) => {
                                     </div>
 
                                     <div className="flex flex-row items-center gap-2 justify-between">
-                                        <input
+                                        {/* <input
                                             type="number"
                                             placeholder="From"
                                             name="from_value"
@@ -226,7 +227,7 @@ const Cars = ({ lang }) => {
                                             name="to_value"
                                             value={filterData?.pricing?.max}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
 
@@ -246,7 +247,7 @@ const Cars = ({ lang }) => {
                                                             name="car_brands"
                                                             className="hidden peer"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onChange={onFilterSelect}
                                                         />
                                                         <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
                                                             <img
@@ -283,7 +284,7 @@ const Cars = ({ lang }) => {
                 </div>
             </div>
             <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
-                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
+                {/* <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} /> */}
             </div>
 
             <div className="flex justify-center mt-10 p-0 w-full bg-white">

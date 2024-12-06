@@ -84,7 +84,7 @@ const Blogs = ({ params, lang }) => {
             </div>
 
             <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
-                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
+                {/* <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} /> */}
             </div>
         </div>
     )
