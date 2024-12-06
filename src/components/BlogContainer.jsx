@@ -25,9 +25,8 @@ const BlogContainer = ({ blogData, lang }) => {
                 {/* Header Section */}
                 <div className="text_area">
                     <div className="flex flex-col justify-center max-w-screen-lg w-full mx-auto px-4">
-                        <h4 className="text-left text-2xl md:text-3xl mt-8" dangerouslySetInnerHTML={{ __html: lang == 'en' ? keywords.commonText.blogs.header.en : keywords.commonText.blogs.header.ar }}>
+                        <h4 className="text-left text-2xl md:text-3xl mt-8" dangerouslySetInnerHTML={{ __html: languageData[langValue]["Our <b>Blogs</b>"] }}>
                             {/* Our <b>Blogs</b> */}
-                            {/* {lang == 'en' ? keywords.commonText.blogs.header.en : keywords.commonText.blogs.header.ar} */}
                         </h4>
                     </div>
                 </div>

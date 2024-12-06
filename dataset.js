@@ -1,132 +1,64 @@
-export const keywords = {
-    buttonText: {
-        book_ride: {
-            en: "Book Ride",
-            ar: "ركوب الكتاب"
-        },
-        search: {
-            en: "Search",
-            ar: "يبحث"
-        },
-        pick_brand: {
-            en: "Pick a Brand",
-            ar: "اختر علامة تجارية"
-        },
-        start_journey: {
-            en: "Start Your Journey",
-            ar: "ابدأ رحلتك"
-        }
-    },
-    navMenu: {
-        home: {
-            en: "Home",
-            ar: "بيت"
-        },
-        about_us: {
-            en: "About us",
-            ar: "معلومات عنا"
-        },
-        brands: {
-            en: "Brand",
-            ar: "ماركة"
-        },
-        cars: {
-            en: "Cars",
-            ar: "سيارات"
-        },
-        faq: {
-            en: "Faq",
-            ar: "التعليمات"
-        },
-        contact_us: {
-            en: "Contact Us",
-            ar: "اتصل بنا"
-        },
-        blog: {
-            en: "Blog",
-            ar: "مدونة"
-        }
-    },
-    commonText: {
-        feature_card: {
-            header: {
-                en: "Explore the Car Range",
-                ar: "استكشف مجموعة السيارات"
-            }
-        },
-        blogs: {
-            header: {
-                en: "Our <b>Blogs</b>",
-                ar: "ملكنا <b>المدونات</b>"
-            }
-        },
-        pricing: {
-            daily: {
-                en: "Daily",
-                ar: "يوميًا"
-            },
-            weekly: {
-                en: "Weekly",
-                ar: "أسبوعي"
-            },
-            monthly: {
-                en: "Monthly",
-                ar: "شهريا"
-            },
-            on_request: {
-                en: "On Request",
-                ar: "عند الطلب"
-            },
-            per: {
-                day: {
-                    en: "Per Day",
-                    ar: "لكل يوم"
-                },
-                week: {
-                    en: "Per Week",
-                    ar: "في الأسبوع"
-                },
-                month: {
-                    en: "Per Month",
-                    ar: "كل شهر"
-                }
-            }
-        }
-    },
-    carFeatures: {
-        bluetooth: {
-            yes: {
-                en: "Blutooth Yes",
-                ar: "بلوتوث نعم"
-            },
-            no: {
-                en: "Blutooth No",
-                ar: "رقم البلوتوث"
-            }
-        },
-        cruise_control: {
-            yes: {
-                en: "Cruise Control Yes",
-                ar: "التحكم في السرعة نعم"
-            },
-            no: {
-                en: "Cruise Control No",
-                ar: "رقم التحكم في السرعة"
-            }
-        },
-        engine: {
-            en: "Engine",
-            ar: "محرك"
-        },
-        luggage: {
-            yes: {
-                en: "Luggage Yes",
-                ar: "الأمتعة نعم"
-            },
-            no: {
-                en: "Luggage No",
-                ar: "رقم الأمتعة"
-            }
-        }
-    }
-}
+export const languageData = {
+  en: {
+    "English": "عربي",
+    "Book Ride": "Book Ride",
+    "Search": "Search",
+    "Pick a Brand": "Pick a Brand",
+    "Start Your Journey": "Start Your Journey",
+    "Home": "Home",
+    "About us": "About us",
+    "Brand": "Brand",
+    "Cars": "Cars",
+    "Faq": "Faq",
+    "Contact Us": "Contact Us",
+    "Blog": "Blog",
+    "Explore the Car Range": "Explore the Car Range",
+    "Our <b>Blogs</b>": "Our <b>Blogs</b>",
+    "Daily": "Daily",
+    "Weekly": "Weekly",
+    "Monthly": "Monthly",
+    "On Request": "On Request",
+    "Per Day": "Per Day",
+    "Per Week": "Per Week",
+    "Per Month": "Per Month",
+    "Blutooth Yes": "Blutooth Yes",
+    "Blutooth No": "Blutooth No",
+    "Cruise Control Yes": "Cruise Control Yes",
+    "Cruise Control No": "Cruise Control No",
+    "Engine": "Engine",
+    "Luggage Yes": "Luggage Yes",
+    "Luggage No": "Luggage No",
+    "Quick Links": "Quick Links",
+},
+ar: {
+    "English": "English",
+    "Book Ride": "ركوب الكتاب",
+    "Search": "يبحث",
+    "Pick a Brand": "اختر علامة تجارية",
+    "Start Your Journey": "ابدأ رحلتك",
+    "Home": "بيت",
+    "About us": "معلومات عنا",
+    "Brand": "ماركة",
+    "Cars": "سيارات",
+    "Faq": "التعليمات",
+    "Contact Us": "اتصل بنا",
+    "Blog": "مدونة",
+    "Explore the Car Range": "استكشف مجموعة السيارات",
+    "Our <b>Blogs</b>": "ملكنا <b>المدونات</b>",
+    "Daily": "يوميًا",
+    "Weekly": "أسبوعي",
+    "Monthly": "شهريا",
+    "On Request": "عند الطلب",
+    "Per Day": "لكل يوم",
+    "Per Week": "في الأسبوع",
+    "Per Month": "كل شهر",
+    "Blutooth Yes": "بلوتوث نعم",
+    "Blutooth No": "رقم البلوتوث",
+    "Cruise Control Yes": "التحكم في السرعة نعم",
+    "Cruise Control No": "رقم التحكم في السرعة",
+    "Engine": "محرك",
+    "Luggage Yes": "الأمتعة نعم",
+    "Luggage No": "رقم الأمتعة",
+    "Quick Links": "روابط سريعة",
+  },
+};

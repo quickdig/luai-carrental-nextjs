@@ -275,7 +275,7 @@ const Cars = ({ lang }) => {
                                     <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
                                         price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
                                         cruise_control={item.cruise} model={item.model}
-                                        engine={item.engine} luggage={item.luggage} btnText={lang == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar} />
+                                        engine={item.engine} luggage={item.luggage} btnText={languageData[langValue]["Book Ride"]} />
                                 )
                             })
                         }

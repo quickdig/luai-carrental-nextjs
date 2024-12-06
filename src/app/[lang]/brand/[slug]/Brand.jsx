@@ -1,7 +1,5 @@
 "use client"
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { MdStar } from "react-icons/md";
-import Image from "next/image";
 import Brands from "@/components/Brands"
 import bOne from "../../../../../src/public/assets/car-brands/chevrolet.png";
 import bTwo from "../../../../../src/public/assets/car-brands/mazda.svg";
@@ -11,10 +9,7 @@ import bFive from "../../../../../src/public/assets/car-brands/mg.png";
 import bSix from "../../../../../src/public/assets/car-brands/rr.png";
 import bSeven from "../../../../../src/public/assets/car-brands/toyota.png";
 import bEight from "../../../../../src/public/assets/car-brands/kia.svg";
-import carBrandOne from "../../../../../src/public/assets/carBrand1.png";
 import Breadcrumb from "@/components/Breadcrumb"
-import Button from "@/components/Button";
-import Link from "next/link";
 import CarSingleCard from "@/components/CarSingleCard";
 import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch";
@@ -22,16 +17,17 @@ import useGet from "@/app/customHooks/useGet";
 import { useEffect, useState } from "react";
 import { Pagination } from "antd";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
-import { keywords } from "../../../../../dataset";
+import { languageData } from "../../../../../dataset";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 
 
 const Brand = ({ lang }) => {
     const params = useParams()
+    const {slug} = params
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
-    const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
-    const filters = useFetch(`brands/filters/${lang}/${params.slug}`);
+    const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
+    const filters = useFetch(`brands/filters/${lang}/${slug}`);
 
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
@@ -103,7 +99,7 @@ const Brand = ({ lang }) => {
     }
     const onChange = (current) => {
         setActivePage(current)
-        apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
+        apiMethodGet(`brands/fetch_by_brand/${lang}/${slug}/12?page=${current}`)
     }
     if (loading) return;
 
@@ -128,7 +124,7 @@ const Brand = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">{params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}</h2>
+                <h2 className="text-left text-xl font-bold">{slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}</h2>
             </div>
 
             {/* Filter bar section */}
@@ -394,7 +390,7 @@ const Brand = ({ lang }) => {
                                     <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
                                         price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
                                         cruise_control={item.cruise}
-                                        engine={item.engine} luggage={item.luggage} btnText={lang == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar} />
+                                        engine={item.engine} luggage={item.luggage} btnText={languageData[langValue]["Book Ride"]} />
                                 )
                             })
                         }

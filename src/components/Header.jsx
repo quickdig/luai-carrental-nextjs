@@ -9,7 +9,7 @@ import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import useGet from "@/app/customHooks/useGet";
 import useFetch from "@/app/customHooks/useFetch";
-import { keywords } from "../../dataset";
+import { languageData } from "../../dataset";
 
 
 const items = [
@@ -150,7 +150,7 @@ const Header = () => {
                 href={`/${basePath}`}
                 className={`relative ${isActive(`/${basePath}`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-                {langValue == 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar}
+                {languageData[langValue]["Home"]}
               </Link>
             </li>
             <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
@@ -158,7 +158,7 @@ const Header = () => {
                 href={`/${basePath}about`}
                 className={`relative ${isActive(`/${basePath}about`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-                {langValue == 'en' ? keywords.navMenu.about_us.en : keywords.navMenu.about_us.ar}
+                {languageData[langValue]["About us"]}
               </Link>
             </li>
 
@@ -168,7 +168,7 @@ const Header = () => {
               onMouseLeave={() => setIsDropdownOpen(false)}
             >
               <button className="text-black font-medium bg-transparent uppercase">
-                {langValue == 'en' ? keywords.navMenu.brands.en : keywords.navMenu.brands.ar}
+                {languageData[langValue]["Brand"]}
               </button>
               {isDropdownOpen && (
                 <ul className="absolute left-0 bg-[#f1f4f8] w-64 border border-gray-200 rounded-md shadow-lg z-[999] grid grid-cols-2">
@@ -189,7 +189,7 @@ const Header = () => {
                 href={`/${basePath}cars`}
                 className={`relative ${isActive(`/${basePath}cars`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-                {langValue == 'en' ? keywords.navMenu.cars.en : keywords.navMenu.cars.ar}
+                {languageData[langValue]["Cars"]}
               </Link>
             </li>
             <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
@@ -197,7 +197,7 @@ const Header = () => {
                 href={`/${basePath}faq`}
                 className={`relative ${isActive(`/${basePath}faq`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-                {langValue == 'en' ? keywords.navMenu.faq.en : keywords.navMenu.faq.ar}
+                {languageData[langValue]["Faq"]}
               </Link>
             </li>
             <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
@@ -205,7 +205,7 @@ const Header = () => {
                 href={`/${basePath}contact-us`}
                 className={`relative ${isActive(`/${basePath}contact-us`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-                {langValue == 'en' ? keywords.navMenu.contact_us.en : keywords.navMenu.contact_us.ar}
+             {languageData[langValue]["Contact Us"]}
               </Link>
             </li>
             <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
@@ -213,7 +213,7 @@ const Header = () => {
                 href={`/${basePath}blog`}
                 className={`relative ${isActive(`/${basePath}blog`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-                {langValue == 'en' ? keywords.navMenu.blog.en : keywords.navMenu.blog.ar}
+                {languageData[langValue]["Blog"]}
               </Link>
             </li>
 
@@ -221,18 +221,15 @@ const Header = () => {
           </ul>
           <ul className="flex flex-col items-center mt-4 space-y-4 text-xs gap-3 md:mt-0 md:flex-row md:space-y-0 md:space-x-4">
             <li>
-              <button
-                onClick={() => toggleLanguage(language)}
-                className="bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded inline-flex items-center"
-              >
+              <button onClick={() => toggleLanguage(language)} className="bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded inline-flex items-center">
                 <FaEarthAmericas className="en_icon mr-2" />
-                {language === 'en' ? 'عربي' : 'English'}
+                {languageData[langValue]["English"]}
               </button>
             </li>
             <li>
               <button className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center">
                 <FaPhone className="ar_icon mr-2" />
-                {langValue == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar}
+                {languageData[langValue]["Book Ride"]}
               </button>
             </li>
           </ul>

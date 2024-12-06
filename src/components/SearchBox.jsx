@@ -1,19 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaCarRear, FaCalendarDays, FaClock } from "react-icons/fa6";
 import Button from "./Button";
-import { keywords } from "../../dataset";
+import { languageData } from "../../dataset";
 import useFetch from "@/app/customHooks/useFetch";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 const SearchBox = ({ lang }) => {
+    const { langValue } = useContext(MainLanguageValueContext);
     const [brands, setBrands] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
     const { data } = useFetch(`brands/all/${lang}`)
 
     useEffect(() => {
         if (data) {
-            console.log(data);
             setBrands(data?.data)
         }
     }, [data])
@@ -48,7 +49,7 @@ const SearchBox = ({ lang }) => {
                                 className="pr-4 pl-14 p-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                             >
                                 <option value="" disabled>
-                                    {lang == 'en' ? keywords.buttonText.pick_brand.en : keywords.buttonText.pick_brand.ar}
+                                {languageData[langValue]["Pick a Brand"]}
                                 </option>
                                 {
                                     Array.isArray(brands) && brands.map((item, idx) => {
@@ -57,11 +58,6 @@ const SearchBox = ({ lang }) => {
                                         </option>)
                                     })
                                 }
-                                {/* {brands?.map((item, idx) => (
-                                    <option key={idx} value={item.id}>
-                                        {item.name}
-                                    </option>
-                                ))} */}
                             </select>
                             <div className="absolute left-4 text-gray-400">
                                 <FaCarRear />
@@ -91,7 +87,7 @@ const SearchBox = ({ lang }) => {
                         </div>
 
                         <Button
-                            text={lang == 'en' ? keywords.buttonText.search.en : keywords.buttonText.search.ar}
+                            text={languageData[langValue]["Search"]}
                             type={"submit"}
                             style={
                                 "bg-primary hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-3 px-6 rounded inline-flex items-center justify-center"

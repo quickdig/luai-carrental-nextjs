@@ -8,7 +8,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import useFetch from '@/app/customHooks/useFetch';
-import { keywords } from '../../dataset';
+import { languageData } from '../../dataset';
 import { MainLanguageValueContext } from '@/app/context/MainLanguageValue';
 import { social_imgOne, social_imgThree, social_imgTwo } from '@/ImagesImport/image';
 
@@ -71,26 +71,26 @@ const Footer = () => {
 
                         {/* Quick Links */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{langValue === 'en' ? 'Quick Links' : 'روابط سريعة'}</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{languageData[langValue]["Quick Links"]}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-4">
                                 <li>
-                                    <Link href={"#"}>{langValue === 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Home"]}</Link>
                                     {/* {langValue == 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar} */}
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{langValue === 'en' ? keywords.navMenu.about_us.en : keywords.navMenu.about_us.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["About us"]}</Link>
                                 </li>
                                 {/* <li>
                                     <Link href={"#"}>Brands</Link>
                                 </li> */}
                                 <li>
-                                    <Link href={"#"}>{langValue === 'en' ? keywords.navMenu.cars.en : keywords.navMenu.cars.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Cars"]}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{langValue === 'en' ? keywords.navMenu.faq.en : keywords.navMenu.faq.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Faq"]}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{langValue === 'en' ? keywords.navMenu.contact_us.en : keywords.navMenu.contact_us.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Contact Us"]}</Link>
                                 </li>
                             </ul>
                         </div>
