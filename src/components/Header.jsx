@@ -115,7 +115,7 @@ const Header = () => {
     <header className="bg-white shadow-md z-20">
       <div className="flex flex-col max-w-screen-xl sm:flex-col md:flex-col lg:flex-row items-center mx-auto px-4 py-4">
 
-        <Link href="/" className="flex items-center ml-0 lg:pl-0 md:pl-4 sm:pl-0 pl-0">
+        <Link href={`/${basePath}`} className="flex items-center ml-0 lg:pl-0 md:pl-4 sm:pl-0 pl-0">
           <Image src={off_logo} className="object-contain h-10 md:h-12" alt="Logo" />
         </Link>
 
