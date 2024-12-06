@@ -1,13 +1,10 @@
 import BlogCard from './BlogCard'
-import img1 from "../../src/public/assets/bImageOne.jpg"
-import img2 from "../../src/public/assets/bImageTwo.jpg"
-import img3 from "../../src/public/assets/bImageThree.jpg"
-import img4 from "../../src/public/assets/bImageFour.jpg"
-import img5 from "../../src/public/assets/bImageFive.jpg"
-import Button from './Button'
-import { keywords } from '../../dataset'
+import { languageData } from '../../dataset'
+import { useContext } from 'react';
+import { MainLanguageValueContext } from '@/app/context/MainLanguageValue';
 
 const BlogContainer = ({ blogData, lang }) => {
+    const { langValue } = useContext(MainLanguageValueContext);
     return (
         <section className="blog_Container relative mt-10">
             <div className="main__container h-[50rem] md:h-[35rem] lg:h-[33rem] sm:h-[55rem] bg-gradient-to-r from-[#BABBBD]/80 to-[#A7A9AB]/20">

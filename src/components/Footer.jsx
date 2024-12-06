@@ -97,7 +97,7 @@ const Footer = () => {
 
                         {/* Contact Details */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{langValue === 'en' ? 'Contact Details' : 'تفاصيل الاتصال'}</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{languageData[langValue]["Contact Details"]}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-3">
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
                                     <span className="p-2 rounded-full bg-primary text-white ">

@@ -2,9 +2,13 @@ import list_icon from "../../src/public/assets/tick-inside-circle.png";
 import Button from './Button';
 import journeyImage from "../../src/public/assets/journey_img1.png"
 import Image from "next/image";
-import { keywords } from "../../dataset";
+import { languageData } from "../../dataset";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { useContext } from "react";
 
 const JourneyCard = ({ section, sectionData, lang }) => {
+    const { langValue } = useContext(MainLanguageValueContext);
+
     return (
         <section className={`journey_${section} relative mt-16`}>
             <div className="flex flex-col lg:flex-row justify-between max-w-screen-lg w-full gap-6 mx-auto items-center lg:px-0" id={section}>
@@ -46,7 +50,7 @@ const JourneyCard = ({ section, sectionData, lang }) => {
                         </ul>
 
                         <Button
-                            text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
+                            text={languageData[langValue]["Start Your Journey"]}
                             type={"submit"}
                             style={
                                 "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"

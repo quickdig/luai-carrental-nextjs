@@ -29,6 +29,7 @@ export const languageData = {
     "Luggage Yes": "Luggage Yes",
     "Luggage No": "Luggage No",
     "Quick Links": "Quick Links",
+    "Contact Details": "Contact Details",
 },
 ar: {
     "English": "English",
@@ -60,5 +61,6 @@ ar: {
     "Luggage Yes": "الأمتعة نعم",
     "Luggage No": "رقم الأمتعة",
     "Quick Links": "روابط سريعة",
+    "Contact Details": "تفاصيل الاتصال",
   },
 };

@@ -1,10 +1,12 @@
 import { keywords } from "../../dataset";
-import banner_back from "../../src/public/assets/backdrop_two.png"
 import Button from './Button';
-import Image from "next/image";
+import { languageData } from "../../dataset";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { useContext } from "react";
 
 
 const JourneyBanner = ({ sectionData, lang }) => {
+    const { langValue } = useContext(MainLanguageValueContext);
     return (
         <section className="journey_Banner relative mt-20">
             <div
@@ -19,7 +21,7 @@ const JourneyBanner = ({ sectionData, lang }) => {
                             Today & <b>Enjoy These Perks</b> */}
                         </h3>
                         <Button
-                            text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
+                            text={languageData[langValue]["Start Your Journey"]}
                             type={"submit"}
                             style={
                                 "bg-black hover:bg-primary uppercase mt-6 lg:mt-10 text-center text-white font-medium py-3 px-6 rounded inline-flex items-center"
