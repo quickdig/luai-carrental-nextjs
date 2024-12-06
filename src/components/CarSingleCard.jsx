@@ -20,22 +20,18 @@ const CarSingleCard = ({ model, slug, image, title, price_daily, price_weekly, p
         setIsModalOpen(false);
     };
     return (
-        <div className="rounded-md h-full bg-white mx-2 px-2">
+        <div className="rounded-md h-full bg-white mx-2 px-4">
 
-            <div className="img_box inline-block p-5">
-                <img
-                    src={image}
-                    alt="Car"
-                    className="rounded-t-md w-full h-auto"
-                />
+            <div className="img_box w-full">
+                <img src={image} alt="Car" className=" w-full h-[10rem] object-contain object-center" />
             </div>
 
-            <div className="w-full flex flex-col mx-4 my-2">
-                <Link href={`/cars/${slug}`} className="text-xl font-semibold uppercase">{title}</Link>
+            <div className="w-full flex flex-col my-2">
+                <Link href={`/cars/${slug}`} className="text-xl font-semibold uppercase h-[50px] leading-[1]">{title}</Link>
                 <span>{model}</span>
             </div>
 
-            <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-0 px-3 mx-4 border-[.5px] border-gray-300">
+            <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-1 px-3 border-[.5px] border-gray-300">
                 <div className="flex flex-col items-center sm:items-start">
                     <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Daily"]}</span>
                     <span className="price_cat text-sm font-medium">AED {price_daily}</span>
@@ -52,7 +48,7 @@ const CarSingleCard = ({ model, slug, image, title, price_daily, price_weekly, p
                 </div>
             </div>
 
-            <ul className="list-none space-y-3 mt-4 mx-4">
+            <ul className="list-none grid grid-cols-2 mt-4">
                 <li className="flex items-center text-xs font-semibold">
                     <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Blutooth Yes"] : languageData[langValue]["Blutooth No"]}
                 </li>
