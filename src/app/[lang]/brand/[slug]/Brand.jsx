@@ -24,9 +24,13 @@ import { Pagination } from "antd";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 import { keywords } from "../../../../../dataset";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import PreLoader from "@/components/PreLoader";
+import axios from "axios";
+import config from "../../../services/config.json"
 
 
 const Brand = ({ lang }) => {
+    const basePath = lang === "en" ? '' : `${lang}/`;
     const params = useParams()
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
@@ -38,28 +42,14 @@ const Brand = ({ lang }) => {
     const [activePage, setActivePage] = useState(1);
     const [isExpanded, setIsExpanded] = useState(true);
     const [filterData, setFilterData] = useState("");
-    const [filtersAll, setFiltersAll] = useState({
-        type_of_car: 1,
-        availability: 1,
-        from_value: null,
-        to_value: null,
-        car_brands: null,
-    });
-
-    const [isFilterSet, setIsFilterSet] = useState({
-        type_of_car: false,
-        availability: false,
-        from_value: false,
-        to_value: false,
-        car_brands: false,
-    });
+    const [filtersAll, setFiltersAll] = useState({});
 
     const [bannerData, setBannerData] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/brand`);
 
     useEffect(() => {
         if (filters) {
-            // console.log(filters?.data?.data);
+            console.log(filters?.data?.data);
             setFilterData(filterData?.data)
         }
     }, [filters])
@@ -85,27 +75,39 @@ const Brand = ({ lang }) => {
         console.log(resget);
     }, [resget.data])
 
-    const onFilterSelect = (e) => {
-        const { name, value } = e.target;
+    const onFilterSelect = async () => {
+        const data = {
+            type: filtersAll?.type_of_car,
+            availability: filtersAll?.availability,
+            brand: params.slug,
+            // brand_x: filtersAll?.car_brands
+        }
 
-        // if (!isFilterSet[name]) {
-        //     setFiltersAll((prevState) => ({ ...prevState, [name]: value }));
-        //     setIsFilterSet((prevState) => ({ ...prevState, [name]: true }));
-        // }
-        setFiltersAll((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
-        handleFilter()
+        const response = await axios.post(`${config.apiEndPoint}filter/${lang}`, data)
+
+        console.log(response?.data?.data);
+        setCarData(response?.data?.data)
     }
 
-    const handleFilter = () => {
-        // console.log(filtersAll.type_of_car, filtersAll.availability, filtersAll.car_brands, filtersAll.from_value, filtersAll.to_value);
-        apiMethodGet(`filter/${lang}/${filtersAll.type_of_car}/${filtersAll.availability}/${filtersAll.car_brands}`)
+    useEffect(() => {
+        if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands) {
+            onFilterSelect();
+        }
+    }, [filtersAll, params.slug])
 
+    const handleFilter = (e) => {
+        const { name, value } = e.target
+        setFiltersAll((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
     }
     const onChange = (current) => {
         setActivePage(current)
         apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
     }
-    if (loading) return;
+
+    if (loading) return <PreLoader />;
 
     return (
         <div className="bg-[#F1F4F8]">
@@ -153,7 +155,7 @@ const Brand = ({ lang }) => {
                                                             name="type_of_car"
                                                             type="radio"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onClick={handleFilter}
                                                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                             id={`type_of_car_` + item.id}
                                                         />
@@ -180,7 +182,7 @@ const Brand = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="1"
-                                                    onClick={onFilterSelect}
+                                                    onClick={handleFilter}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="in_stock"
                                                 />
@@ -199,7 +201,7 @@ const Brand = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="0"
-                                                    onClick={onFilterSelect}
+                                                    onClick={handleFilter}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="out_of_stock"
                                                 />
@@ -287,23 +289,26 @@ const Brand = ({ lang }) => {
                                         {
                                             Array.isArray(filters?.data?.data?.brands) && filters?.data?.data?.brands?.map((item, idx) => {
                                                 return (
-                                                    <label className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" key={idx}>
-                                                        <input
-                                                            type="radio"
-                                                            name="car_brands"
-                                                            className="hidden peer"
-                                                            value={item.id}
-                                                            onClick={onFilterSelect}
-                                                        />
-                                                        <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
-                                                            <img
-                                                                src={item.image}
-                                                                alt="brand_back_img"
-                                                                className="rounded-lg p-2 object-contain object-center w-full h-full"
+                                                    <Link href={`${basePath}${item.slug}`} className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
+                                                        <label className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" key={idx}>
+                                                            <input
+                                                                type="radio"
+                                                                name="car_brands"
+                                                                className="hidden peer"
+                                                                value={item.id}
+                                                                checked={item.slug == params.slug ? true : false}
+                                                                onClick={handleFilter}
                                                             />
-                                                        </div>
+                                                            <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                                <img
+                                                                    src={item.image}
+                                                                    alt="brand_back_img"
+                                                                    className="rounded-lg p-2 object-contain object-center w-full h-full"
+                                                                />
+                                                            </div>
 
-                                                    </label>
+                                                        </label>
+                                                    </Link>
                                                 )
                                             })
                                         }

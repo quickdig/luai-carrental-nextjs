@@ -15,8 +15,17 @@ module.exports = {
           DEFAULT: "#141414"
         }
       },
+      animation: {
+        slide: 'scroll 60s linear infinite',
+      },
       clipPath: {
         triangle: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+      },
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(+100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
     },
   },

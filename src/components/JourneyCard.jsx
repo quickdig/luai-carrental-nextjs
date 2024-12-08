@@ -3,8 +3,12 @@ import Button from './Button';
 import journeyImage from "../../src/public/assets/journey_img1.png"
 import Image from "next/image";
 import { keywords } from "../../dataset";
+import Link from "next/link";
 
 const JourneyCard = ({ section, sectionData, lang }) => {
+
+    const basePath = lang === "en" ? '' : `${lang}/`;
+
     return (
         <section className={`journey_${section} relative mt-16`}>
             <div className="flex flex-col lg:flex-row justify-between max-w-screen-lg w-full gap-6 mx-auto items-center lg:px-0" id={section}>
@@ -45,13 +49,15 @@ const JourneyCard = ({ section, sectionData, lang }) => {
                             </li> */}
                         </ul>
 
-                        <Button
-                            text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
-                            type={"submit"}
-                            style={
-                                "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
-                            }
-                        />
+                        <Link href={`${basePath}cars`} className="bg-secondary hover:bg-primary uppercase text-center text-white font-medium rounded inline-flex items-center">
+                            <Button
+                                text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
+                                type={"submit"}
+                                style={
+                                    "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
+                                }
+                            />
+                        </Link>
                     </div>
                 </div>
 

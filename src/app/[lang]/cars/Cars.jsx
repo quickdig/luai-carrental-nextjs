@@ -23,6 +23,7 @@ import { Pagination } from "antd";
 import { keywords } from "../../../../dataset";
 import { usePathname } from "next/navigation";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import PreLoader from "@/components/PreLoader";
 
 const Cars = ({ lang }) => {
 
@@ -86,7 +87,8 @@ const Cars = ({ lang }) => {
         setActivePage(current)
         apiMethodGet(`car/all/${lang}/12?page=${current}`)
     }
-    if (loading) return;
+
+    if (loading) return <PreLoader />;
 
     return (
         <div className="bg-[#F1F4F8]">

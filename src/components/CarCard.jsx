@@ -12,10 +12,10 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
     return (
         <div className="bg-white rounded-md px-4 py-5 space-y-4">
             {/* Star Rating */}
-            <div className="flex flex-row items-center">
+            {/* <div className="flex flex-row items-center">
                 <FaStar className="text-yellow-400 mr-1" />
                 <span className="text-yellow-400 text-sm sm:text-base">5.0</span>
-            </div>
+            </div> */}
 
             {/* Image Box */}
             <div className="relative w-full h-40 overflow-hidden mx-auto object-contain group">
@@ -56,20 +56,24 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
             {/* Buttons Section */}
             <div className="flex flex-row lg:flex-row md:flex-row gap-2 sm:flex-row">
                 {/* Book Ride Button */}
-                <Button
-                    text={btnText}
-                    type={"submit"}
-                    style={
-                        "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white"
-                    }
-                />
+                <Link href={`${basePath}cars/${slug}`} className="bg-primary hover:bg-secondary uppercase w-full rounded items-center font-medium text-white">
+                    <Button
+                        text={btnText}
+                        type={"submit"}
+                        style={
+                            "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white"
+                        }
+                    />
+                </Link>
 
-                <button
-                    type="button"
-                    className="flex justify-center items-center rounded-md bg-[#29a71a] w-16 sm:w-16"
-                >
-                    <Image src={whatsApp} alt="whats_ap" className="object-contain w-8" />
-                </button>
+                <Link href="https://wa.me/971508879971" target="_blank" className="flex justify-center items-center rounded-md bg-[#29a71a] w-16 sm:w-16">
+                    <button
+                        type="button"
+                        className="flex justify-center items-center rounded-md bg-[#29a71a] w-16 sm:w-16"
+                    >
+                        <Image src={whatsApp} alt="whats_ap" className="object-contain w-8" />
+                    </button>
+                </Link>
             </div>
         </div>
     );

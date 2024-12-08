@@ -25,6 +25,12 @@ const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date,
         return `${day}${ordinalSuffix} ${month}`;
     }
 
+    const getPlainText = (html) => {
+        const tempElement = document.createElement("div");
+        tempElement.innerHTML = html;
+        return tempElement.textContent || tempElement.innerText || "";
+    };
+
     return (
         <div className="flex flex-col sm:flex-row bg-white p-2 gap-4 border border-gray-300 rounded-md">
             <div className="img_box flex relative w-full sm:w-2/5 h-48 sm:h-auto object-contain">
@@ -42,7 +48,7 @@ const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date,
                     >
                         {title}
                     </Link>
-                    <div className="flex items-center text-gray-500 text-sm mt-2">
+                    {/* <div className="flex items-center text-gray-500 text-sm mt-2">
                         <Image
                             src={userImage}
                             alt="Author"
@@ -51,14 +57,14 @@ const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date,
                             className="rounded-full"
                         />
                         <span className="ml-2 text-xs font-normal">{authorname}</span>
-                    </div>
-                    <div className="flex flex-row items-center mt-2 text-gray-400">
+                    </div> */}
+                    <div className="flex flex-row items-center mt-1 text-gray-400">
                         <span className="text-[10px]">{formatDate(date)}</span>
                         <span className="text-sm mx-2">•</span>
                         <span className="text-[10px]">{readtime}</span>
                     </div>
-                    <p className="text-gray-600 mt-2 text-xs line-clamp-3" dangerouslySetInnerHTML={{ __html: description }}>
-
+                    <p className="text-gray-600 mt-1 text-xs text-justify line-clamp-3">
+                        {getPlainText(description)}
                     </p>
                     <Link href={`/blog/${slug}`}>
                         <Button

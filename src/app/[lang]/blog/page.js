@@ -5,21 +5,21 @@ import Blogs from './Blogs';
 
 export async function generateMetadata({ params, searchParams }, parent) {
     // read route params
-    const { lang, slug } = params;
+    const { lang } = params;
 
-    // fetch data using Axios
     try {
-        const response = await axios.get(`${config.apiEndPoint}aboutus/${lang}`);
-        // const data = response.data?.data;
-        // return {
-        //   title:data?.meta_tag || "Raalc About",
-        //   description: data?.meta_description || "Raalc About",
-        // };
+        const response = await axios.get(`${config.apiEndPoint}meta_content/${lang}`);
+        const data = response?.data?.data;
+
+        return {
+            title: data?.blogs?.seo_title || "Our Blogs",
+            description: data?.blogs?.seo_brief || "Luaidrive | Our Blogs"
+        }
     } catch (error) {
-        console.error('Error fetching product data:', error);
-        // return {
-        //   title: 'Raalc About', // fallback title in case of an error
-        // };
+        console.error('Error fetching', error);
+        return {
+            title: 'Our Blogs',
+        };
     }
 }
 

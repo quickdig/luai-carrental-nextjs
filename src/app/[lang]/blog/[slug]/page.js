@@ -9,17 +9,18 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
     // fetch data using Axios
     try {
-        const response = await axios.get(`${config.apiEndPoint}aboutus/${lang}`);
-        // const data = response.data?.data;
-        // return {
-        //   title:data?.meta_tag || "Raalc About",
-        //   description: data?.meta_description || "Raalc About",
-        // };
+        const response = await axios.get(`${config.apiEndPoint}blog/single/${lang}/${slug}`);
+        const data = response?.data?.data;
+
+        return {
+            title: data?.seo_title || "Blog Details | Luaidrive",
+            description: data?.seo_brief || "Blog Details | Luaidrive"
+        }
     } catch (error) {
-        console.error('Error fetching product data:', error);
-        // return {
-        //   title: 'Raalc About', // fallback title in case of an error
-        // };
+        console.error('Error fetching', error);
+        return {
+            title: 'Blog Details | Luaidrive',
+        };
     }
 }
 

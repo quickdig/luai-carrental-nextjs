@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { keywords } from "../../dataset";
 import banner_back from "../../src/public/assets/backdrop_two.png"
 import Button from './Button';
@@ -5,6 +6,9 @@ import Image from "next/image";
 
 
 const JourneyBanner = ({ sectionData, lang }) => {
+
+    const basePath = lang === "en" ? '' : `${lang}/`;
+
     return (
         <section className="journey_Banner relative mt-20">
             <div
@@ -18,13 +22,16 @@ const JourneyBanner = ({ sectionData, lang }) => {
                             {/* Rent a Car Dubai Online <br />
                             Today & <b>Enjoy These Perks</b> */}
                         </h3>
-                        <Button
-                            text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
-                            type={"submit"}
-                            style={
-                                "bg-black hover:bg-primary uppercase mt-6 lg:mt-10 text-center text-white font-medium py-3 px-6 rounded inline-flex items-center"
-                            }
-                        />
+                        <Link href={`${basePath}/cars`}>
+                            <Button
+                                text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
+                                type={"submit"}
+                                style={
+                                    "bg-black hover:bg-primary uppercase mt-6 lg:mt-10 text-center text-white font-medium py-3 px-6 rounded inline-flex items-center"
+                                }
+                            />
+                        </Link>
+
                     </div>
                     <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
                         <p className="text-white font-light text-sm sm:text-base lg:text-lg text-justify leading-6 sm:leading-7" dangerouslySetInnerHTML={{ __html: sectionData.Text }} >

@@ -13,6 +13,7 @@ import CategoryCard from "@/components/CategoryCard";
 import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
+import PreLoader from "@/components/PreLoader"
 
 const BlogDetail = ({ lang }) => {
 
@@ -22,7 +23,7 @@ const BlogDetail = ({ lang }) => {
 
     const { loading, data } = useFetch(`blog/single/${lang}/${params.slug}`);
 
-    if (loading) return;
+    if (loading) return <PreLoader />;
     const allData = data?.data;
     return (
         <div className="bg-[#F1F4F8] pb-10">
@@ -67,7 +68,7 @@ const BlogDetail = ({ lang }) => {
                         </div>
 
                         <div className="author_box flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:gap-4 text-gray-500">
-                            <div className="flex items-center">
+                            {/* <div className="flex items-center">
                                 <Image
                                     src={userImage}
                                     alt="Author"
@@ -76,7 +77,7 @@ const BlogDetail = ({ lang }) => {
                                     className="rounded-full"
                                 />
                                 <span className="ml-2 font-semibold">Dasteen</span>
-                            </div>
+                            </div> */}
                             <div className="flex flex-row items-center text-gray-400">
                                 <span className="text-xs">Jan 10, 2024</span>
                                 <span className="text-sm mx-2">•</span>
@@ -97,25 +98,25 @@ const BlogDetail = ({ lang }) => {
                 </div>
 
                 {/* Blog Footer Section */}
-                <div className="blog_detail_footer space-y-6 mt-16 my-5 px-4 sm:px-6 lg:px-8">
-                    {/* Category Section */}
-                    <div className="category_section_blog w-full flex flex-row items-center gap-2">
+                {/* <div className="blog_detail_footer space-y-6 mt-16 my-5 px-4 sm:px-6 lg:px-8"> */}
+                {/* Category Section */}
+                {/* <div className="category_section_blog w-full flex flex-row items-center gap-2">
                         <h4 className="text-left text-lg sm:text-xl font-semibold text-black">
                             All Category
                         </h4>
                         <span className="bg-black w-6 h-[1.5px]"></span>
-                    </div>
+                    </div> */}
 
-                    {/* Categories Grid */}
-                    <div className="flex flex-col lg:flex-row md:flex-row sm:flex-col justify-center items-center gap-4">
-                        {/* Single Category Card */}
-                        <CategoryCard title={"Car Review"} image={catImageOne} />
+                {/* Categories Grid */}
+                {/* <div className="flex flex-col lg:flex-row md:flex-row sm:flex-col justify-center items-center gap-4"> */}
+                {/* Single Category Card */}
+                {/* <CategoryCard title={"Car Review"} image={catImageOne} />
                         <CategoryCard title={"Maintenance Tips"} image={catImageTwo} />
                         <CategoryCard title={"Car Modifications"} image={catImageThree} />
                         <CategoryCard title={"Driving Tips"} image={catImageFour} />
-                        <CategoryCard title={"Car Review"} image={catImageFive} />
-                    </div>
-                </div>
+                        <CategoryCard title={"Car Review"} image={catImageFive} /> */}
+                {/* </div> */}
+                {/* </div> */}
             </div>
 
         </div>

@@ -11,6 +11,7 @@ import useGet from "@/app/customHooks/useGet";
 import { Pagination } from "antd";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 import { usePathname } from "next/navigation";
+import PreLoader from "@/components/PreLoader";
 
 const Blogs = ({ params, lang }) => {
 
@@ -47,7 +48,7 @@ const Blogs = ({ params, lang }) => {
         setActivePage(current)
         apiMethodGet(`blog/${lang}/12?page=${current}`)
     }
-    if (loading) return;
+    if (loading) return <PreLoader />;
     return (
         <div className="bg-[#F1F4F8]">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">

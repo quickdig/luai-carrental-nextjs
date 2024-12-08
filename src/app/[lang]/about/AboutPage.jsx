@@ -23,6 +23,7 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import useGet from "@/app/customHooks/useGet"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
+import PreLoader from "@/components/PreLoader"
 
 const AboutUs = ({ lang }) => {
 
@@ -33,14 +34,20 @@ const AboutUs = ({ lang }) => {
     console.log(data);
 
     const [bannerData, setBannerData] = useState("");
+    const [brandI, setBrandI] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/about-us`);
+    const brandImages = useFetch(`brands/all/${lang}`);
     useEffect(() => {
         if (dataBanner) {
             setBannerData(dataBanner?.data?.data)
         }
-    }, [dataBanner]);
 
-    if (loading) return;
+        if (brandImages) {
+            setBrandI(brandImages?.data?.data)
+        }
+    }, [dataBanner, brandImages]);
+
+    if (loading) return <PreLoader />;
     const valueData = data?.aboutvalue
     return (
         <>
@@ -99,7 +106,7 @@ const AboutUs = ({ lang }) => {
 
 
             <div className="flex flex-col bg-[#F1F4F8] mx-auto w-full px-4 sm:px-8 py-20 mt-10">
-                <div className="flex flex-wrap items-center justify-between w-full mx-auto max-w-screen-lg">
+                <div className="flex flex-wrap items-center space-y-2 justify-between w-full mx-auto max-w-screen-lg">
 
                     <ACommonCard icon={valueData.image_one} title={valueData.header_one} desc={valueData.brief_one} />
                     <ACommonCard icon={valueData.image_two} title={valueData.header_two} desc={valueData.brief_two} />
@@ -134,16 +141,17 @@ const AboutUs = ({ lang }) => {
             </div>
 
 
-            <div className="flex justify-center m-0 p-0 w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 max-w-screen-lg lg:grid-cols-8 gap-5 p-5 mt-0 w-full">
-                    <Brands icon={bOne} />
-                    <Brands icon={bTwo} />
-                    <Brands icon={bThree} />
-                    <Brands icon={bFour} />
-                    <Brands icon={bFive} />
-                    <Brands icon={bSix} />
-                    <Brands icon={bSeven} />
-                    <Brands icon={bEight} />
+            <div className="brand_logo_container flex justify-center m-0 p-0 w-full overflow-hidden">
+                <div
+                    className="brand_logo_slider flex flex-row animate-slide p-5 mt-0"
+                    style={{ animation: "scroll 20s linear infinite" }}
+                >
+                    {
+                        Array.isArray(brandI) &&
+                        brandI.map((item, idx) => (
+                            <Brands key={idx} icon={item.image} />
+                        ))
+                    }
                 </div>
             </div>
 

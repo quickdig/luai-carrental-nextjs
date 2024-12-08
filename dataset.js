@@ -128,5 +128,37 @@ export const keywords = {
                 ar: "رقم الأمتعة"
             }
         }
+    },
+    carDetails: {
+        requirement: {
+            en: "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.",
+            ar: "يرجى التحقق من المتطلبات قبل إجراء الحجز: - الحد الأدنى للعمر 25. - مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين."
+        },
+        reqUaeResident: {
+            en: [
+                "Copy of Passport",
+                "Copy of Residential Visa",
+                "UAE Driving License",
+                "Copy of Emirates ID"
+            ],
+            ar: [
+                "نسخة من جواز السفر",
+                "نسخة من تأشيرة الإقامة",
+                "رخصة قيادة دولة الإمارات العربية المتحدة",
+                "نسخة من بطاقة الهوية الإماراتية"
+            ]
+        },
+        reqTourist: {
+            en: [
+                "Copy of Passport",
+                "Copy of Visit Visa",
+                "US, Canada, EU, GCC or International Driving License"
+            ],
+            ar: [
+                "نسخة من جواز السفر",
+                "نسخة من تأشيرة الزيارة",
+                "الولايات المتحدة أو كندا أو الاتحاد الأوروبي أو دول مجلس التعاون الخليجي أو رخصة القيادة الدولية"
+            ]
+        }
     }
 }

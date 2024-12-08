@@ -7,19 +7,19 @@ export async function generateMetadata({ params, searchParams }, parent) {
     // read route params
     const { lang, slug } = params;
 
-    // fetch data using Axios
     try {
-        const response = await axios.get(`${config.apiEndPoint}aboutus/${lang}`);
-        // const data = response.data?.data;
-        // return {
-        //   title:data?.meta_tag || "Raalc About",
-        //   description: data?.meta_description || "Raalc About",
-        // };
+        const response = await axios.get(`${config.apiEndPoint}meta_content/${lang}`);
+        const data = response?.data?.data;
+
+        return {
+            title: data?.contact?.seo_title || "Connecting Whispers: Contact Luaidrive.ae",
+            description: data?.contact?.seo_brief || "Contact Us | Luaidrive.ae"
+        }
     } catch (error) {
-        console.error('Error fetching product data:', error);
-        // return {
-        //   title: 'Raalc About', // fallback title in case of an error
-        // };
+        console.error('Error fetching', error);
+        return {
+            title: 'Connecting Whispers: Contact Luaidrive.ae',
+        };
     }
 }
 

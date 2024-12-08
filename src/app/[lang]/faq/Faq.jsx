@@ -9,6 +9,7 @@ import FaqCard from "@/components/FaqCard";
 import useFetch from "@/app/customHooks/useFetch";
 import { usePathname } from "next/navigation";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import PreLoader from "@/components/PreLoader";
 
 const Faq = ({ lang }) => {
 
@@ -27,6 +28,8 @@ const Faq = ({ lang }) => {
     useEffect(() => {
         dropdown()
     }, [])
+
+    if (loading) return <PreLoader />;
 
     return (
         <div className="bg-[#F1F4F8] pb-10">

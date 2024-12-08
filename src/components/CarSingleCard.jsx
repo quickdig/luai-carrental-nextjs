@@ -7,7 +7,7 @@ import Link from "next/link";
 import { keywords } from "../../dataset";
 
 const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
-    // const basePath = lang === "en" ? '' : `${lang}/`;
+    const basePath = lang === "en" ? '' : `${lang}/`;
 
     return (
         <div className="rounded-md h-full bg-white mx-2 px-2">
@@ -25,24 +25,24 @@ const CarSingleCard = ({ btnText, model, slug, image, title, price_daily, price_
             </div>
 
             <div className="w-full flex flex-col mx-4 my-2">
-                <Link href={`/cars/${slug}`} className="text-xl font-semibold uppercase">{title}</Link>
+                <Link href={`/${basePath}cars/${slug}`} className="text-xl font-semibold uppercase">{title}</Link>
                 <span>{model}</span>
             </div>
 
             <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-0 px-3 mx-4 border-[.5px] border-gray-300">
-                <div className="flex flex-col items-center sm:items-start">
+                <div className="flex flex-col justify-center items-center">
                     <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? keywords.commonText.pricing.per.day.en : keywords.commonText.pricing.per.day.ar}</span>
-                    <span className="price_cat text-sm font-medium">AED {price_daily}</span>
+                    <span className={`price_cat text-xs font-medium ${price_daily == 'On Request' ? 'text-green-600' : ''}`}>{price_daily == 'On Request' ? 'On Request' : 'AED ' + price_daily}</span>
                 </div>
 
-                <div className="flex flex-col items-center sm:items-start">
+                <div className="flex flex-col items-center justify-center">
                     <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? keywords.commonText.pricing.per.week.en : keywords.commonText.pricing.per.week.ar}</span>
-                    <span className="price_cat text-sm font-medium">AED {price_weekly}</span>
+                    <span className={`price_cat text-xs font-medium ${price_weekly == 'On Request' ? 'text-green-600' : ''}`}>{price_weekly == 'On Request' ? 'On Request' : 'AED ' + price_weekly}</span>
                 </div>
 
-                <div className="flex flex-col items-center sm:items-start">
+                <div className="flex flex-col items-center justify-center">
                     <span className="price_cat text-primary text-xs font-semibold">{lang == 'en' ? keywords.commonText.pricing.per.month.en : keywords.commonText.pricing.per.month.ar}</span>
-                    <span className="price_cat text-sm font-medium">AED {price_monthly}</span>
+                    <span className={`price_cat text-xs font-medium ${price_monthly == 'On Request' ? 'text-green-600' : ''}`}>{price_monthly == 'On Request' ? 'On Request' : 'AED ' + price_monthly}</span>
                 </div>
             </div>
 

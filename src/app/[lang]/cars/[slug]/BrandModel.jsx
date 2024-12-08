@@ -19,6 +19,8 @@ import useFetch from "@/app/customHooks/useFetch";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
+import { keywords } from "../../../../../dataset";
+import PreLoader from "@/components/PreLoader";
 
 const BrandModel = ({ lang }) => {
     const params = useParams();
@@ -34,7 +36,7 @@ const BrandModel = ({ lang }) => {
         }
     }, [dataBanner]);
 
-    if (loading) return;
+    if (loading) return <PreLoader />;
     const { name, description, price_daily, price_weekly, price_monthly, image, engine, bluetooth, cruise, luggage, deposit, stock } = data?.data
     return (
         <div className="bg-[#F1F4F8]">
@@ -57,7 +59,7 @@ const BrandModel = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">{name}</h2>
+                <h2 className="text-left text-2xl font-bold">{name}</h2>
             </div>
 
 
@@ -78,8 +80,8 @@ const BrandModel = ({ lang }) => {
                             <h4 className="text-left text-secondary font-bold text-lg md:text-xl lg:text-2xl">
                                 {name}
                             </h4>
-                            <p className="text-[#707070] text-sm md:text-base text-justify leading-6">
-                                Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.
+                            <p className="text-[#707070] text-sm md:text-md font-normal text-justify leading-6">
+                                {lang === 'en' ? keywords.carDetails.requirement.en : keywords.carDetails.requirement.ar}
                             </p>
 
                             <p className="text-justify leading-7" dangerouslySetInnerHTML={{ __html: description }}>
@@ -89,61 +91,67 @@ const BrandModel = ({ lang }) => {
                             <div className="flex flex-col md:flex-row justify-between p-0 m-0 space-y-6 md:space-y-0">
                                 {/* Requirements for UAE Residents */}
                                 <div className="text-[#707070] w-full md:w-1/2 md:pr-4">
-                                    <span className="text-sm md:text-base text-secondary text-left font-medium block">
-                                        Requirements for UAE Residents
+                                    <span className="text-sm md:text-md text-secondary text-left font-medium block">
+                                        {lang === 'en' ? 'Requirements for UAE Residents' : 'المتطلبات للمقيمين في دولة الإمارات العربية المتحدة'}
                                     </span>
                                     <ul className="list-none space-y-3 mt-4">
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; Copy of Passport
-                                        </li>
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; Copy of Residential Visa
-                                        </li>
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; UAE Driving License
-                                        </li>
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; Copy of Emirates ID
-                                        </li>
+                                        {
+                                            lang === 'en' ?
+                                                keywords?.carDetails?.reqUaeResident?.en?.map((item, idx) => {
+                                                    return (
+                                                        <li className="flex items-start text-sm font-normal" key={idx}>
+                                                            <span className="text-primary">
+                                                                <FaCheck />
+                                                            </span>
+                                                            &nbsp; {item}
+                                                        </li>
+                                                    )
+                                                })
+                                                :
+                                                keywords?.carDetails?.reqUaeResident?.ar?.map((item, idx) => {
+                                                    return (
+                                                        <li className="flex items-start text-sm font-normal" key={idx}>
+                                                            <span className="text-primary">
+                                                                <FaCheck />
+                                                            </span>
+                                                            &nbsp; {item}
+                                                        </li>
+                                                    )
+                                                })
+                                        }
                                     </ul>
                                 </div>
 
                                 {/* Requirements for Tourists */}
                                 <div className="text-[#707070] w-full md:w-1/2 md:pl-4">
-                                    <span className="text-sm md:text-base text-secondary text-left font-medium block">
-                                        Requirements for Tourists
+                                    <span className="text-sm md:text-md text-secondary text-left font-medium block">
+                                        {lang === 'en' ? 'Requirements for Tourists' : 'متطلبات للسياح'}
                                     </span>
                                     <ul className="list-none space-y-3 mt-4">
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; Copy of Passport
-                                        </li>
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; Copy of Visit Visa
-                                        </li>
-                                        <li className="flex items-center text-sm font-normal">
-                                            <span className="text-primary">
-                                                <FaCheck />
-                                            </span>
-                                            &nbsp; US, Canada, EU, GCC or International Driving License
-                                        </li>
+                                        {
+                                            lang === 'en' ?
+                                                keywords?.carDetails?.reqTourist?.en?.map((item, idx) => {
+                                                    return (
+                                                        <li className="flex items-start text-sm font-normal" key={idx}>
+                                                            <span className="text-primary">
+                                                                <FaCheck />
+                                                            </span>
+                                                            &nbsp; {item}
+                                                        </li>
+                                                    )
+                                                })
+                                                :
+                                                keywords?.carDetails?.reqTourist?.ar?.map((item, idx) => {
+                                                    return (
+                                                        <li className="flex items-start text-sm font-normal" key={idx}>
+                                                            <span className="text-primary">
+                                                                <FaCheck />
+                                                            </span>
+                                                            &nbsp; {item}
+                                                        </li>
+                                                    )
+                                                })
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -152,8 +160,8 @@ const BrandModel = ({ lang }) => {
                 </div>
 
                 {/* Sidebar Panel Pricing/Other Filtering */}
-                <div className="w-full bg-white border-[.5px] border-gray-400 h-auto rounded-md lg:w-4/12 px-4 py-6 sm:px-6 sm:py-8">
-                    <BrandDetailSidebar />
+                <div className="h-full bg-white border-[.5px] border-gray-400 rounded-md lg:w-4/12 px-4 py-6 sm:px-6 sm:py-8">
+                    <BrandDetailSidebar lang={lang} />
                 </div>
 
             </div>
