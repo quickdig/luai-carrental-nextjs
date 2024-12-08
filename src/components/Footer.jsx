@@ -1,11 +1,7 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import footer_logo from "../../src/public/assets/logo_black.png";
-import footer_back from "../../src/public/assets/footer_back.png";
-import social_imgOne from "../../src/public/assets/fb.png";
-import social_imgTwo from "../../src/public/assets/wa.png";
-import social_imgThree from "../../src/public/assets/insta.png";
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiPhoneCall } from "react-icons/fi";
@@ -13,16 +9,13 @@ import { FaRegEnvelope } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import { useParams, usePathname } from 'next/navigation';
 import useFetch from '@/app/customHooks/useFetch';
-import { keywords } from '../../dataset';
+import { languageData } from '../../dataset';
+import { MainLanguageValueContext } from '@/app/context/MainLanguageValue';
+import { social_imgOne, social_imgThree, social_imgTwo } from '@/ImagesImport/image';
 
 const Footer = () => {
-
-    const { lang } = useParams();
-    const { loading, data } = useFetch(`footer/${lang}`);
-
-    useEffect(() => {
-
-    }, [data])
+    const { langValue } = useContext(MainLanguageValueContext);
+    const { loading, data } = useFetch(`footer/${langValue}`);
 
     if (loading) return;
     const footerData = data?.data;
@@ -54,21 +47,21 @@ const Footer = () => {
                                 <Link href={"#"}>
                                     <Image
                                         src={social_imgOne}
-                                        className="object-contain w-8 mr-3"
+                                        className="object-contain w-8 mx-2"
                                         alt="footer_social1"
                                     />
                                 </Link>
                                 <Link href={"#"}>
                                     <Image
                                         src={social_imgTwo}
-                                        className="object-contain w-8 mr-3"
+                                        className="object-contain w-8 mx-2"
                                         alt="footer_social2"
                                     />
                                 </Link>
                                 <Link href={"#"}>
                                     <Image
                                         src={social_imgThree}
-                                        className="object-contain w-8"
+                                        className="object-contain w-8 mx-2"
                                         alt="footer_social3"
                                     />
                                 </Link>
@@ -77,63 +70,60 @@ const Footer = () => {
 
                         {/* Quick Links */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">{lang == undefined ? 'Quick Links' : 'روابط سريعة'}</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{languageData[langValue]["Quick Links"]}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-4">
                                 <li>
-                                    <Link href={"#"}>{lang == undefined ? keywords.navMenu.home.en : keywords.navMenu.home.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Home"]}</Link>
                                     {/* {langValue == 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar} */}
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{lang == undefined ? keywords.navMenu.about_us.en : keywords.navMenu.about_us.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["About us"]}</Link>
                                 </li>
                                 {/* <li>
                                     <Link href={"#"}>Brands</Link>
                                 </li> */}
                                 <li>
-                                    <Link href={"#"}>{lang == undefined ? keywords.navMenu.cars.en : keywords.navMenu.cars.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Cars"]}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{lang == undefined ? keywords.navMenu.faq.en : keywords.navMenu.faq.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Faq"]}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{lang == undefined ? keywords.navMenu.contact_us.en : keywords.navMenu.contact_us.ar}</Link>
+                                    <Link href={"#"}>{languageData[langValue]["Contact Us"]}</Link>
                                 </li>
                             </ul>
                         </div>
 
                         {/* Contact Details */}
                         <div className="col-span-1 w-full md:pl-10 text-center md:text-left">
-                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3">{lang == undefined ? 'Contact Details' : 'تفاصيل الاتصال'}</h4>
+                            <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{languageData[langValue]["Contact Details"]}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-3">
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
-                                    <span className="p-2 rounded-full bg-primary text-white mr-2">
+                                    <span className="p-2 rounded-full bg-primary text-white ">
                                         <FiPhoneCall />
                                     </span>
-                                    <Link href={"#"}>(+971) 505 123 558</Link>
+                                    <Link href={"#"} className='mx-3'>(+971) 505 123 558</Link>
                                 </li>
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
-                                    <span className="p-2 rounded-full bg-primary text-white mr-2">
+                                    <span className="p-2 rounded-full bg-primary text-white ">
                                         <FaRegEnvelope />
                                     </span>
-                                    <Link href={"#"}>sales@luai.ae</Link>
+                                    <Link href={"#"} className='mx-3'>sales@luai.ae</Link>
                                 </li>
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
-                                    <span className="p-2 rounded-full bg-primary text-white mr-2">
+                                    <span className="p-2 rounded-full bg-primary text-white">
                                         <FaLocationDot />
                                     </span>
-                                    <Link href={"#"} className='line-clamp-2' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
-                                        {/* Shop No. 02, <br />
-                                        Azurite Tower, Al Jaddaf */}
+                                    <Link href={"#"} className='line-clamp-2 mx-3' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
                                     </Link>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </footer>
-                {/* <div className="absolute bottom-5 flex flex-row w-full h-auto border-t-[.5px] border-t-white justify-center items-center">
-                    <p className='text-xs text-white mt-5'>&copy;2024 LUAI Drive, All Rights Reserved. Powered by <Link to={"https://quickdigitals.ae/"} className='underline' target='_blank'>Quick Digitals</Link></p>
-                </div> */}
             </div>
+
+            <div class="footer_Quick bg-secondary py-2 text-white text-center"><div class="container mx-auto"> Developed by <a target="_blank" class="border-b border-[#fff]" href="https://quickdigitals.ae/">Quick Digitals</a></div></div>
         </section>
 
     )

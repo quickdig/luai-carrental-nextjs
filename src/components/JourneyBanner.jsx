@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { keywords } from "../../dataset";
-import banner_back from "../../src/public/assets/backdrop_two.png"
 import Button from './Button';
-import Image from "next/image";
+import { languageData } from "../../dataset";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { useContext } from "react";
 
 
 const JourneyBanner = ({ sectionData, lang }) => {
-
-    const basePath = lang === "en" ? '' : `${lang}/`;
-
+    const { langValue } = useContext(MainLanguageValueContext);
     return (
         <section className="journey_Banner relative mt-20">
             <div
@@ -22,16 +21,13 @@ const JourneyBanner = ({ sectionData, lang }) => {
                             {/* Rent a Car Dubai Online <br />
                             Today & <b>Enjoy These Perks</b> */}
                         </h3>
-                        <Link href={`${basePath}/cars`}>
-                            <Button
-                                text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
-                                type={"submit"}
-                                style={
-                                    "bg-black hover:bg-primary uppercase mt-6 lg:mt-10 text-center text-white font-medium py-3 px-6 rounded inline-flex items-center"
-                                }
-                            />
-                        </Link>
-
+                        <Button
+                            text={languageData[langValue]["Start Your Journey"]}
+                            type={"submit"}
+                            style={
+                                "bg-black hover:bg-primary uppercase mt-6 lg:mt-10 text-center text-white font-medium py-3 px-6 rounded inline-flex items-center"
+                            }
+                        />
                     </div>
                     <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
                         <p className="text-white font-light text-sm sm:text-base lg:text-lg text-justify leading-6 sm:leading-7" dangerouslySetInnerHTML={{ __html: sectionData.Text }} >

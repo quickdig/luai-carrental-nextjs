@@ -1,16 +1,19 @@
 
-import { keywords } from "../../dataset";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { languageData } from "../../dataset";
 import Button from "./Button";
 import CarCard from "./CarCard";
+import { useContext } from "react";
 
 const FeaturedCard = ({ featuredData, lang }) => {
+    const { langValue } = useContext(MainLanguageValueContext);
     return (
         <section className="featured_Card relative">
             <div className="flex flex-col justify-center max-w-screen-lg mt-20 w-full mx-auto bg-[#F2F2F2]">
                 <div className="flex flex-col lg:flex-row md:flex-col sm:flex-col items-center lg:justify-between md:justify-center px-16 mt-5">
-                    <span className="text-xl font-semibold text-left">{lang == 'en' ? keywords.commonText.feature_card.header.en : keywords.commonText.feature_card.header.ar}</span>
+                    <span className="text-xl font-semibold text-left">{languageData[langValue]["Explore the Car Range"]}</span>
                     <Button
-                        text={lang == 'en' ? keywords.buttonText.search.en : keywords.buttonText.search.ar}
+                        text={languageData[langValue]["Search"]}
                         type={"submit"}
                         style={
                             "bg-secondary hover:bg-primary text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
@@ -21,17 +24,12 @@ const FeaturedCard = ({ featuredData, lang }) => {
                 <div className="flex flex-wrap lg:flex-wrap justify-center gap-2 my-4">
                     {
                         featuredData?.map((item, idx) => {
+                            const {id,slug,image,name,price_daily,price_weekly,price_monthly} = item
                             return (
-                                <CarCard lang={lang} key={idx} id={item.id} slug={item.slug} image={item.image} rating={5}
-                                    title={item.name} daily={item.price_daily} weekly={item.price_weekly} monthly={item.price_monthly} btnText={lang == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar} />
+                                <CarCard lang={lang} key={idx} id={id} slug={slug} image={image} rating={5} title={name} daily={price_daily} weekly={price_weekly} monthly={price_monthly} btnText={languageData[langValue]["Book Ride"]} />
                             )
                         })
                     }
-                    {/* <CarCard />
-                    <CarCard />
-                    <CarCard />
-                    <CarCard />
-                    <CarCard /> */}
                 </div>
             </div>
         </section>

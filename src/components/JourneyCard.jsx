@@ -2,12 +2,12 @@ import list_icon from "../../src/public/assets/tick-inside-circle.png";
 import Button from './Button';
 import journeyImage from "../../src/public/assets/journey_img1.png"
 import Image from "next/image";
-import { keywords } from "../../dataset";
-import Link from "next/link";
+import { languageData } from "../../dataset";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { useContext } from "react";
 
 const JourneyCard = ({ section, sectionData, lang }) => {
-
-    const basePath = lang === "en" ? '' : `${lang}/`;
+    const { langValue } = useContext(MainLanguageValueContext);
 
     return (
         <section className={`journey_${section} relative mt-16`}>
@@ -49,15 +49,13 @@ const JourneyCard = ({ section, sectionData, lang }) => {
                             </li> */}
                         </ul>
 
-                        <Link href={`${basePath}cars`} className="bg-secondary hover:bg-primary uppercase text-center text-white font-medium rounded inline-flex items-center">
-                            <Button
-                                text={lang == 'en' ? keywords.buttonText.start_journey.en : keywords.buttonText.start_journey.ar}
-                                type={"submit"}
-                                style={
-                                    "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
-                                }
-                            />
-                        </Link>
+                        <Button
+                            text={languageData[langValue]["Start Your Journey"]}
+                            type={"submit"}
+                            style={
+                                "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
+                            }
+                        />
                     </div>
                 </div>
 

@@ -16,20 +16,21 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import CarSingleCard from "@/components/CarSingleCard";
 import useFetch from "@/app/customHooks/useFetch";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useGet from "@/app/customHooks/useGet";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
 import { Pagination } from "antd";
-import { keywords } from "../../../../dataset";
+import { languageData } from "../../../../dataset";
 import { usePathname } from "next/navigation";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 import PreLoader from "@/components/PreLoader";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 const Cars = ({ lang }) => {
 
     const params = usePathname();
     const breadcrumbs = getBreadcrumb(params)
-
+    const { langValue } = useContext(MainLanguageValueContext);
     const { loading, data } = useFetch(`car/all/${lang}/12?page=1`);
 
     const [carData, setCarData] = useState("");
@@ -95,7 +96,7 @@ const Cars = ({ lang }) => {
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
-                    <div className="text-white space-y-4 sm:space-y-6">
+                    <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
                             {bannerData?.header}
                         </h1>
@@ -136,7 +137,7 @@ const Cars = ({ lang }) => {
                                                             name="type_of_car"
                                                             type="radio"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onChange={onFilterSelect}
                                                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                             id={`type_of_car_` + item.id}
                                                         />
@@ -163,7 +164,7 @@ const Cars = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="1"
-                                                    onClick={onFilterSelect}
+                                                    onChange={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="in_stock"
                                                 />
@@ -182,7 +183,7 @@ const Cars = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="0"
-                                                    onClick={onFilterSelect}
+                                                    onChange={onFilterSelect}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="out_of_stock"
                                                 />
@@ -215,7 +216,7 @@ const Cars = ({ lang }) => {
                                     </div>
 
                                     <div className="flex flex-row items-center gap-2 justify-between">
-                                        <input
+                                        {/* <input
                                             type="number"
                                             placeholder="From"
                                             name="from_value"
@@ -228,7 +229,7 @@ const Cars = ({ lang }) => {
                                             name="to_value"
                                             value={filterData?.pricing?.max}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
 
@@ -248,7 +249,7 @@ const Cars = ({ lang }) => {
                                                             name="car_brands"
                                                             className="hidden peer"
                                                             value={item.id}
-                                                            onClick={onFilterSelect}
+                                                            onChange={onFilterSelect}
                                                         />
                                                         <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
                                                             <img
@@ -277,15 +278,15 @@ const Cars = ({ lang }) => {
                                     <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
                                         price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
                                         cruise_control={item.cruise} model={item.model}
-                                        engine={item.engine} luggage={item.luggage} btnText={lang == 'en' ? keywords.buttonText.book_ride.en : keywords.buttonText.book_ride.ar} />
+                                        engine={item.engine} luggage={item.luggage} btnText={languageData[langValue]["Book Ride"]} />
                                 )
                             })
                         }
                     </div>
                 </div>
             </div>
-            <div className="relative flex flex-row justify-center items-center my-10">
-                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
+            <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
+                {/* <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} /> */}
             </div>
 
             <div className="flex justify-center mt-10 p-0 w-full bg-white">

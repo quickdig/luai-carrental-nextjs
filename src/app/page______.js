@@ -1,37 +1,43 @@
-import Banner from "@/components/Banner";
-import BlogContainer from "@/components/BlogContainer";
-import ContentCard from "@/components/ContentCard";
-import FeaturedCard from "@/components/FeaturedCard";
-import Home from "@/components/Home";
-import JourneyBanner from "@/components/JourneyBanner";
-import JourneyCard from "@/components/JourneyCard";
-import ReasonList from "@/components/ReasonList";
-import SearchBox from "@/components/SearchBox";
-import Image from "next/image";
+import React from 'react';
+import Home from '@/components/Home';
+import config from "../services/config.json";
+import axios from 'axios';
 
-export async function generateMetaData({ params }) {
-  const { lang } = params;
+export async function generateMetadata({ params, searchParams }, parent) {
+  // read route params
+  const { lang, slug } = params;
+ 
+  // fetch data using Axios
+  try {
+    const response = await axios.get(`${config.apiEndPoint}test${lang}`);
+    const data = response.data?.data;
+    return {
+      title:data?.meta_tag || "luai",
+      description: data?.meta_description || "luai Home",
+    };
+  } catch (error) {
+    console.error('Error fetching product data:', error);
+    return {
+      title: 'luai Home', // fallback title in case of an error
+    };
+  }
 }
 
 export async function generateStaticParams() {
   // Define all possible language codes
   const languages = ['en', 'ar'];
-
+  
   // Generate the paths for each language
   const paths = languages.map((lang) => ({ lang }));
-
-  console.log(paths);
   return paths;
 }
 
 const page = ({ params }) => {
   const { lang } = params;
-
-
-
+  
   return (
     <>
-      <Home lang={lang ?? 'en'} />
+      <Home lang={lang} />
     </>
   );
 };

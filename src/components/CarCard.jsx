@@ -4,9 +4,13 @@ import whatsApp from "../../src/public/assets/whatsApp.png";
 import Link from "next/link"
 import Button from "./Button";
 import Image from "next/image";
-import { keywords } from "../../dataset";
+import { languageData } from "../../dataset";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { useContext } from "react";
 
 const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, slug, id, btnText }) => {
+
+    const { langValue } = useContext(MainLanguageValueContext);
 
     const basePath = lang === "en" ? '' : `${lang}/`;
     return (
@@ -39,17 +43,17 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
             <div className="flex flex-row lg:flex-row md:flex-row sm:flex-col justify-between items-center gap-2">
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{daily}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.daily.en : keywords.commonText.pricing.daily.ar}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Per Day"]}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{weekly}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.weekly.en : keywords.commonText.pricing.weekly.ar}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Per Week"]}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{monthly}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs">/{lang == 'en' ? keywords.commonText.pricing.monthly.en : keywords.commonText.pricing.monthly.ar}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Per Month"]}</span>
                 </div>
             </div>
 
@@ -65,6 +69,13 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
                         }
                     />
                 </Link>
+                <Button
+                    text={btnText}
+                    type={"submit"}
+                    style={
+                        "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white ar_text_center"
+                    }
+                />
 
                 <Link href="https://wa.me/971508879971" target="_blank" className="flex justify-center items-center rounded-md bg-[#29a71a] w-16 sm:w-16">
                     <button

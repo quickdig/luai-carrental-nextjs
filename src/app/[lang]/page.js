@@ -1,32 +1,41 @@
-import Home from "@/components/Home";
-import config from "../services/config.json"
-import axios from "axios";
 
-export async function generateMetaData({ params }) {
-  const { lang } = params;
+import Home from "@/components/Home";
+
+
+
+
+export async function generateMetadata({ params }) {
+  const { lang } = params; // Default to 'en' if lang is missing
 
   try {
+    // const response = await axios.get(`${config.apiEndPoint}home_content/${lang}`);
+    // const data = response.data?.data;
 
-    const response = await axios.get(`${config.apiEndPoint}meta_content/${lang}`);
-    const data = response?.data?.data;
-
-    console.log(response);
-
-    return {
-      title: data?.home?.seo_title || "Excellent automobile rental in Dubai | Rent or Hire an automobile for AED 70 | Best Car Leasing",
-      description: data?.home?.seo_brief || "One of the top automobile rental firms in Dubai offers cars for AED 70. Renting a car in Dubai with LUAI Drive allows you to benefit from amazing deals and affordable rental car costs. Well-located pick-up points and first-rate customer support will make your rental experience simple and relaxing."
-    }
-
+    // return {
+    //   title: data?.meta_tag || "luai",
+    //   description: data?.meta_description || "luai",
+    // };
   } catch (error) {
-    console.error('Error fetching', error);
-    return {
-      title: 'Excellent automobile rental in Dubai | Rent or Hire an automobile for AED 70 | Best Car Leasing',
-    };
+    // console.error('Error fetching product data:', {
+    //   message: error.message,
+    //   status: error.response?.status,
+    //   data: error.response?.data,
+    // });
+    // return {
+    //   title: 'luai',
+    //   description: 'Default description for luai',
+    // };
   }
 }
 
-export default function page({ params }) {
+export async function generateStaticParams() {
+  const languages = ['en', 'ar'];
+  const paths = languages.map((lang) => ({ lang }));
+  console.log("Static Params:", paths);
+  return paths;
+}
 
+export default function page({ params }) {
   const { lang } = params;
   return (
     <div>

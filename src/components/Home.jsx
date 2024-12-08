@@ -11,17 +11,14 @@ import ReasonList from './ReasonList'
 import useFetch from '@/app/customHooks/useFetch'
 import PreLoader from './PreLoader'
 
-const Home = ({ param, lang }) => {
-
+const Home = ({lang }) => {
     const { loading, data } = useFetch(`home_content/${lang}`);
 
-    useEffect(() => {
-        console.log(param)
-    }, [])
+ 
 
     if (loading) return <PreLoader />;
     const alldata = data?.data
-    const { bannerContent, featuredContent, sectionContent, blogContent, reasonList, reasonSectionHeader } = data?.data
+    const { bannerContent, featuredContent, sectionContent, blogContent, reasonList, reasonSectionHeader } = alldata
     return (
         <div>
             <Banner bannerData={bannerContent} allData={alldata} />

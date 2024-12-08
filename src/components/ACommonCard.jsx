@@ -6,7 +6,11 @@ const ACommonCard = ({ icon, title, desc }) => {
             <img src={icon} alt="icon_img" className="inline-block mb-2 w-[40px] object-contain" />
             <p className="font-semibold text-[18px] mb-2 px-3 text-center">{title}</p>
             <p className='text-[14px] sm:text-sm text-center text-[#707070]'>
-                {desc}
+                <img src={icon} alt="icon_img" className="inline-block w-[100px] object-contain" />
+                <p className="font-semibold text-lg sm:text-xl mb-2 px-3 text-center">{title}</p>
+                <p className='text-sm sm:text-md text-center text-[#707070] ar_text_center'>
+                    {desc}
+                </p>
             </p>
         </div>
     )
