@@ -285,8 +285,8 @@ const Brand = ({ lang }) => {
                                         {
                                             Array.isArray(filters?.data?.data?.brands) && filters?.data?.data?.brands?.map((item, idx) => {
                                                 return (
-                                                    <Link href={`${basePath}${item.slug}`} className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg">
-                                                        <label className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" key={idx}>
+                                                    <Link href={`${basePath}${item.slug}`} className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" key={idx}>
+                                                        <label className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" >
                                                             <input
                                                                 type="radio"
                                                                 name="car_brands"
