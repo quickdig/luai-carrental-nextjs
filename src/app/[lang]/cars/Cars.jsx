@@ -23,8 +23,10 @@ import { Pagination } from "antd";
 import { languageData } from "../../../../dataset";
 import { usePathname } from "next/navigation";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
-import PreLoader from "@/components/PreLoader";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import PreLoader from "@/components/PreLoader";
+import axios from "axios";
+import config from "../../services/config.json"
 
 const Cars = ({ lang }) => {
 
@@ -42,13 +44,7 @@ const Cars = ({ lang }) => {
     const [bannerData, setBannerData] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/cars`);
 
-    const [filtersAll, setFiltersAll] = useState({
-        type_of_car: 1,
-        availability: 1,
-        from_value: null,
-        to_value: null,
-        car_brands: null,
-    });
+    const [filtersAll, setFiltersAll] = useState({});
 
     useEffect(() => {
         if (dataBanner) {
@@ -71,17 +67,32 @@ const Cars = ({ lang }) => {
         console.log(resget);
     }, [resget.data])
 
-    const onFilterSelect = (e) => {
-        const { name, value } = e.target;
+    const onFilterSelect = async () => {
+        const data = {
+            type: filtersAll?.type_of_car,
+            availability: filtersAll?.availability,
+            brand: filtersAll?.car_brands,
+            // brand_x: filtersAll?.car_brands
+        }
 
-        setFiltersAll((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
-        handleFilter()
+        const response = await axios.post(`${config.apiEndPoint}cars/filter/${lang}`, data)
+
+        console.log(response?.data?.data);
+        setCarData(response?.data?.data)
     }
 
-    const handleFilter = () => {
-        // console.log(filtersAll.type_of_car, filtersAll.availability, filtersAll.car_brands, filtersAll.from_value, filtersAll.to_value);
-        apiMethodGet(`cars/filter/${lang}/${filtersAll.type_of_car}/${filtersAll.availability}/${filtersAll.car_brands}`)
+    useEffect(() => {
+        if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands) {
+            onFilterSelect();
+        }
+    }, [filtersAll])
 
+    const handleFilter = (e) => {
+        const { name, value } = e.target
+        setFiltersAll((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
     }
 
     const onChange = (current) => {
@@ -108,7 +119,7 @@ const Cars = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={data?.name} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
@@ -118,7 +129,7 @@ const Cars = ({ lang }) => {
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">
                 <div className="w-[90%] mx-auto h-full bg-[#1C1C1C] lg:w-4/12 rounded-md p-5">
                     <div className="flex flex-row justify-between items-center mb-5 px-1 text-white" onClick={() => setIsExpanded(!isExpanded)}>
-                        <span className="text-md font-normal">Filters</span>
+                        <span className="text-md font-normal">{languageData[langValue]["Filters"]}</span>
                         {isExpanded ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
                     </div>
                     {
@@ -126,7 +137,7 @@ const Cars = ({ lang }) => {
                             <div className="filters_Options">
                                 {/* Type of Cars Section */}
                                 <div className="grid grid-cols-1 space-y-2">
-                                    <span className="text-left text-sm text-white">Type of cars:</span>
+                                    <span className="text-left text-sm text-white">{languageData[lang]["Type of Cars"]}</span>
 
                                     {
                                         Array.isArray(filterData?.types) && filterData?.types?.map((item, idx) => {
@@ -137,7 +148,7 @@ const Cars = ({ lang }) => {
                                                             name="type_of_car"
                                                             type="radio"
                                                             value={item.id}
-                                                            onChange={onFilterSelect}
+                                                            onClick={handleFilter}
                                                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                             id={`type_of_car_` + item.id}
                                                         />
@@ -146,7 +157,7 @@ const Cars = ({ lang }) => {
                                                         </span>
                                                     </label>
                                                     <label className="ml-2 text-white cursor-pointer text-sm" htmlFor={`type_of_car_` + item.id}>
-                                                        {item.name} <span className="text-[#90A3BF]">({item.count})</span>
+                                                        &nbsp;{item.name} <span className="text-[#90A3BF]">({item.count})</span>
                                                     </label>
                                                 </div>
                                             )
@@ -156,7 +167,7 @@ const Cars = ({ lang }) => {
 
                                 {/* Availability Section */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
-                                    <span className="text-left text-sm text-white">Availability</span>
+                                    <span className="text-left text-sm text-white">{languageData[lang]["Availability"]}</span>
                                     <div className="flex flex-row items-center justify-start gap-5">
                                         <div className="inline-flex items-center">
                                             <label className="relative flex items-center cursor-pointer" htmlFor="in_stock">
@@ -164,7 +175,7 @@ const Cars = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="1"
-                                                    onChange={onFilterSelect}
+                                                    onClick={handleFilter}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="in_stock"
                                                 />
@@ -173,7 +184,7 @@ const Cars = ({ lang }) => {
                                                 </span>
                                             </label>
                                             <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="in_stock">
-                                                In Stock
+                                                &nbsp;{languageData[lang]["In Stock"]}
                                             </label>
                                         </div>
 
@@ -183,7 +194,7 @@ const Cars = ({ lang }) => {
                                                     name="availability"
                                                     type="radio"
                                                     value="0"
-                                                    onChange={onFilterSelect}
+                                                    onClick={handleFilter}
                                                     className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                                                     id="out_of_stock"
                                                 />
@@ -192,20 +203,20 @@ const Cars = ({ lang }) => {
                                                 </span>
                                             </label>
                                             <label className="ml-2 text-white cursor-pointer text-sm" htmlFor="out_of_stock">
-                                                Out of Stock
+                                                &nbsp;{languageData[lang]["Out of Stock"]}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Pricing Section */}
-                                <div className="grid grid-cols-1 space-y-2 mt-5">
+                                {/* <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <div className="flex flex-row justify-between items-center">
-                                        <span className="text-left text-sm text-white">Pricing</span>
+                                        <span className="text-left text-sm text-white">{languageData[lang]["Pricing"]}</span>
                                     </div>
                                     <div className="flex flex-row text-white justify-between items-center">
-                                        <span>From AED {filterData?.pricing?.min}</span>
-                                        <span>To AED {filterData?.pricing?.max}</span>
+                                        <span>{languageData[lang]["From"]} AED {filterData?.pricing?.min}</span>
+                                        <span>{languageData[lang]["To"]} AED {filterData?.pricing?.max}</span>
                                     </div>
                                     <div className="flex flex-row items-center justify-center">
                                         <input
@@ -216,7 +227,7 @@ const Cars = ({ lang }) => {
                                     </div>
 
                                     <div className="flex flex-row items-center gap-2 justify-between">
-                                        {/* <input
+                                        <input
                                             type="number"
                                             placeholder="From"
                                             name="from_value"
@@ -229,14 +240,14 @@ const Cars = ({ lang }) => {
                                             name="to_value"
                                             value={filterData?.pricing?.max}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
-                                        /> */}
+                                        />
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Sort By Brands Section */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <div className="flex flex-row justify-between items-center">
-                                        <span className="text-left text-sm text-white">Sort By Brands</span>
+                                        <span className="text-left text-sm text-white">{languageData[lang]["Sort By Brands"]}</span>
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
                                         {/* Brand 1 */}
@@ -249,7 +260,7 @@ const Cars = ({ lang }) => {
                                                             name="car_brands"
                                                             className="hidden peer"
                                                             value={item.id}
-                                                            onChange={onFilterSelect}
+                                                            onClick={handleFilter}
                                                         />
                                                         <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
                                                             <img
@@ -275,7 +286,7 @@ const Cars = ({ lang }) => {
                         {
                             Array.isArray(carData?.data) && carData?.data?.map((item, idx) => {
                                 return (
-                                    <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
+                                    <CarSingleCard key={idx} car_id={item.id} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
                                         price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
                                         cruise_control={item.cruise} model={item.model}
                                         engine={item.engine} luggage={item.luggage} btnText={languageData[langValue]["Book Ride"]} />
@@ -286,20 +297,7 @@ const Cars = ({ lang }) => {
                 </div>
             </div>
             <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
-                {/* <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} /> */}
-            </div>
-
-            <div className="flex justify-center mt-10 p-0 w-full bg-white">
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 max-w-screen-lg lg:grid-cols-8 gap-5 p-5 mt-5 w-full">
-                    <Brands icon={bOne} />
-                    <Brands icon={bTwo} />
-                    <Brands icon={bThree} />
-                    <Brands icon={bFour} />
-                    <Brands icon={bFive} />
-                    <Brands icon={bSix} />
-                    <Brands icon={bSeven} />
-                    <Brands icon={bEight} />
-                </div>
+                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
 
         </div>

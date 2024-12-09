@@ -205,7 +205,7 @@ const Header = () => {
                 href={`/${basePath}contact-us`}
                 className={`relative ${isActive(`/${basePath}contact-us`) ? 'border-b-[3px] border-primary text-primary link_active' : 'not_active'}`}
               >
-             {languageData[langValue]["Contact Us"]}
+                {languageData[langValue]["Contact Us"]}
               </Link>
             </li>
             <li className="group transition duration-300 uppercase font-medium hover:text-primary ">
@@ -227,10 +227,12 @@ const Header = () => {
               </button>
             </li>
             <li>
-              <button className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center">
-                <FaPhone className="ar_icon mr-2" />
-                {languageData[langValue]["Book Ride"]}
-              </button>
+              <Link href={`/${basePath}cars`}>
+                <button className="bg-primary hover:bg-secondary text-white font-medium py-2 px-4 rounded inline-flex items-center">
+                  <FaPhone className="ar_icon mr-2" />
+                  {languageData[langValue]["Book Ride"]}
+                </button>
+              </Link>
             </li>
           </ul>
 

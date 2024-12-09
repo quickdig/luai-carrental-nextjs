@@ -69,13 +69,6 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
                         }
                     />
                 </Link>
-                <Button
-                    text={btnText}
-                    type={"submit"}
-                    style={
-                        "bg-primary hover:bg-secondary uppercase w-full px-6 py-2 rounded items-center font-medium text-white ar_text_center"
-                    }
-                />
 
                 <Link href="https://wa.me/971508879971" target="_blank" className="flex justify-center items-center rounded-md bg-[#29a71a] w-16 sm:w-16">
                     <button

@@ -48,7 +48,7 @@ const Faq = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={null} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">

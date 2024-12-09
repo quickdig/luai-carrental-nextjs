@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import footer_logo from "../../src/public/assets/logo_black.png";
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,11 +15,17 @@ import { social_imgOne, social_imgThree, social_imgTwo } from '@/ImagesImport/im
 
 const Footer = () => {
     const { langValue } = useContext(MainLanguageValueContext);
-    const { loading, data } = useFetch(`footer/${langValue}`);
+    const { data } = useFetch(`footer/${langValue}`);
+    const basePath = langValue === "en" ? '' : `${langValue}/`;
+    const [footerData, setFooterData] = useState("")
 
-    if (loading) return;
-    const footerData = data?.data;
     console.log(footerData);
+
+    useEffect(() => {
+        if (data) {
+            setFooterData(data?.data)
+        }
+    }, [data])
     return (
         <section className="footer_Card relative mt-10">
             <div
@@ -38,10 +44,10 @@ const Footer = () => {
                             />
                             <p className="text-white text-sm font-light leading-6 mt-4">
                                 <b className="font-medium">
-                                    {footerData.Header}
+                                    {footerData?.Header}
                                 </b>
                                 <br />
-                                {footerData.Description}
+                                {footerData?.Description}
                             </p>
                             <div className="flex flex-row justify-center md:justify-start items-center mt-3">
                                 <Link href={"#"}>
@@ -73,23 +79,26 @@ const Footer = () => {
                             <h4 className="text-white font-medium text-lg lg:border-l-4 lg:border-l-primary pl-3 ar_footer">{languageData[langValue]["Quick Links"]}</h4>
                             <ul className="text-white mt-3 space-y-3 ml-4">
                                 <li>
-                                    <Link href={"#"}>{languageData[langValue]["Home"]}</Link>
+                                    <Link href={`${basePath}`}>{languageData[langValue]["Home"]}</Link>
                                     {/* {langValue == 'en' ? keywords.navMenu.home.en : keywords.navMenu.home.ar} */}
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{languageData[langValue]["About us"]}</Link>
+                                    <Link href={`${basePath}about`}>{languageData[langValue]["About us"]}</Link>
                                 </li>
                                 {/* <li>
                                     <Link href={"#"}>Brands</Link>
                                 </li> */}
                                 <li>
-                                    <Link href={"#"}>{languageData[langValue]["Cars"]}</Link>
+                                    <Link href={`${basePath}cars`}>{languageData[langValue]["Cars"]}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{languageData[langValue]["Faq"]}</Link>
+                                    <Link href={`${basePath}faq`}>{languageData[langValue]["Faq"]}</Link>
                                 </li>
                                 <li>
-                                    <Link href={"#"}>{languageData[langValue]["Contact Us"]}</Link>
+                                    <Link href={`${basePath}contact-us`}>{languageData[langValue]["Contact Us"]}</Link>
+                                </li>
+                                <li>
+                                    <Link href={`${basePath}blog`}>{languageData[langValue]["Blog"]}</Link>
                                 </li>
                             </ul>
                         </div>
@@ -114,7 +123,7 @@ const Footer = () => {
                                     <span className="p-2 rounded-full bg-primary text-white">
                                         <FaLocationDot />
                                     </span>
-                                    <Link href={"#"} className='line-clamp-2 mx-3' dangerouslySetInnerHTML={{ __html: footerData.Address }}>
+                                    <Link href={"#"} className='line-clamp-2 mx-3' dangerouslySetInnerHTML={{ __html: footerData?.Address }}>
                                     </Link>
                                 </li>
                             </ul>

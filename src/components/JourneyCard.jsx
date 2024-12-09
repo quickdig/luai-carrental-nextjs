@@ -5,10 +5,11 @@ import Image from "next/image";
 import { languageData } from "../../dataset";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import { useContext } from "react";
+import Link from "next/link";
 
 const JourneyCard = ({ section, sectionData, lang }) => {
     const { langValue } = useContext(MainLanguageValueContext);
-
+    const basePath = langValue === "en" ? '' : `${langValue}/`;
     return (
         <section className={`journey_${section} relative mt-16`}>
             <div className="flex flex-col lg:flex-row justify-between max-w-screen-lg w-full gap-6 mx-auto items-center lg:px-0" id={section}>
@@ -49,13 +50,15 @@ const JourneyCard = ({ section, sectionData, lang }) => {
                             </li> */}
                         </ul>
 
-                        <Button
-                            text={languageData[langValue]["Start Your Journey"]}
-                            type={"submit"}
-                            style={
-                                "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
-                            }
-                        />
+                        <Link href={`${basePath}cars`}>
+                            <Button
+                                text={languageData[langValue]["Start Your Journey"]}
+                                type={"submit"}
+                                style={
+                                    "bg-secondary hover:bg-primary block uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
+                                }
+                            />
+                        </Link>
                     </div>
                 </div>
 

@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 import { usePathname } from "next/navigation";
 import usePost from "@/app/customHooks/usePost";
+import Message from "@/components/Message";
+import { languageData } from "../../../../dataset";
 
 const ContactUs = ({ lang }) => {
 
@@ -21,6 +23,7 @@ const ContactUs = ({ lang }) => {
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [isShow, setIsShow] = useState(false)
 
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
@@ -47,11 +50,14 @@ const ContactUs = ({ lang }) => {
         } else {
             apiMethod(`contactus`, formData)
             if (res.error == null) {
-                window.alert("Email sent successfully");
                 setName("")
                 setNumber("")
                 setEmail("")
                 setMessage("")
+                setIsShow(true)
+                setTimeout(() => {
+                    setIsShow(false);
+                }, [3000])
             }
         }
 
@@ -75,7 +81,7 @@ const ContactUs = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={null} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
@@ -152,6 +158,11 @@ const ContactUs = ({ lang }) => {
                                 // required
                                 ></textarea>
                             </div>
+                            {
+                                isShow && (
+                                    <Message message={languageData[lang]["Success! Your Request has been Sent"]} />
+                                )
+                            }
                             <div className="mt-6 text-right mb-5">
                                 <button type="submit" className="bg-secondary hover:bg-[#c9281a] text-white text-sm md:text-base lg:text-md py-2 px-4 md:px-6 rounded uppercase font-medium" name="contact_usbtn">
                                     {lang == 'en' ? 'Submit' : 'يُقدِّم'}

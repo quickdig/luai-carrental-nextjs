@@ -21,6 +21,7 @@ import useGet from "@/app/customHooks/useGet"
 import { EcllipseOne, EcllipseThree, EcllipseTwo } from "@/ImagesImport/image"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
 import PreLoader from "@/components/PreLoader"
+import BrandCarousel from "@/components/BrandCarousel";
 
 const AboutUs = ({ lang }) => {
 
@@ -28,21 +29,14 @@ const AboutUs = ({ lang }) => {
     const { loading, data } = useFetch(`aboutus/${lang}`);
     const breadcrumbs = getBreadcrumb(params)
 
-    console.log(data);
-
     const [bannerData, setBannerData] = useState("");
-    const [brandI, setBrandI] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/about-us`);
-    const brandImages = useFetch(`brands/all/${lang}`);
     useEffect(() => {
         if (dataBanner) {
             setBannerData(dataBanner?.data?.data)
         }
 
-        if (brandImages) {
-            setBrandI(brandImages?.data?.data)
-        }
-    }, [dataBanner, brandImages]);
+    }, [dataBanner]);
 
     if (loading) return <PreLoader />;
     const valueData = data?.aboutvalue
@@ -63,7 +57,7 @@ const AboutUs = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={data?.name} />
             </div>
             <div className="relative z-10 flex flex-col max-w-screen-lg w-full mt-0 mx-auto items-center">
                 <div className="flex flex-col lg:flex-row justify-between items-center sm:px-6 lg:px-0">
@@ -90,13 +84,13 @@ const AboutUs = ({ lang }) => {
                             </p>
                         </div>
 
-                        <Button
+                        {/* <Button
                             text={"Start Your Journey"}
                             type={"submit"}
                             style={
                                 "bg-secondary hover:bg-primary uppercase text-center text-white font-medium py-2 px-4 rounded inline-flex items-center mx-auto lg:mx-0"
                             }
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>
@@ -138,19 +132,7 @@ const AboutUs = ({ lang }) => {
             </div>
 
 
-            <div className="brand_logo_container flex justify-center m-0 p-0 w-full overflow-hidden">
-                <div
-                    className="brand_logo_slider flex flex-row animate-slide p-5 mt-0"
-                    style={{ animation: "scroll 20s linear infinite" }}
-                >
-                    {
-                        Array.isArray(brandI) &&
-                        brandI.map((item, idx) => (
-                            <Brands key={idx} icon={item.image} />
-                        ))
-                    }
-                </div>
-            </div>
+            <BrandCarousel lang={lang} />
 
         </>
     )

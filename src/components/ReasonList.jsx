@@ -1,13 +1,10 @@
+import Link from 'next/link';
 import Button from './Button'
 import ReasonCard from './ReasonCard';
-import { LuKey } from "react-icons/lu";
-import { SlEnergy } from "react-icons/sl";
-import { GoShieldCheck } from "react-icons/go";
-import { BsCalendar2Check } from "react-icons/bs";
-import { RiAnchorLine } from "react-icons/ri";
-import { IoBriefcaseOutline } from "react-icons/io5";
+import { languageData } from '../../dataset';
 
 const ReasonList = ({ lang, reasonListData, reasonHeaderData }) => {
+    const basePath = lang === "en" ? '' : `${lang}/`;
     return (
         <section className="reasonList_Card relative mt-16">
             <div className="flex flex-col max-w-screen-lg w-full mx-auto items-center px-4 lg:px-8">
@@ -41,11 +38,13 @@ const ReasonList = ({ lang, reasonListData, reasonHeaderData }) => {
                     {reasonHeaderData?.text_two}
                 </p>
 
-                <Button
-                    text={"Book Ride"}
-                    type={"submit"}
-                    style="bg-primary hover:bg-secondary uppercase mt-6 md:mt-8 text-center text-white font-medium py-3 px-8 md:py-2 md:px-12 rounded inline-flex items-center"
-                />
+                <Link href={`${basePath}cars`}>
+                    <Button
+                        text={languageData[lang]["Book Ride"]}
+                        type={"submit"}
+                        style="bg-primary hover:bg-secondary uppercase mt-6 md:mt-8 text-center text-white font-medium py-3 px-8 md:py-2 md:px-12 rounded inline-flex items-center"
+                    />
+                </Link>
             </div>
 
         </section>

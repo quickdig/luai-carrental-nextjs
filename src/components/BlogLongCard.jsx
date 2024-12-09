@@ -3,6 +3,7 @@ import carImage from "../public/assets/car_img_1.png"
 import userImage from "../public/assets/ecllipsTwo.png"
 import Button from "@/components/Button";
 import Link from "next/link";
+import { languageData } from "../../dataset";
 
 
 const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date, readtime, description }) => {
@@ -71,7 +72,7 @@ const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date,
                     </p>
                     <Link href={`/blog/${slug}`}>
                         <Button
-                            text="Read more →"
+                            text={languageData[lang]["Read more"]}
                             type="submit"
                             style="bg-red-500 text-white text-sm px-2 py-1 rounded hover:bg-secondary mt-2 uppercase"
                         />

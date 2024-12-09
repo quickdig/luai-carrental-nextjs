@@ -14,6 +14,7 @@ import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
 import PreLoader from "@/components/PreLoader"
+import { useEffect, useState } from "react"
 
 const BlogDetail = ({ lang }) => {
 
@@ -22,6 +23,14 @@ const BlogDetail = ({ lang }) => {
     const breadcrumbs = getBreadcrumb(pathname)
 
     const { loading, data } = useFetch(`blog/single/${lang}/${params.slug}`);
+
+    const [bannerData, setBannerData] = useState("");
+    const dataBanner = useFetch(`banner_data/${lang}/blog`);
+    useEffect(() => {
+        if (dataBanner) {
+            setBannerData(dataBanner?.data?.data)
+        }
+    }, [dataBanner]);
 
     if (loading) return <PreLoader />;
     const allData = data?.data;
@@ -32,21 +41,21 @@ const BlogDetail = ({ lang }) => {
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
                     <div className="text-white space-y-4 sm:space-y-6 ar_banner">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-                            Blog Details
+                            {bannerData?.header}
                         </h1>
                         <p className="text-sm sm:text-md md:text-lg lg:text-md font-medium">
-                            Top-rated car rental in Dubai. Low prices, great deals, convenient pick-up, top-notch service!
+                            {bannerData?.text}
                         </p>
                     </div>
                 </div>
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={allData.Title} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
-                <h2 className="text-left text-xl font-bold">Blogs</h2>
+                <h2 className="text-left text-xl font-bold">{allData.Title}</h2>
             </div>
 
             <div className="relative flex flex-col lg:flex-col md:flex-col sm:flex-col max-w-screen-lg bg-white w-full mx-auto px-4 sm:px-6 lg:px-8 mt-5">

@@ -1,8 +1,15 @@
-
+"use client"
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+
 
 const FaqCard = ({ idx, question, answer }) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleOpen = () => setIsOpen(!isOpen)
+
 
     return (
         <div className="w-full mx-auto">
@@ -19,30 +26,35 @@ const FaqCard = ({ idx, question, answer }) => {
                     </div>
                     <button
                         aria-label="toggler"
+                        onClick={handleOpen}
                         className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
                         data-menu=""
                     >
-                        <Image
-                            className="transform"
-                            src="https://tuk-cdn.s3.amazonaws.com/can-uploader/faq-8-svg2.svg"
-                            width={30}
-                            height={30}
-                            alt="toggler"
-                        />
-                        <Image
-                            className="transform hidden"
-                            src="https://tuk-cdn.s3.amazonaws.com/can-uploader/faq-8-svg2dark.svg"
-                            width={30}
-                            height={30}
-                            alt="toggler"
-                        />
+                        {
+                            isOpen ? (
+                                <BsChevronUp
+                                    size={25}
+                                />
+                            ) :
+                                (
+                                    <BsChevronDown
+                                        size={25}
+                                    />
+                                )
+                        }
+
                     </button>
                 </div>
-                <div id="menu" className="hidden mt-3 w-full px-4 sm:px-8 md:px-12">
-                    <p className="text-sm sm:text-base leading-6 text-gray-600 font-normal">
-                        {answer}
-                    </p>
-                </div>
+                {
+                    isOpen && (
+                        <div id="menu" className="block mt-3 w-full px-4 sm:px-8 md:px-12">
+                            <p className="text-sm sm:text-base leading-6 text-gray-600 font-normal">
+                                {answer}
+                            </p>
+                        </div>
+                    )
+                }
+
             </div>
             <hr className="w-full my-6 sm:my-8 lg:mt-10" />
         </div>

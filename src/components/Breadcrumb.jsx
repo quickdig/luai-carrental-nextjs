@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const Breadcrumb = ({ breadcrumbs }) => {
+const Breadcrumb = ({ breadcrumbs, lang, lastVal }) => {
 
     return (
         <nav aria-label="breadcrumb">
@@ -16,10 +16,10 @@ const Breadcrumb = ({ breadcrumbs }) => {
                                 <Link href={crumb.href}>
                                     {crumb.name}
                                 </Link>
-                                <span style={{ margin: '0 8px' }}>→</span>
+                                <span style={{ margin: '0 8px' }}> {lang == 'en' ? '→' : '←'} </span>
                             </>
                         ) : (
-                            <span style={{ fontWeight: 'bold', color: 'gray' }}>{crumb.name}</span>
+                            <span style={{ fontWeight: 'bold', color: 'gray' }}>{lastVal ?? crumb.name}</span>
                         )}
                     </li>
                 ))}

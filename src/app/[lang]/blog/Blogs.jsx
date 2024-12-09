@@ -66,7 +66,7 @@ const Blogs = ({ params, lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={null} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
@@ -78,7 +78,7 @@ const Blogs = ({ params, lang }) => {
                     Array.isArray(blogData?.data) && blogData?.data.map((item, idx) => {
                         return (
                             <BlogLongCard key={idx} lang={lang} image={item.image} slug={item.slug} title={item.heading} authorimage={null}
-                                authorname={"Test Author"} date={item.date} readtime={"3 min read"} description={item.description} />
+                                authorname={"Admin"} date={item.date} readtime={"3 min read"} description={item.description} />
                         )
                     })
                 }

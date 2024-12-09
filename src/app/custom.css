@@ -104,4 +104,9 @@ body.ar .ar_img{
   position: absolute;
   bottom: 10px;
   right: 10px;
+  
+}
+
+.ant-modal-footer button.ant-btn{
+  display: none;
 }

@@ -1,15 +1,4 @@
 "use client"
-
-import Image from "next/image";
-import Brands from "@/components/Brands"
-import bOne from "../../../../../src/public/assets/car-brands/chevrolet.png";
-import bTwo from "../../../../../src/public/assets/car-brands/mazda.svg";
-import bThree from "../../../../../src/public/assets/car-brands/honda.png";
-import bFour from "../../../../../src/public/assets/car-brands/bmw.webp";
-import bFive from "../../../../../src/public/assets/car-brands/mg.png";
-import bSix from "../../../../../src/public/assets/car-brands/rr.png";
-import bSeven from "../../../../../src/public/assets/car-brands/toyota.png";
-import bEight from "../../../../../src/public/assets/car-brands/kia.svg";
 import Breadcrumb from "@/components/Breadcrumb"
 import carBrandOne from "../../../../../src/public/assets/carBrand1.png";
 import { FaCheck } from "react-icons/fa6";
@@ -17,16 +6,18 @@ import Link from "next/link";
 import BrandDetailSidebar from "@/components/BrandDetailSidebar";
 import useFetch from "@/app/customHooks/useFetch";
 import { useParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
-import { keywords } from "../../../../../dataset";
+import { requirements } from "../../../../../dataset";
 import PreLoader from "@/components/PreLoader";
+import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 
 const BrandModel = ({ lang }) => {
     const params = useParams();
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
     const { loading, data } = useFetch(`car/detail/${lang}/${params.slug}`);
+    const { langValue } = useContext(MainLanguageValueContext);
 
     const [bannerData, setBannerData] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/car-details`);
@@ -37,7 +28,7 @@ const BrandModel = ({ lang }) => {
     }, [dataBanner]);
 
     if (loading) return <PreLoader />;
-    const { name, description, price_daily, price_weekly, price_monthly, image, engine, bluetooth, cruise, luggage, deposit, stock } = data?.data
+    const { id, name, description, price_daily, price_weekly, price_monthly, image, engine, bluetooth, cruise, luggage, deposit, stock } = data?.data
     return (
         <div className="bg-[#F1F4F8]">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
@@ -55,7 +46,7 @@ const BrandModel = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-10 mx-auto items-center">
-                <Breadcrumb breadcrumbs={breadcrumbs} />
+                <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={name} />
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full mt-5 mx-auto items-center">
@@ -81,7 +72,7 @@ const BrandModel = ({ lang }) => {
                                 {name}
                             </h4>
                             <p className="text-[#707070] text-sm md:text-md font-normal text-justify leading-6">
-                                {lang === 'en' ? keywords.carDetails.requirement.en : keywords.carDetails.requirement.ar}
+                                {requirements[langValue]["Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit."]}
                             </p>
 
                             <p className="text-justify leading-7" dangerouslySetInnerHTML={{ __html: description }}>
@@ -96,28 +87,17 @@ const BrandModel = ({ lang }) => {
                                     </span>
                                     <ul className="list-none space-y-3 mt-4">
                                         {
-                                            lang === 'en' ?
-                                                keywords?.carDetails?.reqUaeResident?.en?.map((item, idx) => {
-                                                    return (
-                                                        <li className="flex items-start text-sm font-normal" key={idx}>
-                                                            <span className="text-primary">
-                                                                <FaCheck />
-                                                            </span>
-                                                            &nbsp; {item}
-                                                        </li>
-                                                    )
-                                                })
-                                                :
-                                                keywords?.carDetails?.reqUaeResident?.ar?.map((item, idx) => {
-                                                    return (
-                                                        <li className="flex items-start text-sm font-normal" key={idx}>
-                                                            <span className="text-primary">
-                                                                <FaCheck />
-                                                            </span>
-                                                            &nbsp; {item}
-                                                        </li>
-                                                    )
-                                                })
+
+                                            ["Copy of Passport", "Copy of Residential Visa", "UAE Driving License", "Copy of Emirates ID"]?.map((item, idx) => {
+                                                return (
+                                                    <li className="flex items-start text-sm font-normal" key={idx}>
+                                                        <span className="text-primary">
+                                                            <FaCheck />
+                                                        </span>
+                                                        &nbsp; {requirements[langValue][item]}
+                                                    </li>
+                                                )
+                                            })
                                         }
                                     </ul>
                                 </div>
@@ -129,28 +109,16 @@ const BrandModel = ({ lang }) => {
                                     </span>
                                     <ul className="list-none space-y-3 mt-4">
                                         {
-                                            lang === 'en' ?
-                                                keywords?.carDetails?.reqTourist?.en?.map((item, idx) => {
-                                                    return (
-                                                        <li className="flex items-start text-sm font-normal" key={idx}>
-                                                            <span className="text-primary">
-                                                                <FaCheck />
-                                                            </span>
-                                                            &nbsp; {item}
-                                                        </li>
-                                                    )
-                                                })
-                                                :
-                                                keywords?.carDetails?.reqTourist?.ar?.map((item, idx) => {
-                                                    return (
-                                                        <li className="flex items-start text-sm font-normal" key={idx}>
-                                                            <span className="text-primary">
-                                                                <FaCheck />
-                                                            </span>
-                                                            &nbsp; {item}
-                                                        </li>
-                                                    )
-                                                })
+                                            ["Copy of Passport", "Copy of Visit Visa", "US, Canada, EU, GCC or International Driving License"]?.map((item, idx) => {
+                                                return (
+                                                    <li className="flex items-start text-sm font-normal" key={idx}>
+                                                        <span className="text-primary">
+                                                            <FaCheck />
+                                                        </span>
+                                                        &nbsp; {requirements[langValue][item]}
+                                                    </li>
+                                                )
+                                            })
                                         }
                                     </ul>
                                 </div>
@@ -161,21 +129,9 @@ const BrandModel = ({ lang }) => {
 
                 {/* Sidebar Panel Pricing/Other Filtering */}
                 <div className="h-full bg-white border-[.5px] border-gray-400 rounded-md lg:w-4/12 px-4 py-6 sm:px-6 sm:py-8">
-                    <BrandDetailSidebar lang={lang} />
+                    <BrandDetailSidebar lang={lang} title={name} image={image} car_id={id} />
                 </div>
 
-            </div>
-            <div className="flex justify-center mt-10 w-full bg-white">
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 max-w-screen-lg lg:grid-cols-8 gap-5 p-5 mt-5 w-full">
-                    <Brands icon={bOne} />
-                    <Brands icon={bTwo} />
-                    <Brands icon={bThree} />
-                    <Brands icon={bFour} />
-                    <Brands icon={bFive} />
-                    <Brands icon={bSix} />
-                    <Brands icon={bSeven} />
-                    <Brands icon={bEight} />
-                </div>
             </div>
 
         </div>

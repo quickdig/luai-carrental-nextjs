@@ -6,9 +6,13 @@ import Button from "./Button";
 import { languageData } from "../../dataset";
 import useFetch from "@/app/customHooks/useFetch";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 const SearchBox = ({ lang }) => {
     const { langValue } = useContext(MainLanguageValueContext);
+    const basePath = langValue === "en" ? '' : `${langValue}/`;
+    const router = useRouter();
     const [brands, setBrands] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
     const { data } = useFetch(`brands/all/${lang}`)
@@ -18,6 +22,12 @@ const SearchBox = ({ lang }) => {
             setBrands(data?.data)
         }
     }, [data])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        router.push(`${basePath}brand/${selectedBrand}`)
+    }
 
     return (
         <section className="searchform_Section relative bg-secondary py-6">
@@ -41,19 +51,20 @@ const SearchBox = ({ lang }) => {
                 </div>
 
                 <div className="md:w-5/6 w-full">
-                    <form className="flex flex-col gap-4 md:flex-row md:items-center md:justify-center md:flex-wrap">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-center md:justify-center md:flex-wrap">
                         <div className="relative flex items-center w-full md:w-auto">
                             <select
                                 value={selectedBrand}
                                 onChange={(e) => setSelectedBrand(e.target.value)}
                                 className="pr-4 pl-14 p-3 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
+                                required
                             >
                                 <option value="" disabled>
-                                {languageData[langValue]["Pick a Brand"]}
+                                    {languageData[langValue]["Pick a Brand"]}
                                 </option>
                                 {
                                     Array.isArray(brands) && brands.map((item, idx) => {
-                                        return (<option key={idx} value={item.id}>
+                                        return (<option key={idx} value={item.slug}>
                                             {item.name}
                                         </option>)
                                     })
@@ -69,6 +80,7 @@ const SearchBox = ({ lang }) => {
                                 type="date"
                                 placeholder="Select Date"
                                 className="pr-4 pl-14 py-3 text-sm text-black rounded bg-white border border-gray-400 w-full  outline-[#333]"
+                                required
                             />
                             <div className="absolute left-4 text-gray-400">
                                 <FaCalendarDays />
@@ -80,6 +92,7 @@ const SearchBox = ({ lang }) => {
                                 type="time"
                                 placeholder="Select Time"
                                 className="pr-4 pl-14 py-3 text-sm text-black rounded bg-white border border-gray-400 w-full  outline-[#333]"
+                                required
                             />
                             <div className="absolute left-4 text-gray-400">
                                 <FaClock />

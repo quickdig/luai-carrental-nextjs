@@ -1,30 +1,29 @@
 
 import Home from "@/components/Home";
-
-
-
+import axios from "axios";
+import config from "../services/config.json"
 
 export async function generateMetadata({ params }) {
   const { lang } = params; // Default to 'en' if lang is missing
 
   try {
-    // const response = await axios.get(`${config.apiEndPoint}home_content/${lang}`);
-    // const data = response.data?.data;
+    const response = await axios.get(`${config.apiEndPoint}meta_content/${lang}`);
+    const data = response.data?.data;
 
-    // return {
-    //   title: data?.meta_tag || "luai",
-    //   description: data?.meta_description || "luai",
-    // };
+    return {
+      title: data?.home?.seo_title || "Home | LUAI Car Rental Dubai",
+      description: data?.home?.seo_brief || "Home | LUAI Car Rental Dubai",
+    };
   } catch (error) {
-    // console.error('Error fetching product data:', {
-    //   message: error.message,
-    //   status: error.response?.status,
-    //   data: error.response?.data,
-    // });
-    // return {
-    //   title: 'luai',
-    //   description: 'Default description for luai',
-    // };
+    console.error('Error fetching product data:', {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+    return {
+      title: 'Home | LUAI Car Rental Dubai',
+      description: 'Home | LUAI Car Rental Dubai',
+    };
   }
 }
 

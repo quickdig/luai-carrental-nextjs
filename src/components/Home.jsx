@@ -11,10 +11,8 @@ import ReasonList from './ReasonList'
 import useFetch from '@/app/customHooks/useFetch'
 import PreLoader from './PreLoader'
 
-const Home = ({lang }) => {
+const Home = ({ lang }) => {
     const { loading, data } = useFetch(`home_content/${lang}`);
-
- 
 
     if (loading) return <PreLoader />;
     const alldata = data?.data
