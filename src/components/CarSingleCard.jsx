@@ -143,7 +143,7 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
                         </div> */}
                     </div>
 
-                    <div className="lg:w-1/2 w-full sm:p-6">
+                    <div className="lg:w-1/2 w-full sm:p-6 p-5">
                         <h2 className="text-lg lg:text-xl font-semibold mb-2">{languageData[lang]["Book Ride"]}</h2>
                         <form onSubmit={handleSubmit}>
 
