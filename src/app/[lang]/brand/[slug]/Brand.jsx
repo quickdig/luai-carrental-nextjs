@@ -245,7 +245,7 @@ const Brand = ({ lang }) => {
                                 {/* Sort By Pricing */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <div className="flex flex-row justify-between items-center">
-                                        <span className="text-left text-sm text-white">Pricing</span>
+                                        <span className="text-left text-sm text-white">{languageData[lang]["Pricing"]}</span>
                                     </div>
 
                                     <div className="flex flex-row justify-between space-x-2 items-center">
@@ -260,7 +260,7 @@ const Brand = ({ lang }) => {
                                                     onClick={handleFilter}
                                                 />
                                                 <div className="w-full h-full py-2 flex text-center text-white items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-primary">
-                                                    <label htmlFor="low_to_high text-white">Low to High</label>
+                                                    <label htmlFor="low_to_high text-white">{languageData[lang]["Low to High"]}</label>
                                                 </div>
                                             </label>
                                         </div>
@@ -275,14 +275,14 @@ const Brand = ({ lang }) => {
                                                     onClick={handleFilter}
                                                 />
                                                 <div className="w-full h-full py-2 flex text-center text-white items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-primary">
-                                                    <label htmlFor="high_to_low text-white">High to Low</label>
+                                                    <label htmlFor="high_to_low text-white">{languageData[lang]["High to Low"]}</label>
                                                 </div>
                                             </label>
                                         </div>
                                     </div>
                                     <div className="flex flex-row text-white justify-between items-center">
-                                        <span>From AED {minPrice}</span>
-                                        <span>To AED {maxPrice}</span>
+                                        <span>{languageData[lang]["From"]} AED {minPrice}</span>
+                                        <span>{languageData[lang]["To"]} AED {maxPrice}</span>
                                     </div>
                                     <div className="flex flex-row items-center justify-center">
                                         <input

@@ -3,7 +3,7 @@
 import { IoCheckmarkCircle } from "react-icons/io5";
 import Button from "@/components/Button";
 import { FaCheck } from "react-icons/fa6";
-import { languageData } from "../../dataset";
+import { languageData, requirements } from "../../dataset";
 import { Modal } from "antd";
 import { useState } from "react";
 import usePost from "@/app/customHooks/usePost";
@@ -325,22 +325,21 @@ const BrandDetailSidebar = ({ lang, title, image, car_id, price_daily, price_wee
 
                     <div className="lg:w-1/2 w-full bg-white p-4 sm:p-6">
                         <h2 className="uppercase text-[24px] sm:text-[30px] lg:text-[40px] font-light">{title}</h2>
+                        <div className="flex flex-row justify-start gap-2">
+                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Daily"]}: AED {price_daily}</span>
+                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Weekly"]}: AED {price_weekly}</span>
+                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Monthly"]}: AED {price_monthly}</span>
+                        </div>
                         {/* <p className="text-primary text-[16px] sm:text-[18px] mt-2">{languageData[lang]["Total Price"]}: AED {price_daily}</p> */}
                         <img
                             src={image}
                             alt="Car"
                             className="rounded-t-md object-contain mx-auto w-full lg:w-80 mt-4"
                         />
-                        {/* <h3 className="mt-6 text-lg">Coverages/Extras</h3>
-                        <div>
-                            <ul>
-                                <li className="flex justify-between items-center mt-4">
-                                    <div>Refundable Security Deposit</div>
-                                    <div>1000.00</div>
-                                    <button className="bg-[#2c9248] text-white py-1 px-3 rounded-md">Added</button>
-                                </li>
-                            </ul>
-                        </div> */}
+                        <h3 className="mt-6 text-lg text-black font-semibold">{languageData[lang]["Min Requirement"]}</h3>
+                        <div className="flex flex-row justify-center">
+                            <p className="text-justify leading-6 text-[12px]">{requirements[lang]["MinReq"]}</p>
+                        </div>
                     </div>
 
                     <div className="lg:w-1/2 w-full sm:p-6 p-5">

@@ -62,7 +62,10 @@ export const languageData = {
         "Manual": "Manual",
         "Petrol": "Petrol",
         "Diesel": "Diesel",
-        "Electric": "Electric"
+        "Electric": "Electric",
+        "Low to High": "Low to High",
+        "High to Low": "High to Low",
+        "Pricing": "Pricing"
     },
     ar: {
         "English": "English",
@@ -127,7 +130,10 @@ export const languageData = {
         "Manual": "يدوي",
         "Petrol": "بنزين",
         "Diesel": "ديزل",
-        "Electric": "كهربائي"
+        "Electric": "كهربائي",
+        "Low to High": "من منخفض إلى مرتفع",
+        "High to Low": "من الأعلى إلى الأدنى",
+        "Pricing": "التسعير"
     },
 };
 
