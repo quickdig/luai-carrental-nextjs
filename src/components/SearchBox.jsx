@@ -65,7 +65,7 @@ const SearchBox = ({ lang }) => {
                                 {
                                     Array.isArray(brands) && brands.map((item, idx) => {
                                         return (<option key={idx} value={item.slug}>
-                                            {item.name}
+                                            <img src={item.image} /> {item.name}
                                         </option>)
                                     })
                                 }

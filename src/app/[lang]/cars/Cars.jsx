@@ -1,16 +1,5 @@
 "use client"
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { MdStar } from "react-icons/md";
-import Image from "next/image";
-import Brands from "@/components/Brands"
-import bOne from "../../../../src/public/assets/car-brands/chevrolet.png";
-import bTwo from "../../../../src/public/assets/car-brands/mazda.svg";
-import bThree from "../../../../src/public/assets/car-brands/honda.png";
-import bFour from "../../../../src/public/assets/car-brands/bmw.webp";
-import bFive from "../../../../src/public/assets/car-brands/mg.png";
-import bSix from "../../../../src/public/assets/car-brands/rr.png";
-import bSeven from "../../../../src/public/assets/car-brands/toyota.png";
-import bEight from "../../../../src/public/assets/car-brands/kia.svg";
 import Breadcrumb from "@/components/Breadcrumb"
 import Button from "@/components/Button";
 import Link from "next/link";
@@ -34,6 +23,7 @@ const Cars = ({ lang }) => {
     const breadcrumbs = getBreadcrumb(params)
     const { langValue } = useContext(MainLanguageValueContext);
     const { loading, data } = useFetch(`car/all/${lang}/12?page=1`);
+    const [paginatioTotal, setPaginationTotal] = useState("")
 
     const [carData, setCarData] = useState("");
     const [filterData, setFilterData] = useState("");
@@ -46,6 +36,11 @@ const Cars = ({ lang }) => {
 
     const [filtersAll, setFiltersAll] = useState({});
 
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(0);
+    const [debouncedMin, setDebouncedMin] = useState(minPrice);
+    const [debouncedMax, setDebouncedMax] = useState(maxPrice);
+
     useEffect(() => {
         if (dataBanner) {
             setBannerData(dataBanner?.data?.data)
@@ -56,6 +51,9 @@ const Cars = ({ lang }) => {
         if (data) {
             setCarData(data?.data)
             setFilterData(data?.filter_data)
+            // setMinPrice(data?.filter_data?.pricing?.min)
+            setMaxPrice(data?.filter_data?.pricing?.max)
+            setPaginationTotal(data?.pagination?.total)
         }
 
     }, [data])
@@ -67,22 +65,37 @@ const Cars = ({ lang }) => {
         console.log(resget);
     }, [resget.data])
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedMin(minPrice);
+            setDebouncedMax(maxPrice);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, [minPrice, maxPrice]);
+
     const onFilterSelect = async () => {
         const data = {
             type: filtersAll?.type_of_car,
             availability: filtersAll?.availability,
             brand: filtersAll?.car_brands,
+            price_high_low: filtersAll?.price_high_low,
+            price_max: debouncedMax
             // brand_x: filtersAll?.car_brands
         }
 
         const response = await axios.post(`${config.apiEndPoint}cars/filter/${lang}`, data)
-
-        console.log(response?.data?.data);
         setCarData(response?.data?.data)
     }
 
     useEffect(() => {
-        if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands) {
+        if (debouncedMax) {
+            onFilterSelect();
+        }
+    }, [debouncedMin, debouncedMax]);
+
+    useEffect(() => {
+        if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands || filtersAll?.price_high_low) {
             onFilterSelect();
         }
     }, [filtersAll])
@@ -93,10 +106,21 @@ const Cars = ({ lang }) => {
             ...prevState,
             [name]: value
         }))
+        console.log(name, value);
     }
+
+    const handleSliderChange = (e) => {
+        const { value } = e.target;
+        // setMinPrice(value.split(',')[0]);
+        setMaxPrice(value);
+    };
 
     const onChange = (current) => {
         setActivePage(current)
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
         apiMethodGet(`car/all/${lang}/12?page=${current}`)
     }
 
@@ -127,7 +151,7 @@ const Cars = ({ lang }) => {
             </div>
 
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">
-                <div className="w-[90%] mx-auto h-full bg-[#1C1C1C] lg:w-4/12 rounded-md p-5">
+                <div className={`scrollbar w-[90%] mx-auto sticky top-0 ${isExpanded ? 'h-[calc(100vh-2rem)]' : 'h-full'} bg-[#1C1C1C] lg:w-4/12 rounded-md p-5 overflow-y-auto`}>
                     <div className="flex flex-row justify-between items-center mb-5 px-1 text-white" onClick={() => setIsExpanded(!isExpanded)}>
                         <span className="text-md font-normal">{languageData[langValue]["Filters"]}</span>
                         {isExpanded ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
@@ -209,20 +233,56 @@ const Cars = ({ lang }) => {
                                     </div>
                                 </div>
 
-                                {/* Pricing Section */}
-                                {/* <div className="grid grid-cols-1 space-y-2 mt-5">
+                                {/* Sort By Pricing */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <div className="flex flex-row justify-between items-center">
-                                        <span className="text-left text-sm text-white">{languageData[lang]["Pricing"]}</span>
+                                        <span className="text-left text-sm text-white">Pricing</span>
+                                    </div>
+
+                                    <div className="flex flex-row justify-between space-x-2 items-center">
+                                        <div className="w-full">
+                                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg" id="price_high_low">
+                                                <input
+                                                    type="radio"
+                                                    name="price_high_low"
+                                                    className="hidden peer"
+                                                    id="low_to_high"
+                                                    value="low_to_high"
+                                                    onClick={handleFilter}
+                                                />
+                                                <div className="w-full h-full py-2 flex text-center text-white items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-primary">
+                                                    <label htmlFor="low_to_high text-white">Low to High</label>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div className="w-full">
+                                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg" id="price_high_low">
+                                                <input
+                                                    type="radio"
+                                                    name="price_high_low"
+                                                    className="hidden peer"
+                                                    id="high_to_low"
+                                                    value="high_to_low"
+                                                    onClick={handleFilter}
+                                                />
+                                                <div className="w-full h-full py-2 flex text-center text-white items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-primary">
+                                                    <label htmlFor="high_to_low text-white">High to Low</label>
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
                                     <div className="flex flex-row text-white justify-between items-center">
-                                        <span>{languageData[lang]["From"]} AED {filterData?.pricing?.min}</span>
-                                        <span>{languageData[lang]["To"]} AED {filterData?.pricing?.max}</span>
+                                        <span>From AED {minPrice}</span>
+                                        <span>To AED {maxPrice}</span>
                                     </div>
                                     <div className="flex flex-row items-center justify-center">
                                         <input
                                             type="range"
+                                            min={filterData?.pricing?.min}
+                                            max={filterData?.pricing?.max}
+                                            value={maxPrice}
+                                            onChange={handleSliderChange}
                                             className="w-full cursor-pointer accent-primary"
-
                                         />
                                     </div>
 
@@ -231,18 +291,18 @@ const Cars = ({ lang }) => {
                                             type="number"
                                             placeholder="From"
                                             name="from_value"
-                                            value={filterData?.pricing?.min}
+                                            value={minPrice}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="To"
                                             name="to_value"
-                                            value={filterData?.pricing?.max}
+                                            value={maxPrice}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
-                                </div> */}
+                                </div>
 
                                 {/* Sort By Brands Section */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
@@ -262,7 +322,7 @@ const Cars = ({ lang }) => {
                                                             value={item.id}
                                                             onClick={handleFilter}
                                                         />
-                                                        <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[.5px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
+                                                        <div className="w-full h-full bg-cover bg-center cursor-pointer rounded-lg border-[2px] border-transparent peer-checked:border-primary peer-checked:rounded-lg relative">
                                                             <img
                                                                 src={item.image}
                                                                 alt="brand_back_img"
@@ -284,20 +344,26 @@ const Cars = ({ lang }) => {
                     {/* Data Card Area */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-2">
                         {
-                            Array.isArray(carData?.data) && carData?.data?.map((item, idx) => {
-                                return (
-                                    <CarSingleCard key={idx} car_id={item.id} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
-                                        price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
-                                        cruise_control={item.cruise} model={item.model}
-                                        engine={item.engine} luggage={item.luggage} btnText={languageData[langValue]["Book Ride"]} />
+                            Array.isArray(carData?.data) && carData?.data?.length > 0 ? (
+                                carData?.data?.map((item, idx) => {
+                                    return (
+                                        <CarSingleCard key={idx} car_id={item.id} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
+                                            price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
+                                            cruise_control={item.cruise} model={item.model}
+                                            engine={item.engine} luggage={item.luggage} btnText={languageData[langValue]["Book Ride"]} />
+                                    )
+                                })
+                            ) :
+                                (
+                                    <p className="flex flex-row justify-center text-xl text-secondary text-center">No Data Available</p>
                                 )
-                            })
+
                         }
                     </div>
                 </div>
             </div>
             <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
-                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
+                <Pagination onChange={onChange} responsive={true} current={activePage} total={paginatioTotal} pageSize={12} />
             </div>
 
         </div>

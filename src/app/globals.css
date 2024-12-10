@@ -9,8 +9,13 @@
   padding: 0;
 }
 
-.top__BannerBack {
-  /* background-image: url("../../src/public/assets/banner_back.png"); */
+.scrollbar::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #444 !important;
+  border-radius: 4px !important;
 }
 
 .journey_BannerBack {
@@ -138,3 +143,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+/* Carousel Indicators Next/Prev */
+button.slick-arrow {
+  color: #000 !important;
+}
+
+button.slick-arrow.slick-disabled {
+  color: #2c2c2c !important;
+}

@@ -38,15 +38,16 @@ const Brand = ({ lang }) => {
     const [bannerData, setBannerData] = useState("");
     const dataBanner = useFetch(`banner_data/${lang}/brand`);
 
-    const [priceRange, setPriceRange] = useState({
-        from: 0,
-        to: filters?.data?.data?.pricing?.max,
-    });
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(0);
+    const [debouncedMin, setDebouncedMin] = useState(minPrice);
+    const [debouncedMax, setDebouncedMax] = useState(maxPrice);
 
     useEffect(() => {
         if (filters) {
             console.log(filters?.data?.data);
             setFilterData(filterData?.data)
+            setMaxPrice(filters?.data?.data?.pricing?.max)
         }
     }, [filters])
 
@@ -59,8 +60,8 @@ const Brand = ({ lang }) => {
     useEffect(() => {
         if (data) {
             setCarData(data?.data)
+            console.log(data);
         }
-
     }, [data])
 
     useEffect(() => {
@@ -71,11 +72,22 @@ const Brand = ({ lang }) => {
         console.log(resget);
     }, [resget.data])
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedMin(minPrice);
+            setDebouncedMax(maxPrice);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, [minPrice, maxPrice]);
+
     const onFilterSelect = async () => {
         const data = {
             type: filtersAll?.type_of_car,
             availability: filtersAll?.availability,
             brand: params.slug,
+            price_high_low: filtersAll?.price_high_low,
+            price_max: debouncedMax
             // price_max: priceRange.to
             // brand_x: filtersAll?.car_brands
         }
@@ -87,7 +99,13 @@ const Brand = ({ lang }) => {
     }
 
     useEffect(() => {
-        if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands) {
+        if (debouncedMax) {
+            onFilterSelect();
+        }
+    }, [debouncedMin, debouncedMax]);
+
+    useEffect(() => {
+        if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands || filtersAll?.price_high_low) {
             onFilterSelect();
         }
     }, [filtersAll, params.slug])
@@ -98,33 +116,21 @@ const Brand = ({ lang }) => {
             ...prevState,
             [name]: value
         }))
-
-        // if (name === 'price_range') {
-        //     setPriceRange((prev) => ({
-        //         ...prev,
-        //         to: parseInt(e.target.value, 10),
-        //     }));
-        // }
     }
     const onChange = (current) => {
         setActivePage(current)
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
         apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
     }
 
-    // const onRangeChange = (e) => {
-    //     setPriceRange((prev) => ({
-    //         ...prev,
-    //         to: parseInt(e.target.value, 10),
-    //     }));
-    // };
-
-    // const onInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setPriceRange((prev) => ({
-    //         ...prev,
-    //         [name]: parseInt(value, 10) || 0,
-    //     }));
-    // };
+    const handleSliderChange = (e) => {
+        const { value } = e.target;
+        // setMinPrice(value.split(',')[0]);
+        setMaxPrice(value);
+    };
 
     if (loading) return <PreLoader />;
 
@@ -155,9 +161,9 @@ const Brand = ({ lang }) => {
 
             {/* Filter bar section */}
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">
-                <div className="w-[90%] mx-auto h-full bg-[#1C1C1C] lg:w-4/12 rounded-md px-5 pb-1 pt-5">
+                <div className={`scrollbar w-[90%] mx-auto sticky top-0 ${isExpanded ? 'h-[calc(100vh-2rem)]' : 'h-full'} bg-[#1C1C1C] lg:w-4/12 rounded-md p-5 overflow-y-auto`}>
                     <div className="flex flex-row justify-between items-center mb-5 px-1 text-white" onClick={() => setIsExpanded(!isExpanded)}>
-                        <span className="text-md font-normal">{languageData[lang]["Filters"]}</span>
+                        <span className="text-md font-normal">{languageData[langValue]["Filters"]}</span>
                         {isExpanded ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
                     </div>
                     {
@@ -236,21 +242,55 @@ const Brand = ({ lang }) => {
                                     </div>
                                 </div>
 
-                                {/* Pricing Section */}
-                                {/* <div className="grid grid-cols-1 space-y-2 mt-5">
+                                {/* Sort By Pricing */}
+                                <div className="grid grid-cols-1 space-y-2 mt-5">
                                     <div className="flex flex-row justify-between items-center">
-                                        <span className="text-left text-sm text-white">{languageData[lang]["Pricing"]}</span>
+                                        <span className="text-left text-sm text-white">Pricing</span>
+                                    </div>
+
+                                    <div className="flex flex-row justify-between space-x-2 items-center">
+                                        <div className="w-full">
+                                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg" id="price_high_low">
+                                                <input
+                                                    type="radio"
+                                                    name="price_high_low"
+                                                    className="hidden peer"
+                                                    id="low_to_high"
+                                                    value="low_to_high"
+                                                    onClick={handleFilter}
+                                                />
+                                                <div className="w-full h-full py-2 flex text-center text-white items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-primary">
+                                                    <label htmlFor="low_to_high text-white">Low to High</label>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div className="w-full">
+                                            <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg" id="price_high_low">
+                                                <input
+                                                    type="radio"
+                                                    name="price_high_low"
+                                                    className="hidden peer"
+                                                    id="high_to_low"
+                                                    value="high_to_low"
+                                                    onClick={handleFilter}
+                                                />
+                                                <div className="w-full h-full py-2 flex text-center text-white items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-primary">
+                                                    <label htmlFor="high_to_low text-white">High to Low</label>
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
                                     <div className="flex flex-row text-white justify-between items-center">
-                                        <span>{languageData[lang]["From"]} AED {priceRange.from}</span>
-                                        <span>{languageData[lang]["To"]} AED {priceRange.to}</span>
+                                        <span>From AED {minPrice}</span>
+                                        <span>To AED {maxPrice}</span>
                                     </div>
                                     <div className="flex flex-row items-center justify-center">
                                         <input
                                             type="range"
-                                            name="price_range"
-                                            onChange={handleFilter}
-                                            max={filters?.data?.data?.pricing?.max}
+                                            min={filterData?.pricing?.min}
+                                            max={filterData?.pricing?.max}
+                                            value={maxPrice}
+                                            onChange={handleSliderChange}
                                             className="w-full cursor-pointer accent-primary"
                                         />
                                     </div>
@@ -259,21 +299,19 @@ const Brand = ({ lang }) => {
                                         <input
                                             type="number"
                                             placeholder="From"
-                                            name="from"
-                                            value={priceRange.from}
-                                            onChange={onInputChange}
+                                            name="from_value"
+                                            value={minPrice}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                         <input
                                             type="number"
                                             placeholder="To"
-                                            name="to"
-                                            value={priceRange.to}
-                                            onChange={onInputChange}
+                                            name="to_value"
+                                            value={maxPrice}
                                             className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                         />
                                     </div>
-                                </div> */}
+                                </div>
 
                                 {/* Sort By Brands Section */}
                                 <div className="grid grid-cols-1 space-y-2 mt-5">
@@ -325,7 +363,7 @@ const Brand = ({ lang }) => {
                                     return (
                                         <CarSingleCard key={idx} lang={lang} slug={item.slug} image={item.image} title={item.name} price_daily={item.price_daily}
                                             price_weekly={item.price_weekly} price_monthly={item.price_monthly} bluetooth={item.bluetooth}
-                                            cruise_control={item.cruise}
+                                            cruise_control={item.cruise} model={item.model}
                                             engine={item.engine} luggage={item.luggage} />
                                         // btnText={languageData[langValue]["Luggage Yes"]}
                                     )

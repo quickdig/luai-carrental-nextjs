@@ -9,7 +9,7 @@ import { useState } from "react";
 import usePost from "@/app/customHooks/usePost";
 import Message from "./Message";
 
-const BrandDetailSidebar = ({ lang, title, image, car_id, pricing, subscription, insurance, services, techDetails }) => {
+const BrandDetailSidebar = ({ lang, title, image, car_id, price_daily, price_weekly, price_monthly, pricing, subscription, insurance, services, techDetails }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [res, apiMethod] = usePost()
@@ -86,8 +86,8 @@ const BrandDetailSidebar = ({ lang, title, image, car_id, pricing, subscription,
                                 className="hidden peer"
                                 id="daily_price"
                             />
-                            <div className="w-full h-full py-2 flex items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
-                                <label htmlFor="daily_price">{lang === 'en' ? 'Daily' : 'يوميًا'}</label>
+                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                                <label htmlFor="daily_price">{languageData[lang]["Daily"]} <br />AED {price_daily}</label>
                             </div>
                         </label>
                     </div>
@@ -100,8 +100,8 @@ const BrandDetailSidebar = ({ lang, title, image, car_id, pricing, subscription,
                                 className="hidden peer"
                                 id="weekly_price"
                             />
-                            <div className="w-full h-full py-2 flex items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
-                                <label htmlFor="weekly_price">{lang === 'en' ? 'Weekly' : 'أسبوعي'}</label>
+                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                                <label htmlFor="weekly_price">{languageData[lang]["Weekly"]} <br />AED {price_weekly}</label>
                             </div>
                         </label>
                     </div>
@@ -114,8 +114,8 @@ const BrandDetailSidebar = ({ lang, title, image, car_id, pricing, subscription,
                                 className="hidden peer"
                                 id="monthly_price"
                             />
-                            <div className="w-full h-full py-2 flex items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
-                                <label htmlFor="monthly_price">{lang === 'en' ? 'Monthly' : 'شهريا'}</label>
+                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                                <label htmlFor="monthly_price">{languageData[lang]["Monthly"]}<br /> AED {price_monthly}</label>
                             </div>
                         </label>
                     </div>

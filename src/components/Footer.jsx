@@ -111,13 +111,13 @@ const Footer = () => {
                                     <span className="p-2 rounded-full bg-primary text-white ">
                                         <FiPhoneCall />
                                     </span>
-                                    <Link href={"#"} className='mx-3'>(+971) 505 123 558</Link>
+                                    <Link href={"#"} className='mx-3'>(+971) 508 879 971</Link>
                                 </li>
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
                                     <span className="p-2 rounded-full bg-primary text-white ">
                                         <FaRegEnvelope />
                                     </span>
-                                    <Link href={"#"} className='mx-3'>sales@luai.ae</Link>
+                                    <Link href={"#"} className='mx-3'>bookings@luaicarrentals.com</Link>
                                 </li>
                                 <li className="flex flex-col md:flex-row justify-center md:justify-start items-center">
                                     <span className="p-2 rounded-full bg-primary text-white">

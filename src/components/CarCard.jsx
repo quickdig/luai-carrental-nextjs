@@ -15,19 +15,14 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
     const basePath = lang === "en" ? '' : `${lang}/`;
     return (
         <div className="bg-white rounded-md px-4 py-5 space-y-4">
-            {/* Star Rating */}
-            {/* <div className="flex flex-row items-center">
-                <FaStar className="text-yellow-400 mr-1" />
-                <span className="text-yellow-400 text-sm sm:text-base">5.0</span>
-            </div> */}
 
             {/* Image Box */}
-            <div className="relative w-full h-40 overflow-hidden mx-auto object-contain group">
+            <div className="relative w-full h-40 overflow-hidden mx-auto items-center object-contain group">
                 <img
                     src={image}
                     alt="Zoomable"
                     width={200}
-                    className="object-contain transform mx-auto transition-transform duration-300 group-hover:scale-110"
+                    className="object-contain transform mx-auto max-h-[400px] h-auto transition-transform duration-300 group-hover:scale-110"
                 />
             </div>
 
@@ -43,17 +38,17 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
             <div className="flex flex-row lg:flex-row md:flex-row sm:flex-col justify-between items-center gap-2">
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{daily}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Per Day"]}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Daily"]}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{weekly}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Per Week"]}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Weekly"]}</span>
                 </div>
 
                 <div className="p-2 flex flex-col lg:flex-col w-full md:flex-col sm:flex-col rounded-md text-center bg-[#EBF3FE80]">
                     <span className="text-sm font-[500] text-primary">{monthly}&nbsp;AED</span>
-                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Per Month"]}</span>
+                    <span className="text-gray-400 font-light text-xs ar_text_center">/{languageData[langValue]["Monthly"]}</span>
                 </div>
             </div>
 

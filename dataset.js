@@ -53,7 +53,16 @@ export const languageData = {
         "Message": "Message",
         "Success! Your Booking Request has been Sent": "Success! Your Booking Request has been Sent",
         "Success! Your Request has been Sent": "Success! Your Request has been Sent",
-        "Read more": "Read more →"
+        "Read more": "Read more →",
+        "Min Requirement": "Minimum Requirement Book a Vehicle in LUAI Drive",
+        "Available": "Available",
+        "Doors": "Doors",
+        "Automatic/Manual": "Automatic/Manual",
+        "Automatic": "Automatic",
+        "Manual": "Manual",
+        "Petrol": "Petrol",
+        "Diesel": "Diesel",
+        "Electric": "Electric"
     },
     ar: {
         "English": "English",
@@ -109,7 +118,16 @@ export const languageData = {
         "Message": "رسالة",
         "Success! Your Booking Request has been Sent": "نجاح! لقد تم إرسال طلب الحجز الخاص بك",
         "Success! Your Request has been Sent": "نجاح! لقد تم إرسال طلبك",
-        "Read more": "اقرأ المزيد →"
+        "Read more": "اقرأ المزيد →",
+        "Min Requirement": "الحد الأدنى من المتطلبات حجز سيارة في LUAI Drive",
+        "Available": "متاح",
+        "Doors": "أبواب",
+        "Automatic/Manual": "أوتوماتيكي / يدوي",
+        "Automatic": "تلقائي",
+        "Manual": "يدوي",
+        "Petrol": "بنزين",
+        "Diesel": "ديزل",
+        "Electric": "كهربائي"
     },
 };
 
@@ -121,7 +139,8 @@ export const requirements = {
         "Copy of Emirates ID": "Copy of Emirates ID",
         "Copy of Visit Visa": "Copy of Visit Visa",
         "US, Canada, EU, GCC or International Driving License": "US, Canada, EU, GCC or International Driving License",
-        "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.": "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit."
+        "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.": "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.",
+        "MinReq": "Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit."
     },
     ar: {
         "Copy of Passport": "نسخة من جواز السفر",
@@ -130,6 +149,7 @@ export const requirements = {
         "Copy of Emirates ID": "نسخة من بطاقة الهوية الإماراتية",
         "Copy of Visit Visa": "نسخة من تأشيرة الزيارة",
         "US, Canada, EU, GCC or International Driving License": "الولايات المتحدة أو كندا أو الاتحاد الأوروبي أو دول مجلس التعاون الخليجي أو رخصة القيادة الدولية",
-        "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.": "يرجى التحقق من المتطلبات قبل إجراء الحجز: - الحد الأدنى للعمر 25. - مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين."
+        "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.": "يرجى التحقق من المتطلبات قبل إجراء الحجز: - الحد الأدنى للعمر 25. - مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين.",
+        "MinReq": "الحد الأدنى للسن 25. -مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين."
     }
 }

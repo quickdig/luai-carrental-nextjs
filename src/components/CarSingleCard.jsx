@@ -1,12 +1,13 @@
 
 import { MdStar } from "react-icons/md";
 import Link from "next/link";
-import { languageData } from "../../dataset";
+import { languageData, requirements } from "../../dataset";
 import { useContext, useState } from "react";
 import { Modal } from "antd";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import usePost from "@/app/customHooks/usePost";
 import Message from "./Message";
+import { Carousel } from 'antd';
 
 const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
     const basePath = lang === "en" ? '' : `${lang}/`;
@@ -70,12 +71,12 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
     return (
         <div className="rounded-md h-full bg-white mx-2 px-4">
 
-            <div className="img_box w-full">
-                <img src={image} alt="Car" className=" w-full h-[10rem] object-contain object-center" />
+            <div className="img_boxw-full flex justify-center items-center overflow-hidden mt-4 max-h-[400px]">
+                <img src={image} alt="Car" className="rounded-md object-contain w-full h-auto max-h-[400px]" />
             </div>
 
             <div className="w-full flex flex-col my-2">
-                <Link href={`/cars/${slug}`} className="text-xl font-semibold uppercase h-[50px] leading-[1]">{title}</Link>
+                <Link href={`/cars/${slug}`} className="text-lg font-semibold uppercase">{title}</Link>
                 <span>{model}</span>
             </div>
 
@@ -125,22 +126,21 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
 
                     <div className="lg:w-1/2 w-full bg-white p-4 sm:p-6">
                         <h2 className="uppercase text-[24px] sm:text-[30px] lg:text-[40px] font-light">{title}</h2>
-                        <p className="text-primary text-[16px] sm:text-[18px] mt-2">{languageData[lang]["Total Price"]}: AED {price_daily}</p>
+                        <div className="flex flex-row justify-start gap-2">
+                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Daily"]}: AED {price_daily}</span>
+                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Weekly"]}: AED {price_weekly}</span>
+                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Monthly"]}: AED {price_monthly}</span>
+                        </div>
+                        {/* <p className="text-primary text-[16px] sm:text-[18px] mt-2">{languageData[lang]["Total Price"]}: AED {price_daily}</p> */}
                         <img
                             src={image}
                             alt="Car"
                             className="rounded-t-md object-contain mx-auto w-full lg:w-80 mt-4"
                         />
-                        {/* <h3 className="mt-6 text-lg">Coverages/Extras</h3>
-                        <div>
-                            <ul>
-                                <li className="flex justify-between items-center mt-4">
-                                    <div>Refundable Security Deposit</div>
-                                    <div>1000.00</div>
-                                    <button className="bg-[#2c9248] text-white py-1 px-3 rounded-md">Added</button>
-                                </li>
-                            </ul>
-                        </div> */}
+                        <h3 className="mt-6 text-lg text-black font-semibold">{languageData[lang]["Min Requirement"]}</h3>
+                        <div className="flex flex-row justify-center">
+                            <p className="text-justify leading-6 text-[12px]">{requirements[lang]["MinReq"]}</p>
+                        </div>
                     </div>
 
                     <div className="lg:w-1/2 w-full sm:p-6 p-5">
