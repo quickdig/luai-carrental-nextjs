@@ -72,7 +72,7 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
         setIsModalOpen(false);
     };
     return (
-        <div className="rounded-md h-full bg-white mx-2 px-4">
+        <div className="rounded-md h-full bg-white mx-2 px-4 hover:shadow-lg hover:scale-105 transform transition duration-300">
             <div className="img_box flex justify-center items-center overflow-hidden mt-4">
                 <img src={image} className="object-cover h-48 w-96 rounded-md" />
             </div>
@@ -124,7 +124,7 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
             <button onClick={handleBookingModal} className="bg-secondary float-right mx-auto my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center">{languageData[langValue]["Book Ride"]}</button>
 
             <Modal
-                className="p-0"
+                className="p-0 rounded-md"
                 width={"80%"}
                 height={"100vh"}
                 open={isModalOpen}
@@ -133,7 +133,7 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
             >
                 <div className="flex flex-col lg:flex-row overflow-auto h-[100vh]">
 
-                    <div className="lg:w-1/2 w-full bg-white p-4 sm:p-6">
+                    <div className="lg:w-1/2 w-full bg-white p-4 sm:p-6 rounded-l-md">
                         <h2 className="uppercase text-[24px] sm:text-[30px] lg:text-[40px] font-light">{title}</h2>
                         <div className="flex flex-row gap-2">
                             <div className="w-full">

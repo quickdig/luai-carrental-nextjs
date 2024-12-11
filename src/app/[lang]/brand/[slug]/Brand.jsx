@@ -172,7 +172,7 @@ const Brand = ({ lang }) => {
 
                 {/* Filter Sidebar */}
                 <div
-                    className={`scrollbar fixed md:sticky top-0 ${isExpanded ? 'h-[calc(100vh-2rem)]' : 'h-full'} bg-[#1C1C1C] transition-all duration-300 z-50 md:w-4/12 rounded-md p-5 overflow-y-auto 
+                    className={`scrollbar fixed md:sticky top-0 ${isExpanded ? 'h-[calc(100vh-2rem)] p-5' : 'h-[50px] overflow-auto pt-[15px] overflow-y-hidden'} bg-[#1C1C1C] transition-all duration-500 z-50 md:w-4/12 rounded-md p-5 overflow-y-auto 
                         ${isMobileFilterVisible ? "left-0 w-full h-full" : "-left-full md:left-0 w-[90%]"
                         }`}
                 >
@@ -180,8 +180,8 @@ const Brand = ({ lang }) => {
                         className="flex flex-row justify-between items-center mb-5 px-1 text-white"
                         onClick={() => setIsExpanded(!isExpanded)}
                     >
-                        <span className="text-md font-normal">{languageData[langValue]["Filters"]}</span>
-                        {isExpanded ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
+                        <span className="text-sm font-normal flex flex-row items-center"><FaFilter className="mr-2 ml-2" />{languageData[langValue]["Filters"]}</span> {/* {languageData[langValue]["Filters"]} */}
+                        {isExpanded ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
                     </div>
                     {
                         isExpanded && (
