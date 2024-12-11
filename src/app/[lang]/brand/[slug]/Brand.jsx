@@ -369,6 +369,12 @@ const Brand = ({ lang }) => {
                             </div>
                         )
                     }
+                    <button
+                        className="block md:hidden bg-red-500 text-white py-2 px-4 rounded-md mt-5 w-full"
+                        onClick={() => setIsMobileFilterVisible(false)}
+                    >
+                        Close
+                    </button>
                 </div>
 
                 <div className="w-full h-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 justify-center">

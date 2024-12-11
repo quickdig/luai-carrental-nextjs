@@ -356,13 +356,8 @@ const Cars = ({ lang }) => {
                                     }
                                 </div>
                             </div>
-
-                            {/* Other Filters */}
-                            {/* Availability, Pricing, Brands sections remain similar with responsive styling */}
                         </div>
                     )}
-
-                    {/* Close button for mobile filter */}
                     <button
                         className="block md:hidden bg-red-500 text-white py-2 px-4 rounded-md mt-5 w-full"
                         onClick={() => setIsMobileFilterVisible(false)}
@@ -371,9 +366,7 @@ const Cars = ({ lang }) => {
                     </button>
                 </div>
 
-                {/* Data Display Area */}
                 <div className="w-full h-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 justify-center">
-                    {/* Data Card Area */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-2">
                         {Array.isArray(carData?.data) && carData?.data?.length > 0 ? (
                             carData?.data?.map((item, idx) => (
