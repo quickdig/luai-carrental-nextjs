@@ -44,10 +44,10 @@ const Footer = () => {
                             />
                             <p className="text-white text-sm font-light leading-6 mt-4">
                                 <b className="font-medium">
-                                    {footerData?.Header}
+                                    {footerData.Header}
                                 </b>
                                 <br />
-                                {footerData?.Description}
+                                {footerData.Description}
                             </p>
                             <div className="flex flex-row justify-center md:justify-start items-center mt-3">
                                 <Link href={"#"}>
@@ -123,7 +123,8 @@ const Footer = () => {
                                     <span className="p-2 rounded-full bg-primary text-white">
                                         <FaLocationDot />
                                     </span>
-                                    <Link href={"#"} className='line-clamp-2 mx-3' dangerouslySetInnerHTML={{ __html: footerData?.Address }}>
+                                    <Link href={"#"} className='line-clamp-2 mx-3'>
+                                        {footerData.Address}
                                     </Link>
                                 </li>
                             </ul>
