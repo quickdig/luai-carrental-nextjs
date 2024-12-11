@@ -1,14 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* nav button::after {
-    border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    vertical-align: middle;
-    margin-left: 8px;
-} */
-
 /* HTML: <div class="loader"></div> */
 body.ar{
   direction: rtl;
@@ -52,8 +43,6 @@ body.ar{
         visibility: hidden;
     }
 }
-
-
 
 body.ar .banner_SectionMain{
   margin-right: 5%;
@@ -124,4 +113,16 @@ body.ar div.footer_Quick div.container{
 
 .ant-modal-footer button.ant-btn{
   display: none;
+}
+
+
+body.ar div.footer_contact_data ul li{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: start !important;
+  text-align: right !important;
+}
+
+body.ar div.footer_contact_data ul li.number_contact a{
+  direction: ltr !important;
 }

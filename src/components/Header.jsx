@@ -10,6 +10,8 @@ import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import useGet from "@/app/customHooks/useGet";
 import useFetch from "@/app/customHooks/useFetch";
 import { languageData } from "../../dataset";
+import axios from "axios";
+import config from "../app/services/config.json"
 
 
 const items = [
@@ -48,17 +50,24 @@ const Header = () => {
   useEffect(() => {
     if (langValue) {
       apiMethodGet(`home_content/${langValue}`);
-
+      fetchBrands(langValue)
     }
   }, [langValue]);
 
-  const { data } = useFetch(`brands/all/${langValue}`)
+  const fetchBrands = async (lan) => {
+    const data = await axios.get(`${config.apiEndPoint}brands/all/${lan}`)
+    console.log('brands data', data?.data);
+    setBrands(data?.data?.data)
+  }
 
-  useEffect(() => {
-    if (data) {
-      setBrands(data?.data)
-    }
-  }, [data])
+  // const { data } = useFetch(`brands/all/${langValue}`)
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setBrands(data?.data)
+  //     console.log('brands data', data?.data);
+  //   }
+  // }, [data])
 
   const basePath = langValue === "en" ? '' : `${langValue}/`;
 
@@ -128,7 +137,7 @@ const Header = () => {
           >
             <Image
               src={off_logo}
-              className="lg:object-contain w-auto lg:w-auto sm:w-[20px] h-8 sm:h-10 md:h-12 ml-0 mr-auto"
+              className="logo_brandTop lg:object-contain w-auto lg:w-auto sm:w-[20px] h-8 sm:h-10 md:h-12 ml-0 mr-auto"
               alt="Logo"
             />
           </Link>
@@ -136,7 +145,7 @@ const Header = () => {
           {/* Toggle Button for mobile/tablet view */}
           <button
             onClick={toggleNav}
-            className="absolute top-4 right-7 cursor-pointer md:hidden"
+            className={`${langValue == 'ar' ? 'absolute top-4 left-7 cursor-pointer md:hidden' : 'absolute top-4 right-7 cursor-pointer md:hidden'}`}
             aria-label="Toggle Navigation"
           >
             <svg
