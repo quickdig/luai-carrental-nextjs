@@ -9,7 +9,7 @@ import { useState } from "react";
 import usePost from "@/app/customHooks/usePost";
 import Message from "./Message";
 
-const BrandDetailSidebar = ({ lang, title, image, car_id, price_daily, price_weekly, price_monthly, pricing, subscription, insurance, services, techDetails }) => {
+const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, price_weekly, price_monthly, pricing, subscription, insurance, services, techDetails }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [res, apiMethod] = usePost()
