@@ -29,7 +29,7 @@ const Cars = ({ lang }) => {
     const [filterData, setFilterData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
     const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
 
     const [bannerData, setBannerData] = useState("");

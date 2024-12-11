@@ -32,7 +32,7 @@ const Brand = ({ lang }) => {
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
     const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
     const [filterData, setFilterData] = useState("");
     const [filtersAll, setFiltersAll] = useState({});
