@@ -141,7 +141,7 @@ const Footer = () => {
 
             <div class="footer_Quick text-xs bg-primary py-2 text-white text-center">
                 <div class="container mx-auto">
-                    &copy; 2024 Luai Alkhatib Car Rental. All Rights Reserved. | {languageData[langValue]["Developed by"]}&nbsp;<a target="_blank" class="border-b border-[#fff]" href="https://quickdigitals.ae/">Quick Digitals</a>
+                    &copy; 2024 {languageData[langValue]["Luai Alkhatib Car Rental"]}. {languageData[langValue]["All Rights Reserved"]}. | {languageData[langValue]["Developed by"]}&nbsp;<a target="_blank" class="border-b border-[#fff]" href="https://quickdigitals.ae/">Quick Digitals</a>
                 </div>
             </div>
         </section>

@@ -66,7 +66,9 @@ export const languageData = {
         "Low to High": "Low to High",
         "High to Low": "High to Low",
         "Pricing": "Pricing",
-        "Developed by": "Developed by"
+        "Developed by": "Developed by",
+        "Luai Alkhatib Car Rental": "Luai Alkhatib Car Rental",
+        "All Rights Reserved": "All Rights Reserved"
     },
     ar: {
         "English": "English",
@@ -135,7 +137,9 @@ export const languageData = {
         "Low to High": "من منخفض إلى مرتفع",
         "High to Low": "من الأعلى إلى الأدنى",
         "Pricing": "التسعير",
-        "Developed by": "تم تطويره بواسطة"
+        "Developed by": "تم تطويره بواسطة",
+        "Luai Alkhatib Car Rental": "لؤي الخطيب لتأجير السيارات",
+        "All Rights Reserved": "جميع الحقوق محفوظة"
     },
 };
 
