@@ -63,7 +63,7 @@ const Footer = () => {
                                         alt="footer_social1"
                                     />
                                 </Link>
-                                <Link href={"#"}>
+                                <Link href={"https://wa.me/971508879971"} target='_blank'>
                                     <Image
                                         src={social_imgTwo}
                                         className="object-contain w-8 mx-2"
