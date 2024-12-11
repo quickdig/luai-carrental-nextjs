@@ -9,7 +9,7 @@ import useFetch from "@/app/customHooks/useFetch";
 import useGet from "@/app/customHooks/useGet";
 import { useContext, useEffect, useState } from "react";
 import { Pagination } from "antd";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa6";
+import { FaChevronUp, FaChevronDown, FaFilter } from "react-icons/fa6";
 import { keywords, languageData } from "../../../../../dataset";
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs";
 import PreLoader from "@/components/PreLoader";
@@ -32,7 +32,8 @@ const Brand = ({ lang }) => {
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
     const [activePage, setActivePage] = useState(1);
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
     const [filterData, setFilterData] = useState("");
     const [filtersAll, setFiltersAll] = useState({});
     const [bannerData, setBannerData] = useState("");
@@ -161,8 +162,24 @@ const Brand = ({ lang }) => {
 
             {/* Filter bar section */}
             <div className="relative flex flex-col md:flex-row max-w-screen-lg w-full gap-5 mt-5 mx-auto">
-                <div className={`scrollbar w-[90%] mx-auto sticky top-0 ${isExpanded ? 'h-[calc(100vh-2rem)]' : 'h-full'} bg-[#1C1C1C] lg:w-4/12 rounded-md p-5 overflow-y-auto`}>
-                    <div className="flex flex-row justify-between items-center mb-5 px-1 text-white" onClick={() => setIsExpanded(!isExpanded)}>
+                {/* Mobile Filter Button */}
+                <button
+                    className="flex md:hidden justify-center items-center bg-primary text-white py-2 px-4 rounded-md mb-3 mx-5"
+                    onClick={() => setIsMobileFilterVisible(!isMobileFilterVisible)}
+                >
+                    <FaFilter className="mr-2" /> {languageData[langValue]["Filters"]}
+                </button>
+
+                {/* Filter Sidebar */}
+                <div
+                    className={`scrollbar fixed md:sticky top-0 ${isExpanded ? 'h-[calc(100vh-2rem)]' : 'h-full'} bg-[#1C1C1C] transition-all duration-300 z-50 md:w-4/12 rounded-md p-5 overflow-y-auto 
+                        ${isMobileFilterVisible ? "left-0 w-full h-full" : "-left-full md:left-0 w-[90%]"
+                        }`}
+                >
+                    <div
+                        className="flex flex-row justify-between items-center mb-5 px-1 text-white"
+                        onClick={() => setIsExpanded(!isExpanded)}
+                    >
                         <span className="text-md font-normal">{languageData[langValue]["Filters"]}</span>
                         {isExpanded ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
                     </div>
