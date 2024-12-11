@@ -7,7 +7,7 @@ import { Modal } from "antd";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import usePost from "@/app/customHooks/usePost";
 import Message from "./Message";
-import { Carousel } from 'antd';
+import { Card } from 'antd';
 
 const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
     const basePath = lang === "en" ? '' : `${lang}/`;
@@ -73,11 +73,17 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
     };
     return (
         <div className="rounded-md h-full bg-white mx-2 px-4">
-
-            <div className="img_boxw-full flex justify-center items-center overflow-hidden mt-4 max-h-[400px]">
-                <img src={image} alt="Car" className="rounded-md object-contain w-full h-auto max-h-[400px]" />
+            <div className="img_box flex justify-center items-center overflow-hidden mt-4">
+                <img src={image} className="object-cover h-48 w-96 rounded-md" />
             </div>
 
+            {/* <div className="img_box w-[400px] h-[400px] flex justify-center items-center bg-gray-100 overflow-hidden mt-4">
+                <img
+                    src={image}
+                    alt="Car"
+                    className="rounded-md object-contain max-w-full max-h-full"
+                />
+            </div> */}
             <div className="w-full flex flex-col my-2">
                 <Link href={`/cars/${slug}`} className="text-lg font-semibold uppercase">{title}</Link>
                 <span>{model}</span>

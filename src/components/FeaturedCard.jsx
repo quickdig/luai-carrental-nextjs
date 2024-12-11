@@ -24,9 +24,9 @@ const FeaturedCard = ({ featuredData, lang }) => {
                 <div className="flex flex-wrap lg:flex-wrap justify-center gap-2 my-4">
                     {
                         featuredData?.map((item, idx) => {
-                            const { id, slug, image, name, price_daily, price_weekly, price_monthly } = item
+                            const { id, slug, image, name, price_daily, price_weekly, price_monthly, model } = item
                             return (
-                                <CarCard lang={lang} key={idx} id={id} slug={slug} image={image} rating={5} title={name} daily={price_daily} weekly={price_weekly} monthly={price_monthly} btnText={languageData[langValue]["Book Ride"]} />
+                                <CarCard lang={lang} key={idx} id={id} slug={slug} image={image} rating={5} title={name} daily={price_daily} weekly={price_weekly} monthly={price_monthly} btnText={languageData[langValue]["Book Ride"]} model={model} />
                             )
                         })
                     }

@@ -80,9 +80,11 @@ const Cars = ({ lang }) => {
             availability: filtersAll?.availability,
             brand: filtersAll?.car_brands,
             price_high_low: filtersAll?.price_high_low,
-            price_max: debouncedMax
+            // price_max: debouncedMax
             // brand_x: filtersAll?.car_brands
         }
+
+        console.log(data);
 
         const response = await axios.post(`${config.apiEndPoint}cars/filter/${lang}`, data)
         setCarData(response?.data?.data)
@@ -106,7 +108,6 @@ const Cars = ({ lang }) => {
             ...prevState,
             [name]: value
         }))
-        console.log(name, value);
     }
 
     const handleSliderChange = (e) => {

@@ -17,19 +17,23 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
         <div className="bg-white rounded-md px-4 py-5 space-y-4">
 
             {/* Image Box */}
-            <div className="relative w-full h-40 overflow-hidden mx-auto items-center object-contain group">
+            {/* <div className="relative w-full h-40 overflow-hidden mx-auto items-center object-contain group">
                 <img
                     src={image}
                     alt="Zoomable"
                     width={200}
                     className="object-contain transform mx-auto max-h-[400px] h-auto transition-transform duration-300 group-hover:scale-110"
                 />
+            </div> */}
+
+            <div className="img_box relative w-auto overflow-hidden mx-auto items-center object-contain">
+                <img src={image} className="object-cover h-48 w-50 rounded-md" />
             </div>
 
             {/* Car Name and Year */}
             <div className="flex flex-col text-center sm:text-left px-2">
                 <Link href={`${basePath}cars/${slug}`} className="text-lg font-medium uppercase">
-                    {title}
+                    {title} {model}
                 </Link>
                 {/* <span className="text-xs sm:text-sm text-secondary">2023</span> */}
             </div>
