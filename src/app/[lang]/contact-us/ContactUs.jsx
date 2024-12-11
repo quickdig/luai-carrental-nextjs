@@ -110,7 +110,7 @@ const ContactUs = ({ lang }) => {
                             <span className="text-primary flex items-center gap-2">
                                 <FaCheck className="text-lg" />
                                 <b className="text-black">{contactData(lang).header_three}</b>
-                                <span className="text-gray-600 font-light">(+971) 501837000 / (+971) 42711000</span>
+                                <span className="text-gray-600 font-light">(+971) 508 879 971</span>
                             </span>
                         </li>
                     </ul>
