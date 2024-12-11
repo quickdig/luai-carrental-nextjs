@@ -59,13 +59,8 @@ const BlogLongCard = ({ lang, image, title, slug, authorimage, authorname, date,
                         />
                         <span className="ml-2 text-xs font-normal">{authorname}</span>
                     </div> */}
-                    <div className="flex flex-row items-center mt-1 text-gray-400">
-                        <span className="mx-2 text-xs font-normal">{authorname}</span>
-                    </div>
                     <div className="flex flex-row items-center mt-2 text-gray-400">
                         <span className="text-[10px]">{formatDate(date)}</span>
-                        <span className="text-sm mx-2">•</span>
-                        <span className="text-[10px]">{readtime}</span>
                     </div>
                     <p className="text-gray-600 mt-1 text-xs text-justify line-clamp-3">
                         {getPlainText(description)}

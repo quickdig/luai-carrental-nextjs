@@ -23,11 +23,15 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
         start_time: "",
         date_to: "",
         end_time: "",
+        pricing_mode: ""
     });
 
     const handleInputChange = (e) => {
         e.persist();
         setBookingData({ ...bookingData, [e.target.name]: e.target.value })
+        if (e.target.name == 'pricing_mode') {
+            setBookingData({ ...bookingData, ['pricing_mode']: e.target.id + ',' + e.target.value })
+        }
     }
 
     const handleSubmit = (e) => {
@@ -40,7 +44,8 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
         formData.append("start_time", bookingData.start_time);
         formData.append("date_to", bookingData.date_to);
         formData.append("end_time", bookingData.end_time);
-        formData.append("car", car_id);
+        formData.append("pricing", bookingData.pricing_mode);
+        formData.append("car", title + model);
 
         if (bookingData.name == "" || bookingData.number == "" || bookingData.email == ""
             || bookingData.date_from == "" || bookingData.date_to == "") {
@@ -55,8 +60,6 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
                 }, [3000])
             }
         }
-
-        console.log(...formData);
     }
 
     const handleBookingModal = () => {
@@ -126,10 +129,54 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
 
                     <div className="lg:w-1/2 w-full bg-white p-4 sm:p-6">
                         <h2 className="uppercase text-[24px] sm:text-[30px] lg:text-[40px] font-light">{title}</h2>
-                        <div className="flex flex-row justify-start gap-2">
-                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Daily"]}: AED {price_daily}</span>
-                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Weekly"]}: AED {price_weekly}</span>
-                            <span className="border-[2px] border-secondary px-3 py-1 rounded-md text-md text-white bg-secondary">{languageData[lang]["Monthly"]}: AED {price_monthly}</span>
+                        <div className="flex flex-row gap-2">
+                            <div className="w-full">
+                                <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg">
+                                    <input
+                                        type="radio"
+                                        name="pricing_mode"
+                                        className="hidden peer"
+                                        id="daily_price"
+                                        value={price_daily}
+                                        onChange={handleInputChange}
+                                    />
+                                    <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                                        <label htmlFor="daily_price">{languageData[lang]["Daily"]}: AED {price_daily}</label>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="w-full">
+                                <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg">
+                                    <input
+                                        type="radio"
+                                        name="pricing_mode"
+                                        className="hidden peer"
+                                        id="weekly_price"
+                                        value={price_weekly}
+                                        onChange={handleInputChange}
+                                    />
+                                    <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                                        <label htmlFor="weekly_price">{languageData[lang]["Weekly"]}: AED {price_weekly}</label>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="w-full">
+                                <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg">
+                                    <input
+                                        type="radio"
+                                        name="pricing_mode"
+                                        className="hidden peer"
+                                        id="monthly_price"
+                                        value={price_monthly}
+                                        onChange={handleInputChange}
+                                    />
+                                    <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                                        <label htmlFor="monthly_price">{languageData[lang]["Monthly"]}: AED {price_monthly}</label>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                         {/* <p className="text-primary text-[16px] sm:text-[18px] mt-2">{languageData[lang]["Total Price"]}: AED {price_daily}</p> */}
                         <img

@@ -132,7 +132,7 @@ const Footer = () => {
                 </footer>
             </div>
 
-            <div class="footer_Quick bg-secondary py-2 text-white text-center"><div class="container mx-auto"> Developed by <a target="_blank" class="border-b border-[#fff]" href="https://quickdigitals.ae/">Quick Digitals</a></div></div>
+            <div class="footer_Quick bg-secondary py-2 text-white text-center"><div class="container mx-auto"> {languageData[langValue]["Developed by"]}&nbsp;<a target="_blank" class="border-b border-[#fff]" href="https://quickdigitals.ae/">Quick Digitals</a></div></div>
         </section>
 
     )

@@ -1,15 +1,7 @@
 "use client"
 import Breadcrumb from "@/components/Breadcrumb"
-import carImage from "@/public/assets/car_img_1.png"
-import userImage from "@/public/assets/ecllipsTwo.png"
+import userImage from "@/public/assets/favicon.ico"
 import Image from "next/image"
-import Button from "@/components/Button";
-import catImageOne from "@/public/assets/cat_img1.jpg";
-import catImageTwo from "@/public/assets/cat_img2.jpg";
-import catImageThree from "@/public/assets/cat_img3.jpg";
-import catImageFour from "@/public/assets/cat_img4.jpg";
-import catImageFive from "@/public/assets/cat_img5.jpg";
-import CategoryCard from "@/components/CategoryCard";
 import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
@@ -76,8 +68,8 @@ const BlogDetail = ({ lang }) => {
                             </h2>
                         </div>
 
-                        <div className="author_box flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:gap-4 text-gray-500">
-                            {/* <div className="flex items-center">
+                        {/* <div className="author_box flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:gap-4 text-gray-500"> */}
+                        {/* <div className="flex items-center">
                                 <Image
                                     src={userImage}
                                     alt="Author"
@@ -87,12 +79,12 @@ const BlogDetail = ({ lang }) => {
                                 />
                                 <span className="ml-2 font-semibold">Dasteen</span>
                             </div> */}
-                            <div className="flex flex-row items-center text-gray-400">
+                        {/* <div className="flex flex-row items-center text-gray-400">
                                 <span className="text-xs">Jan 10, 2024</span>
                                 <span className="text-sm mx-2">•</span>
                                 <span className="text-xs">3 Min Read</span>
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div> */}
 
                         <div className="blog_content_box space-y-4" dangerouslySetInnerHTML={{ __html: allData.Description }}>
 

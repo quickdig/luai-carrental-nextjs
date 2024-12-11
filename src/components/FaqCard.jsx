@@ -19,7 +19,7 @@ const FaqCard = ({ idx, question, answer }) => {
                     <div>
                         <h4 className="flex items-center font-bold text-lg lg:text-xl sm:text-xl md:text-2xl text-secondary leading-6">
                             <span className="mr-4 text-lg sm:text-xl md:text-2xl font-bold text-[#3C3C4380]">
-                                {idx < 10 ? '0' + idx : idx}
+                                {idx < 10 ? '0' + idx : idx}&nbsp;
                             </span>
                             {question}
                         </h4>

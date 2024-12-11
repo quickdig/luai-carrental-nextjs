@@ -95,6 +95,21 @@ body.ar .ar_img{
   margin-right: 0px;
 }
 
+body.ar button.ant-pagination-item-link span.anticon-left{
+  rotate: 180deg !important;
+}
+
+body.ar button.ant-pagination-item-link span.anticon-right{
+  rotate: 180deg !important;
+}
+
+body.ar li.ant-pagination-item a{
+  text-align: center !important;
+}
+
+body.ar div.footer_Quick div.container{
+ text-align: center !important;
+}
 
 .ant-modal-content {
   background-color: #f2f6fa !important;

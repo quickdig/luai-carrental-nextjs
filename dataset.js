@@ -65,7 +65,8 @@ export const languageData = {
         "Electric": "Electric",
         "Low to High": "Low to High",
         "High to Low": "High to Low",
-        "Pricing": "Pricing"
+        "Pricing": "Pricing",
+        "Developed by": "Developed by"
     },
     ar: {
         "English": "English",
@@ -133,7 +134,8 @@ export const languageData = {
         "Electric": "كهربائي",
         "Low to High": "من منخفض إلى مرتفع",
         "High to Low": "من الأعلى إلى الأدنى",
-        "Pricing": "التسعير"
+        "Pricing": "التسعير",
+        "Developed by": "تم تطويره بواسطة"
     },
 };
 
