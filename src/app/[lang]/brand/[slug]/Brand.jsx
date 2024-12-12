@@ -15,6 +15,7 @@ import PreLoader from "@/components/PreLoader";
 import axios from "axios";
 import config from "../../../services/config.json"
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
+import { IoCloseSharp } from "react-icons/io5";
 
 
 
@@ -199,7 +200,12 @@ const Brand = ({ lang }) => {
                             </span>
 
                         </div>
-                        {isExpanded ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
+                        {isExpanded && isMobileFilterVisible ? <button
+                            className="block md:hidden bg-red-500 text-white py-2 px-4 rounded-md w-auto"
+                            onClick={() => setIsMobileFilterVisible(false)}
+                        >
+                            <IoCloseSharp />
+                        </button> : isExpanded && !isMobileFilterVisible ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
                     </div>
                     {
                         isExpanded && (
@@ -388,12 +394,7 @@ const Brand = ({ lang }) => {
                             </div>
                         )
                     }
-                    <button
-                        className="block md:hidden bg-red-500 text-white py-2 px-4 rounded-md mt-5 w-full"
-                        onClick={() => setIsMobileFilterVisible(false)}
-                    >
-                        Close
-                    </button>
+
                 </div>
 
                 <div className="w-full h-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 justify-center">

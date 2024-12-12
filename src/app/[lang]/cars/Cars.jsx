@@ -14,6 +14,7 @@ import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import PreLoader from "@/components/PreLoader";
 import axios from "axios";
 import config from "../../services/config.json"
+import { IoCloseSharp } from "react-icons/io5";
 
 const Cars = ({ lang }) => {
 
@@ -189,7 +190,12 @@ const Cars = ({ lang }) => {
                                 {isFiltered ? <button type="button" onClick={handleFilterReset} className="px-2 py-1 bg-primary w-auto mx-2 rounded-md">{languageData[langValue]["Reset Filter"]}</button> : null}
                             </span>
                         </div>
-                        {isExpanded ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
+                        {isExpanded && isMobileFilterVisible ? <button
+                            className="block md:hidden bg-red-500 text-white py-2 px-4 rounded-md w-auto"
+                            onClick={() => setIsMobileFilterVisible(false)}
+                        >
+                            <IoCloseSharp />
+                        </button> : isExpanded && !isMobileFilterVisible ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
                     </div>
 
                     {isExpanded && (
@@ -375,12 +381,12 @@ const Cars = ({ lang }) => {
                             </div>
                         </div>
                     )}
-                    <button
+                    {/* <button
                         className="block md:hidden bg-red-500 text-white py-2 px-4 rounded-md mt-5 w-full"
                         onClick={() => setIsMobileFilterVisible(false)}
                     >
                         Close
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="w-full h-full right-0 flex flex-col lg:flex-row mx-auto lg:w-8/12 justify-center">
