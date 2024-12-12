@@ -7,7 +7,6 @@ import { Modal } from "antd";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import usePost from "@/app/customHooks/usePost";
 import Message from "./Message";
-import { Card } from 'antd';
 
 const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_weekly, price_monthly, bluetooth, cruise_control, engine, luggage, lang }) => {
     const basePath = lang === "en" ? '' : `${lang}/`;

@@ -1,7 +1,5 @@
 "use client"
 import Breadcrumb from "@/components/Breadcrumb"
-import userImage from "@/public/assets/favicon.ico"
-import Image from "next/image"
 import { useParams, usePathname } from "next/navigation";
 import useFetch from "@/app/customHooks/useFetch"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"

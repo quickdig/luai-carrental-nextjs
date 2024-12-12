@@ -1,8 +1,6 @@
 "use client"
 import { IoCheckmarkCircle } from "react-icons/io5";
 import Breadcrumb from "@/components/Breadcrumb"
-import Button from "@/components/Button";
-import Link from "next/link";
 import CarSingleCard from "@/components/CarSingleCard";
 import useFetch from "@/app/customHooks/useFetch";
 import { useContext, useEffect, useState } from "react";

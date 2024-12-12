@@ -1,6 +1,0 @@
-export const  EcllipseOne = require("../public/assets/ecllipsOne.png")
-export const  EcllipseTwo = require("../public/assets/ecllipsTwo.png")
-export const  EcllipseThree = require("../public/assets/ecllipsThree.png")
-export const  social_imgOne = require("../public/assets/fb.png")
-export const  social_imgTwo = require("../public/assets/wa.png")
-export const  social_imgThree = require("../public/assets/insta.png")

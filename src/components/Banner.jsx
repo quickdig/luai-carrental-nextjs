@@ -1,6 +1,4 @@
-import banner_car2 from "../public/assets/banner_back.png";
-import banner_car from "../public/assets/banner_img.png";
-import bgimg from "../../src/public/assets/bgimg.png"
+import { bgimg } from "@/commonExports/images";
 import Image from "next/image";
 
 const Banner = ({ bannerData, allData }) => {

@@ -1,5 +1,3 @@
-import { SlKey } from "react-icons/sl";
-
 const ReasonCard = ({ icon, title, desc }) => {
     return (
         <div className='flex flex-col justify-center items-center p-3'>

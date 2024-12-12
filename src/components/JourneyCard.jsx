@@ -1,11 +1,10 @@
-import list_icon from "../../src/public/assets/tick-inside-circle.png";
 import Button from './Button';
-import journeyImage from "../../src/public/assets/journey_img1.png"
 import Image from "next/image";
 import { languageData } from "../../dataset";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import { useContext } from "react";
 import Link from "next/link";
+import { list_icon } from '@/commonExports/images';
 
 const JourneyCard = ({ section, sectionData, lang }) => {
     const { langValue } = useContext(MainLanguageValueContext);
@@ -34,20 +33,6 @@ const JourneyCard = ({ section, sectionData, lang }) => {
                                     )
                                 })
                             }
-                            {/* <li className="flex items-center text-xs gap-2 font-semibold">
-                                <Image src={list_icon} alt="list_item" width={15} />
-                                Our company offers reasonably priced car rental deals in Dubai prioritizing comfort and safety.
-                            </li>
-
-                            <li className="flex items-center text-xs gap-2 font-semibold">
-                                <Image src={list_icon} alt="list_item" width={15} />
-                                We provide fantastic deals that justify their cost and are light on the pocket.
-                            </li>
-
-                            <li className="flex items-center text-xs gap-2 font-semibold">
-                                <Image src={list_icon} alt="list_item" width={15} />
-                                Our car rental Dubai monthly rates exceed expectations.
-                            </li> */}
                         </ul>
 
                         <Link href={`${basePath}cars`}>

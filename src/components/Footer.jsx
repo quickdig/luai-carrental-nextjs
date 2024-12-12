@@ -1,7 +1,5 @@
 "use client"
-
 import React, { useContext, useEffect, useState } from 'react'
-import footer_logo from "../../src/public/assets/logo_black.png";
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiPhoneCall } from "react-icons/fi";
@@ -11,10 +9,10 @@ import { useParams, usePathname } from 'next/navigation';
 import useFetch from '@/app/customHooks/useFetch';
 import { languageData } from '../../dataset';
 import { MainLanguageValueContext } from '@/app/context/MainLanguageValue';
-import { social_imgOne, social_imgThree, social_imgTwo } from '@/ImagesImport/image';
 import useGet from '@/app/customHooks/useGet';
 import config from "../app/services/config.json"
 import axios from 'axios';
+import { footer_logo, social_imgOne, social_imgThree, social_imgTwo } from '@/commonExports/images';
 
 const Footer = () => {
     const { langValue } = useContext(MainLanguageValueContext);
@@ -29,7 +27,6 @@ const Footer = () => {
 
     const fetchFooter = async (lan) => {
         const data = await axios.get(`${config.apiEndPoint}footer/${lan}`)
-        console.log('footer data', data);
         setFooterData(data?.data?.data)
     }
     return (

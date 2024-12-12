@@ -1,15 +1,15 @@
 
+import { backdrop } from "@/commonExports/images";
 import Image from "next/image";
-import backdrop from "../public/assets/backdrop_.png"
 
-const ContentCard = ({ bannerData, allData }) => {
+const ContentCard = ({ bannerData, allData, lang }) => {
 
     const { sec_one_heading, sec_one_textone, sec_one_textthree, sec_one_texttwo } = bannerData;
 
     return (
         <section className="common_Card relative overflow-hidden">
 
-            <Image className="absolute -z-50 -right-44 top-10 w-[380px] opacity-5" src={backdrop} alt="backdrop_" />
+            <Image className={`absolute -z-50 ${lang == 'en' ? '-right-44' : '-left-44'} top-10 w-[380px] opacity-5 backdrop_palms`} src={backdrop} alt="backdrop_" id="backdrop_palms" />
 
             <div className="flex flex-col md:flex-row pt-12 md:pt-28 max-w-screen-lg w-full mx-auto px-4">
                 {/* Left Section */}

@@ -21,7 +21,7 @@ const Home = ({ lang }) => {
         <div>
             <Banner bannerData={bannerContent} allData={alldata} />
             <SearchBox lang={lang} />
-            <ContentCard bannerData={bannerContent} allData={alldata} />
+            <ContentCard lang={lang} bannerData={bannerContent} allData={alldata} />
             <FeaturedCard lang={lang} featuredData={featuredContent} />
             <JourneyCard lang={lang} sectionData={sectionContent.section_one} section={"CardOne"} />
             <JourneyCard lang={lang} sectionData={sectionContent.section_two} section={"CardTwo"} />

@@ -1,9 +1,5 @@
 "use client"
 import Breadcrumb from "@/components/Breadcrumb"
-import Image from "next/image";
-// import carImage from "../../public/assets/car_img_1.png"
-// import userImage from "../../public/assets/ecllipsTwo.png"
-import Button from "@/components/Button";
 import BlogLongCard from "@/components/BlogLongCard";
 import useFetch from "@/app/customHooks/useFetch";
 import { useEffect, useState } from "react";
@@ -84,8 +80,8 @@ const Blogs = ({ params, lang }) => {
                 }
             </div>
 
-            <div className="relative flex flex-row justify-center items-center my-10 ar_pagination">
-                {/* <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} /> */}
+            <div className="relative flex flex-row justify-center items-center my-10 mb-5 pb-5 ar_pagination">
+                <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
         </div>
     )

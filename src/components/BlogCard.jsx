@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const BlogCard = ({ date, image, title, style, headerStyle, dateStyle, slug }) => {
 
@@ -31,9 +30,9 @@ const BlogCard = ({ date, image, title, style, headerStyle, dateStyle, slug }) =
                 <img
                     src={image}
                     alt="Car"
-                    className="rounded-md object-cover"
+                    className="rounded-md object-cover w-full"
                 />
-                <div className="absolute rounded-md inset-0 bg-gradient-to-t from-black/80 to-black/20"></div>
+                <div className="absolute rounded-md inset-0 bg-gradient-to-t from-black/80 to-black/10"></div>
 
                 <span className={`${dateStyle}`}>{formatDate(date)}</span>
                 <Link href={`/blog/${slug}`} className={`${headerStyle}`}>{title}</Link>

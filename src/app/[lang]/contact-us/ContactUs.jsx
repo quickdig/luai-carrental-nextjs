@@ -1,12 +1,7 @@
 
 "use client"
-import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb"
-import Link from "next/link";
-import BrandDetailSidebar from "@/components/BrandDetailSidebar";
 import { FaCheck } from "react-icons/fa6";
-import Button from "@/components/Button";
-import mapImage from "../../../public/assets/map.png"
 import { contactData } from "./data";
 import useFetch from "@/app/customHooks/useFetch";
 import { useEffect, useState } from "react";

@@ -1,18 +1,15 @@
 "use client"
 import Image from "next/image"
 import ACommonCard from "@/components/ACommonCard"
-import EcllipseFour from "../../../public/assets/ecllipsFour.png";
-import EcllipseFive from "../../../public/assets/ecllipsFive.png";
 import Breadcrumb from "@/components/Breadcrumb"
 import useFetch from "@/app/customHooks/useFetch"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import useGet from "@/app/customHooks/useGet"
-import { EcllipseOne, EcllipseThree, EcllipseTwo } from "@/ImagesImport/image"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
 import PreLoader from "@/components/PreLoader"
 import BrandCarousel from "@/components/BrandCarousel";
-import backdrop from "../../../public/assets/backdrop_.png"
+import { backdrop, EcllipseFive, EcllipseFour, EcllipseOne, EcllipseThree, EcllipseTwo } from "@/commonExports/images"
 
 const AboutUs = ({ lang }) => {
 

@@ -1,12 +1,10 @@
-import { FaStar } from "react-icons/fa6";
-import car_img from "../../src/public/assets/car_img.png";
-import whatsApp from "../../src/public/assets/whatsApp.png";
 import Link from "next/link"
 import Button from "./Button";
 import Image from "next/image";
 import { languageData } from "../../dataset";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import { useContext } from "react";
+import { whatsApp } from "@/commonExports/images";
 
 const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, slug, id, btnText }) => {
 

@@ -1,10 +1,8 @@
 "use client";
-
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from 'next/navigation';
-import off_logo from "../../src/public/assets/off_logo.png";
 import { FaEarthAmericas, FaPhone } from "react-icons/fa6";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import useGet from "@/app/customHooks/useGet";
@@ -12,6 +10,7 @@ import useFetch from "@/app/customHooks/useFetch";
 import { languageData } from "../../dataset";
 import axios from "axios";
 import config from "../app/services/config.json"
+import { off_logo } from "@/commonExports/images";
 
 
 const items = [
@@ -56,7 +55,6 @@ const Header = () => {
 
   const fetchBrands = async (lan) => {
     const data = await axios.get(`${config.apiEndPoint}brands/all/${lan}`)
-    console.log('brands data', data?.data);
     setBrands(data?.data?.data)
   }
 

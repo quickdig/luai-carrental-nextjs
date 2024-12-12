@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import Breadcrumb from "@/components/Breadcrumb"
 import dropdown from "./script";
 import { useEffect } from "react";
-import { GoPlus } from "react-icons/go";
-import { RxCross2 } from "react-icons/rx";
 import FaqCard from "@/components/FaqCard";
 import useFetch from "@/app/customHooks/useFetch";
 import { usePathname } from "next/navigation";

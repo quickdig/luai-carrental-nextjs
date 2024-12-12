@@ -1,7 +1,6 @@
 
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
 import { languageData } from "../../dataset";
-import Button from "./Button";
 import CarCard from "./CarCard";
 import { useContext } from "react";
 
@@ -12,13 +11,6 @@ const FeaturedCard = ({ featuredData, lang }) => {
             <div className="flex flex-col justify-center max-w-screen-lg mt-20 w-full mx-auto bg-[#F2F2F2]">
                 <div className="flex flex-col lg:flex-row md:flex-col sm:flex-col items-center lg:justify-between md:justify-center px-16 mt-5">
                     <span className="text-xl font-semibold text-left">{languageData[langValue]["Explore the Car Range"]}</span>
-                    {/* <Button
-                        text={languageData[langValue]["Search"]}
-                        type={"submit"}
-                        style={
-                            "bg-secondary hover:bg-primary text-center text-white font-medium py-2 px-4 rounded inline-flex items-center"
-                        }
-                    /> */}
                 </div>
 
                 <div className="flex flex-wrap lg:flex-wrap justify-center gap-2 my-4">

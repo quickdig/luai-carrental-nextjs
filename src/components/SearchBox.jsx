@@ -1,13 +1,11 @@
 "use client";
-
 import { useState, useEffect, useContext } from "react";
+import { useRouter } from 'next/navigation'
+import useFetch from "@/app/customHooks/useFetch";
 import { FaCarRear, FaCalendarDays, FaClock } from "react-icons/fa6";
 import Button from "./Button";
 import { languageData } from "../../dataset";
-import useFetch from "@/app/customHooks/useFetch";
 import { MainLanguageValueContext } from "@/app/context/MainLanguageValue";
-import Link from "next/link";
-import { useRouter } from 'next/navigation'
 
 const SearchBox = ({ lang }) => {
     const { langValue } = useContext(MainLanguageValueContext);
