@@ -109,9 +109,9 @@ const BrandModel = ({ lang }) => {
                                             <Image src={feature_three} width={30} alt="feature_one" /> <span className="text-[16px] font-medium text-secondary">{cruise ? languageData[lang]["Available"] : 'N/A'}</span>
                                         </li>
 
-                                        <li className="flex flex-row items-center gap-2 text-sm font-normal">
+                                        {/* <li className="flex flex-row items-center gap-2 text-sm font-normal">
                                             <Image src={feature_four} width={30} alt="feature_one" /> <span className="text-[16px] font-medium text-secondary">{color}</span>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                                 <div className="w-full md:w-1/2 md:pr-4">

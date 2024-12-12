@@ -25,7 +25,7 @@ const CarCard = ({ lang, image, rating, title, model, daily, weekly, monthly, sl
             </div> */}
 
             <div className="img_box relative w-auto overflow-hidden mx-auto items-center object-contain">
-                <img src={image} className="object-cover h-48 w-50 rounded-md" />
+                <img src={image} className="object-cover h-48 w-full rounded-md" />
             </div>
 
             {/* Car Name and Year */}

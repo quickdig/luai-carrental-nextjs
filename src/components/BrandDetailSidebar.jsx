@@ -92,7 +92,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 id="daily_price"
                             />
                             <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
-                                <label htmlFor="daily_price">{languageData[lang]["Daily"]} <br />AED {price_daily}</label>
+                                <label htmlFor="daily_price">{languageData[lang]["Daily"]} <br />{price_daily == 'On Request' ? null : 'AED'} {price_daily}</label>
                             </div>
                         </label>
                     </div>
@@ -106,7 +106,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 id="weekly_price"
                             />
                             <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
-                                <label htmlFor="weekly_price">{languageData[lang]["Weekly"]} <br />AED {price_weekly}</label>
+                                <label htmlFor="weekly_price">{languageData[lang]["Weekly"]} <br />{price_weekly == 'On Request' ? null : 'AED'} {price_weekly}</label>
                             </div>
                         </label>
                     </div>
@@ -120,7 +120,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 id="monthly_price"
                             />
                             <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
-                                <label htmlFor="monthly_price">{languageData[lang]["Monthly"]}<br /> AED {price_monthly}</label>
+                                <label htmlFor="monthly_price">{languageData[lang]["Monthly"]}<br /> {price_monthly == 'On Request' ? null : 'AED'} {price_monthly}</label>
                             </div>
                         </label>
                     </div>

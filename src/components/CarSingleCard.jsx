@@ -88,20 +88,20 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
                 <span>{model}</span>
             </div>
 
-            <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-1 px-3 mx-4 border-[.5px] border-gray-300">
+            <div className="bg-gray-200 flex flex-row sm:flex-row items-center justify-between py-1 px-3 mx-4 border-[.5px] border-gray-300">
                 <div className="flex flex-col items-center sm:items-start">
                     <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Daily"]}</span>
-                    <span className="price_cat text-sm font-medium">AED {price_daily}</span>
+                    <span className="price_cat text-sm font-medium">{price_daily == 'On Request' ? null : 'AED'} {price_daily}</span>
                 </div>
 
                 <div className="flex flex-col items-center sm:items-start">
                     <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Weekly"]}</span>
-                    <span className="price_cat text-sm font-medium">AED {price_weekly}</span>
+                    <span className="price_cat text-sm font-medium">{price_weekly == 'On Request' ? null : 'AED'} {price_weekly}</span>
                 </div>
 
                 <div className="flex flex-col items-center sm:items-start">
                     <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Monthly"]}</span>
-                    <span className="price_cat text-sm font-medium">AED {price_monthly}</span>
+                    <span className="price_cat text-sm font-medium">{price_monthly == 'On Request' ? null : 'AED'} {price_monthly}</span>
                 </div>
             </div>
 
