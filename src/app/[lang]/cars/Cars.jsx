@@ -41,6 +41,7 @@ const Cars = ({ lang }) => {
     const [maxPrice, setMaxPrice] = useState(0);
     const [debouncedMin, setDebouncedMin] = useState(minPrice);
     const [debouncedMax, setDebouncedMax] = useState(maxPrice);
+    const [isFiltered, setIsFiltered] = useState(false);
 
     useEffect(() => {
         if (dataBanner) {
@@ -63,7 +64,6 @@ const Cars = ({ lang }) => {
         if (resget.data) {
             setCarData(resget?.data?.data)
         }
-        console.log(resget);
     }, [resget.data])
 
     useEffect(() => {
@@ -75,31 +75,32 @@ const Cars = ({ lang }) => {
         return () => clearTimeout(timer);
     }, [minPrice, maxPrice]);
 
-    const onFilterSelect = async () => {
+    const onFilterSelect = async (current) => {
         const data = {
             type: filtersAll?.type_of_car,
             availability: filtersAll?.availability,
             brand: filtersAll?.car_brands,
             price_high_low: filtersAll?.price_high_low,
-            // price_max: debouncedMax
+            price_max: debouncedMax
             // brand_x: filtersAll?.car_brands
         }
 
         console.log(data);
 
-        const response = await axios.post(`${config.apiEndPoint}cars/filter/${lang}`, data)
+        const response = await axios.post(`${config.apiEndPoint}cars/filter/${lang}/12?page=${current}`, data)
         setCarData(response?.data?.data)
+        setPaginationTotal(response?.data?.pagination?.total)
     }
 
     useEffect(() => {
         if (debouncedMax) {
-            onFilterSelect();
+            onFilterSelect(activePage);
         }
     }, [debouncedMin, debouncedMax]);
 
     useEffect(() => {
         if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands || filtersAll?.price_high_low) {
-            onFilterSelect();
+            onFilterSelect(activePage);
         }
     }, [filtersAll])
 
@@ -109,11 +110,11 @@ const Cars = ({ lang }) => {
             ...prevState,
             [name]: value
         }))
+        setIsFiltered(true)
     }
 
     const handleSliderChange = (e) => {
         const { value } = e.target;
-        // setMinPrice(value.split(',')[0]);
         setMaxPrice(value);
     };
 
@@ -123,7 +124,19 @@ const Cars = ({ lang }) => {
             top: 0,
             behavior: 'smooth'
         })
-        apiMethodGet(`car/all/${lang}/12?page=${current}`)
+
+        if (isFiltered) {
+            onFilterSelect(current)
+        } else {
+            apiMethodGet(`car/all/${lang}/12?page=${current}`)
+        }
+
+    }
+
+    const handleFilterReset = () => {
+        setIsFiltered(false);
+        setFiltersAll({});
+        window.location.reload();
     }
 
     if (loading) return <PreLoader />;
@@ -171,7 +184,13 @@ const Cars = ({ lang }) => {
                         className="flex flex-row justify-between items-center mb-5 px-1 text-white"
                         onClick={() => setIsExpanded(!isExpanded)}
                     >
-                        <span className="text-sm font-normal flex flex-row items-center"><FaFilter className="mr-2 ml-2" />{languageData[langValue]["Filters"]}</span> {/* {languageData[langValue]["Filters"]} */}
+                        <div>
+                            <span className="text-sm font-normal flex flex-row items-center"><FaFilter className="mr-2 ml-2" />
+                                {languageData[langValue]["Filters"]}
+
+                                {isFiltered ? <button type="button" onClick={handleFilterReset} className="px-2 py-1 bg-primary w-auto mx-2 rounded-md">{languageData[langValue]["Reset Filter"]}</button> : null}
+                            </span>
+                        </div>
                         {isExpanded ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
                     </div>
 

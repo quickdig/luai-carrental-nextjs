@@ -72,9 +72,9 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
         setIsModalOpen(false);
     };
     return (
-        <div className="rounded-md h-full bg-white mx-2 px-4 hover:shadow-lg hover:scale-105 transform transition duration-300">
-            <div className="img_box flex justify-center items-center overflow-hidden mt-4">
-                <img src={image} className="object-cover h-48 w-96 rounded-md" />
+        <div className="rounded-md h-full bg-white mx-2 hover:shadow-lg hover:scale-105 transform transition duration-300">
+            <div className="img_box flex justify-center items-center overflow-hidden">
+                <img src={image} className="object-cover h-48 w-96 rounded-t-md" />
             </div>
 
             {/* <div className="img_box w-[400px] h-[400px] flex justify-center items-center bg-gray-100 overflow-hidden mt-4">
@@ -84,12 +84,12 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
                     className="rounded-md object-contain max-w-full max-h-full"
                 />
             </div> */}
-            <div className="w-full flex flex-col my-2">
+            <div className="w-full flex flex-col my-2 px-4">
                 <Link href={`/cars/${slug}`} className="text-lg font-semibold uppercase">{title}</Link>
                 <span>{model}</span>
             </div>
 
-            <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-1 px-3 border-[.5px] border-gray-300">
+            <div className="bg-gray-200 flex flex-row sm:flex-row items-center text-left justify-between py-1 px-3 mx-4 border-[.5px] border-gray-300">
                 <div className="flex flex-col items-center sm:items-start">
                     <span className="price_cat text-primary text-xs font-semibold">{languageData[langValue]["Daily"]}</span>
                     <span className="price_cat text-sm font-medium">AED {price_daily}</span>
@@ -106,7 +106,7 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
                 </div>
             </div>
 
-            <ul className="list-none grid grid-cols-2 mt-4">
+            <ul className="list-none grid grid-cols-2 mt-4 mx-4">
                 <li className="flex items-center text-xs font-semibold">
                     <span className="text-primary"><MdStar /></span> &nbsp; {bluetooth ? languageData[langValue]["Blutooth Yes"] : languageData[langValue]["Blutooth No"]}
                 </li>
@@ -121,7 +121,9 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
                 </li>
             </ul>
 
-            <button onClick={handleBookingModal} className="bg-secondary float-right mx-auto my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center">{languageData[langValue]["Book Ride"]}</button>
+            <div className="px-4 lg:px-0">
+                <button onClick={handleBookingModal} className="bg-secondary float-right lg:mx-4 my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center">{languageData[langValue]["Book Ride"]}</button>
+            </div>
 
             <Modal
                 className="p-0 rounded-md"

@@ -1,11 +1,16 @@
 
+import Image from "next/image";
+import backdrop from "../public/assets/backdrop_.png"
 
 const ContentCard = ({ bannerData, allData }) => {
 
     const { sec_one_heading, sec_one_textone, sec_one_textthree, sec_one_texttwo } = bannerData;
 
     return (
-        <section className="common_Card relative">
+        <section className="common_Card relative overflow-hidden">
+
+            <Image className="absolute -z-50 -right-44 top-10 w-[380px] opacity-5" src={backdrop} alt="backdrop_" />
+
             <div className="flex flex-col md:flex-row pt-12 md:pt-28 max-w-screen-lg w-full mx-auto px-4">
                 {/* Left Section */}
                 <div className="md:w-1/2 mb-6 md:mb-0">

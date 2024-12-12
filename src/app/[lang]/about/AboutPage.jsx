@@ -1,18 +1,8 @@
 "use client"
 import Image from "next/image"
-import Button from "@/components/Button"
 import ACommonCard from "@/components/ACommonCard"
 import EcllipseFour from "../../../public/assets/ecllipsFour.png";
 import EcllipseFive from "../../../public/assets/ecllipsFive.png";
-import Brands from "@/components/Brands"
-import bOne from "../../../public/assets/car-brands/chevrolet.png";
-import bTwo from "../../../public/assets/car-brands/mazda.svg";
-import bThree from "../../../public/assets/car-brands/honda.png";
-import bFour from "../../../public/assets/car-brands/bmw.webp";
-import bFive from "../../../public/assets/car-brands/mg.png";
-import bSix from "../../../public/assets/car-brands/rr.png";
-import bSeven from "../../../public/assets/car-brands/toyota.png";
-import bEight from "../../../public/assets/car-brands/kia.svg";
 import Breadcrumb from "@/components/Breadcrumb"
 import useFetch from "@/app/customHooks/useFetch"
 import { useEffect, useState } from "react"
@@ -22,6 +12,7 @@ import { EcllipseOne, EcllipseThree, EcllipseTwo } from "@/ImagesImport/image"
 import { getBreadcrumb } from "@/app/utils/getBreadcrumbs"
 import PreLoader from "@/components/PreLoader"
 import BrandCarousel from "@/components/BrandCarousel";
+import backdrop from "../../../public/assets/backdrop_.png"
 
 const AboutUs = ({ lang }) => {
 
@@ -60,6 +51,7 @@ const AboutUs = ({ lang }) => {
                 <Breadcrumb breadcrumbs={breadcrumbs} lang={lang} lastVal={data?.name} />
             </div>
             <div className="relative z-10 flex flex-col max-w-screen-lg w-full mt-0 mx-auto items-center">
+                <Image className="absolute top-72 lg:-top-20 -z-50 opacity-[.1]" src={backdrop} alt="backdrop_" />
                 <div className="flex flex-col lg:flex-row justify-between items-center sm:px-6 lg:px-0">
 
                     <div className="w-full lg:w-1/2 mt-6 lg:mt-10 sm:mx-2 md:mx-2 sm:px-2 md:px-2 px-2 lg:px-0 lg:mx-0">

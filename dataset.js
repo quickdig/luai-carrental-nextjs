@@ -68,7 +68,8 @@ export const languageData = {
         "Pricing": "Pricing",
         "Developed by": "Developed by",
         "Luai Alkhatib Car Rental": "Luai Alkhatib Car Rental",
-        "All Rights Reserved": "All Rights Reserved"
+        "All Rights Reserved": "All Rights Reserved",
+        "Reset Filter": "Reset Filter"
     },
     ar: {
         "English": "English",
@@ -139,7 +140,8 @@ export const languageData = {
         "Pricing": "التسعير",
         "Developed by": "تم تطويره بواسطة",
         "Luai Alkhatib Car Rental": "لؤي الخطيب لتأجير السيارات",
-        "All Rights Reserved": "جميع الحقوق محفوظة"
+        "All Rights Reserved": "جميع الحقوق محفوظة",
+        "Reset Filter": "إعادة ضبط"
     },
 };
 

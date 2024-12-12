@@ -27,7 +27,7 @@ const Brand = ({ lang }) => {
     const pathname = usePathname();
     const breadcrumbs = getBreadcrumb(pathname)
     const { loading, data } = useFetch(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=1`); //brands/fetch_by_brand/en/rent-a-mitsubishi/12
-    const filters = useFetch(`brands/filters/${lang}/${params.slug}`);
+    // const filters = useFetch(`brands/filters/${lang}/${params.slug}`);
 
     const [carData, setCarData] = useState("");
     const [resget, apiMethodGet] = useGet()
@@ -37,20 +37,22 @@ const Brand = ({ lang }) => {
     const [filterData, setFilterData] = useState("");
     const [filtersAll, setFiltersAll] = useState({});
     const [bannerData, setBannerData] = useState("");
+    const [paginatioTotal, setPaginationTotal] = useState("")
     const dataBanner = useFetch(`banner_data/${lang}/brand`);
 
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
     const [debouncedMin, setDebouncedMin] = useState(minPrice);
     const [debouncedMax, setDebouncedMax] = useState(maxPrice);
+    const [isFiltered, setIsFiltered] = useState(false);
 
-    useEffect(() => {
-        if (filters) {
-            console.log(filters?.data?.data);
-            setFilterData(filterData?.data)
-            setMaxPrice(filters?.data?.data?.pricing?.max)
-        }
-    }, [filters])
+    // useEffect(() => {
+    //     if (filters) {
+    //         console.log(filters?.data?.data);
+    //         setFilterData(filterData?.data)
+    //         setMaxPrice(filters?.data?.data?.pricing?.max)
+    //     }
+    // }, [filters])
 
     useEffect(() => {
         if (dataBanner) {
@@ -61,7 +63,9 @@ const Brand = ({ lang }) => {
     useEffect(() => {
         if (data) {
             setCarData(data?.data)
-            console.log(data);
+            setFilterData(data?.filter_data)
+            setMaxPrice(data?.filter_data?.pricing?.max)
+            setPaginationTotal(data?.pagination?.total)
         }
     }, [data])
 
@@ -69,7 +73,6 @@ const Brand = ({ lang }) => {
         if (resget.data) {
             setCarData(resget?.data?.data)
         }
-
         console.log(resget);
     }, [resget.data])
 
@@ -82,18 +85,16 @@ const Brand = ({ lang }) => {
         return () => clearTimeout(timer);
     }, [minPrice, maxPrice]);
 
-    const onFilterSelect = async () => {
+    const onFilterSelect = async (current) => {
         const data = {
             type: filtersAll?.type_of_car,
             availability: filtersAll?.availability,
             brand: params.slug,
             price_high_low: filtersAll?.price_high_low,
             price_max: debouncedMax
-            // price_max: priceRange.to
-            // brand_x: filtersAll?.car_brands
         }
 
-        const response = await axios.post(`${config.apiEndPoint}filter/${lang}`, data)
+        const response = await axios.post(`${config.apiEndPoint}filter/${lang}/12?page=${current}`, data)
 
         console.log(response?.data?.data);
         setCarData(response?.data?.data)
@@ -101,13 +102,13 @@ const Brand = ({ lang }) => {
 
     useEffect(() => {
         if (debouncedMax) {
-            onFilterSelect();
+            onFilterSelect(activePage);
         }
     }, [debouncedMin, debouncedMax]);
 
     useEffect(() => {
         if (filtersAll?.type_of_car || filtersAll?.availability || params.slug || filtersAll?.car_brands || filtersAll?.price_high_low) {
-            onFilterSelect();
+            onFilterSelect(activePage);
         }
     }, [filtersAll, params.slug])
 
@@ -117,14 +118,7 @@ const Brand = ({ lang }) => {
             ...prevState,
             [name]: value
         }))
-    }
-    const onChange = (current) => {
-        setActivePage(current)
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-        apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
+        setIsFiltered(true)
     }
 
     const handleSliderChange = (e) => {
@@ -133,10 +127,30 @@ const Brand = ({ lang }) => {
         setMaxPrice(value);
     };
 
+    const onChange = (current) => {
+        setActivePage(current)
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+        if (isFiltered) {
+            onFilterSelect(current)
+        } else {
+            apiMethodGet(`brands/fetch_by_brand/${lang}/${params.slug}/12?page=${current}`)
+        }
+
+    }
+
+    const handleFilterReset = () => {
+        setIsFiltered(false);
+        setFiltersAll({});
+        window.location.reload();
+    }
+
     if (loading) return <PreLoader />;
 
     return (
-        <div className="bg-[#F1F4F8]">
+        <div className="bg-[#F1F4F8] h-auto">
             <div className="relative aboutus__Back flex items-center justify-center bg-cover bg-no-repeat bg-center h-60 sm:h-80 md:h-96 lg:h-[15rem] w-full">
                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40"></div>
                 <div className="relative z-10 flex flex-col md:flex-row p-4 max-w-screen-lg w-full mx-auto items-center text-center md:text-left">
@@ -180,7 +194,13 @@ const Brand = ({ lang }) => {
                         className="flex flex-row justify-between items-center mb-5 px-1 text-white"
                         onClick={() => setIsExpanded(!isExpanded)}
                     >
-                        <span className="text-sm font-normal flex flex-row items-center"><FaFilter className="mr-2 ml-2" />{languageData[langValue]["Filters"]}</span> {/* {languageData[langValue]["Filters"]} */}
+                        <div>
+                            <span className="text-sm font-normal flex flex-row items-center"><FaFilter className="mr-2 ml-2" />
+                                {languageData[langValue]["Filters"]}
+                                {isFiltered ? <button type="button" onClick={handleFilterReset} className="px-2 py-1 bg-primary w-auto mx-2 rounded-md">{languageData[langValue]["Reset Filter"]}</button> : null}
+                            </span>
+
+                        </div>
                         {isExpanded ? <FaChevronUp size={18} className="mr-2" /> : <FaChevronDown size={18} className="mr-2" />}
                     </div>
                     {
@@ -190,7 +210,8 @@ const Brand = ({ lang }) => {
                                 <div className="grid grid-cols-1 space-y-2">
                                     <span className="text-left text-sm text-white">{languageData[lang]["Type of Cars"]}</span>
                                     {
-                                        Array.isArray(filters?.data?.data?.types) && filters?.data?.data?.types?.map((item, idx) => {
+                                        Array.isArray(filterData?.types) &&
+                                        filterData?.types?.map((item, idx) => {
                                             return (
                                                 <div className="inline-flex items-center" key={idx} >
                                                     <label className="relative flex items-center cursor-pointer" htmlFor={`type_of_car_` + item.id}>
@@ -338,7 +359,7 @@ const Brand = ({ lang }) => {
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
                                         {/* Brand 1 */}
                                         {
-                                            Array.isArray(filters?.data?.data?.brands) && filters?.data?.data?.brands?.map((item, idx) => {
+                                            Array.isArray(filterData?.brands) && filterData?.brands?.map((item, idx) => {
                                                 return (
                                                     <Link href={`${basePath}${item.slug}`} className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" key={idx}>
                                                         <label className="relative h-[5rem] items-center sm:h-[5rem] md:h-[5rem] bg-white rounded-lg" >
@@ -400,7 +421,7 @@ const Brand = ({ lang }) => {
                 </div>
 
             </div>
-            <div className="relative flex flex-row justify-center items-center my-10">
+            <div className="relative flex flex-row justify-center items-center my-10 pb-5">
                 <Pagination onChange={onChange} responsive={true} current={activePage} total={data?.pagination?.total} pageSize={12} />
             </div>
 
