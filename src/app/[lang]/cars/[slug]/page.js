@@ -28,7 +28,7 @@ export async function generateStaticParams() {
     const languages = ['en', 'ar',];
 
     const paths = languages.map((lang) => ({ lang }));
-
+    console.log('Pathssss', paths);
     return paths;
 }
 

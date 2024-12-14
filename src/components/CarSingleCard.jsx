@@ -121,7 +121,10 @@ const CarSingleCard = ({ car_id, model, slug, image, title, price_daily, price_w
             </ul>
 
             <div className="px-4 lg:px-0">
-                <button onClick={handleBookingModal} className="bg-secondary float-right lg:mx-4 my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center">{languageData[langValue]["Book Ride"]}</button>
+                <Link href={`/cars/${slug}`}>
+                    <button className="bg-secondary float-right lg:mx-4 my-4 hover:bg-[#c9281a] uppercase text-center w-full md:w-auto text-white font-medium py-2 px-6 rounded inline-flex items-center justify-center">{languageData[langValue]["Book Ride"]}</button>
+                </Link>
+                {/* onClick={handleBookingModal} */}
             </div>
 
             <Modal

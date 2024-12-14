@@ -36,8 +36,8 @@ const Cars = ({ lang }) => {
 
     const [filtersAll, setFiltersAll] = useState({});
 
-    const [minPrice, setMinPrice] = useState(0);
-    const [maxPrice, setMaxPrice] = useState(0);
+    const [minPrice, setMinPrice] = useState(filterData?.pricing?.min || 0);
+    const [maxPrice, setMaxPrice] = useState(filterData?.pricing?.max || 0);
     const [debouncedMin, setDebouncedMin] = useState(minPrice);
     const [debouncedMax, setDebouncedMax] = useState(maxPrice);
     const [isFiltered, setIsFiltered] = useState(false);
@@ -80,7 +80,9 @@ const Cars = ({ lang }) => {
             availability: filtersAll?.availability,
             brand: filtersAll?.car_brands,
             price_high_low: filtersAll?.price_high_low,
-            price_max: debouncedMax
+            price_max: debouncedMax,
+            min: minPrice,
+            max: maxPrice
             // brand_x: filtersAll?.car_brands
         }
 
@@ -109,6 +111,13 @@ const Cars = ({ lang }) => {
             ...prevState,
             [name]: value
         }))
+
+        if (name == 'minPrice') {
+            setMinPrice(value)
+        }
+        if (name == 'maxPrice') {
+            setMaxPrice(value)
+        }
         setIsFiltered(true)
     }
 
@@ -334,15 +343,17 @@ const Cars = ({ lang }) => {
                                     <input
                                         type="number"
                                         placeholder="From"
-                                        name="from_value"
+                                        name="minPrice"
                                         value={minPrice}
+                                        onChange={handleFilter}
                                         className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                     />
                                     <input
                                         type="number"
                                         placeholder="To"
-                                        name="to_value"
+                                        name="maxPrice"
                                         value={maxPrice}
+                                        onChange={handleFilter}
                                         className="py-2 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#333]"
                                     />
                                 </div>

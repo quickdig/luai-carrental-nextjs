@@ -48,7 +48,7 @@ export const languageData = {
         "End from Time": "End from Time",
         "Submit Request": "Submit Request",
         "Name": "Name",
-        "Number": "Number",
+        "Contact Number": "Contact Number",
         "Email": "Email",
         "Message": "Message",
         "Success! Your Booking Request has been Sent": "Success! Your Booking Request has been Sent",
@@ -69,7 +69,17 @@ export const languageData = {
         "Developed by": "Developed by",
         "Luai Alkhatib Car Rental": "Luai Alkhatib Car Rental",
         "All Rights Reserved": "All Rights Reserved",
-        "Reset Filter": "Reset Filter"
+        "Reset Filter": "Reset Filter",
+        "Baby Seat": "Baby Seat",
+        "Additional Driver": "Additional Driver",
+        "Full Insurance": "Full Insurance",
+        "Security Amount": "Security Amount",
+        "Payment Type": "Payment Type",
+        "24x7 Support": "24x7 Support",
+        "Free Delivery": "Free Delivery",
+        "Free Cancellation": "Free Cancellation",
+        "Additional services": "Additional services",
+        "daily_price": "Daily Price"
     },
     ar: {
         "English": "English",
@@ -120,7 +130,7 @@ export const languageData = {
         "End from Time": "انتهى من الزمن",
         "Submit Request": "إرسال الطلب",
         "Name": "اسم",
-        "Number": "رقم",
+        "Contact Number": "رقم الاتصال",
         "Email": "بريد إلكتروني",
         "Message": "رسالة",
         "Success! Your Booking Request has been Sent": "نجاح! لقد تم إرسال طلب الحجز الخاص بك",
@@ -141,7 +151,17 @@ export const languageData = {
         "Developed by": "تم تطويره بواسطة",
         "Luai Alkhatib Car Rental": "لؤي الخطيب لتأجير السيارات",
         "All Rights Reserved": "جميع الحقوق محفوظة",
-        "Reset Filter": "إعادة ضبط"
+        "Reset Filter": "إعادة ضبط",
+        "Baby Seat": "مقعد الطفل",
+        "Additional Driver": "سائق إضافي",
+        "Full Insurance": "التأمين الكامل",
+        "Security Amount": "مبلغ التأمين",
+        "Payment Type": "نوع الدفع",
+        "24x7 Support": "دعم 24×7",
+        "Free Delivery": "التوصيل مجاني",
+        "Free Cancellation": "إلغاء مجاني",
+        "Additional services": "خدمات إضافية",
+        "daily_price": "السعر اليومي"
     },
 };
 
@@ -154,7 +174,7 @@ export const requirements = {
         "Copy of Visit Visa": "Copy of Visit Visa",
         "US, Canada, EU, GCC or International Driving License": "US, Canada, EU, GCC or International Driving License",
         "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.": "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.",
-        "MinReq": "Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit."
+        "MinReq": "Minimum age 21. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit."
     },
     ar: {
         "Copy of Passport": "نسخة من جواز السفر",
@@ -164,6 +184,6 @@ export const requirements = {
         "Copy of Visit Visa": "نسخة من تأشيرة الزيارة",
         "US, Canada, EU, GCC or International Driving License": "الولايات المتحدة أو كندا أو الاتحاد الأوروبي أو دول مجلس التعاون الخليجي أو رخصة القيادة الدولية",
         "Please check the requirements before making the booking: - Minimum age 25. -Security deposit is required. You may get a different car from the pictures depends on the availability but for sure same model. Free daily mileage is 250KM. Any extra mileage will be deducted from the security deposit.": "يرجى التحقق من المتطلبات قبل إجراء الحجز: - الحد الأدنى للعمر 25. - مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين.",
-        "MinReq": "الحد الأدنى للسن 25. -مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين."
+        "MinReq": "الحد الأدنى للسن 21. -مطلوب وديعة التأمين. قد تحصل على سيارة مختلفة عن الصور حسب التوفر ولكن بالتأكيد نفس الطراز. الأميال اليومية المجانية هي 250 كم. سيتم خصم أي أميال إضافية من وديعة التأمين."
     }
 }

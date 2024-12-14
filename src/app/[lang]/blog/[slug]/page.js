@@ -30,6 +30,7 @@ export async function generateStaticParams() {
 
     const paths = languages.map((lang) => ({ lang }));
 
+
     return paths;
 }
 

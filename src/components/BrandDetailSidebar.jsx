@@ -9,11 +9,12 @@ import { useState } from "react";
 import usePost from "@/app/customHooks/usePost";
 import Message from "./Message";
 
-const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, price_weekly, price_monthly, pricing, subscription, insurance, services, techDetails }) => {
+const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, price_weekly, price_monthly, pricing, subscription, insurance, techDetails, deposit }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [res, apiMethod] = usePost()
     const [isShow, setIsShow] = useState(false)
+    const [services, setServices] = useState({});
 
     const [bookingData, setBookingData] = useState({
         name: "",
@@ -23,15 +24,14 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
         start_time: "",
         date_to: "",
         end_time: "",
-        pricing_mode: ""
     });
 
     const handleInputChange = (e) => {
         e.persist();
         setBookingData({ ...bookingData, [e.target.name]: e.target.value })
-        if (e.target.name == 'pricing_mode') {
-            setBookingData({ ...bookingData, ['pricing_mode']: e.target.id + ',' + e.target.value })
-        }
+        // if (e.target.name == 'pricing_mode') {
+        //     setBookingData({ ...bookingData, ['pricing_mode']: e.target.id + ',' + e.target.value })
+        // }
     }
 
     const handleSubmit = (e) => {
@@ -44,7 +44,10 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
         formData.append("start_time", bookingData.start_time);
         formData.append("date_to", bookingData.date_to);
         formData.append("end_time", bookingData.end_time);
-        formData.append("pricing", bookingData.pricing_mode);
+        formData.append("pricing", services?.pricing_mode);
+        formData.append("baby_seat", services?.baby_set)
+        formData.append("driver", services?.additional_driver)
+        formData.append("insurance", services?.full_insurance)
         formData.append("car", title + model);
 
         if (bookingData.name == "" || bookingData.number == "" || bookingData.email == ""
@@ -74,6 +77,20 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
         setIsModalOpen(false);
     };
 
+    const handleServices = (e) => {
+        e.persist();
+
+        const { name, value } = e.target;
+
+        console.log(name, value);
+        setServices({ ...services, [name]: value })
+
+        if (name === 'pricing_mode') {
+            setServices({ ...services, ['pricing_mode']: e.target.id + ',' + value })
+        }
+
+    }
+
     return (
         <div className="space-y-4">
             {/* Pricing Mode */}
@@ -90,8 +107,10 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 name="pricing_mode"
                                 className="hidden peer"
                                 id="daily_price"
+                                value={price_daily}
+                                onChange={handleServices}
                             />
-                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-[12px] border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
                                 <label htmlFor="daily_price">{languageData[lang]["Daily"]} <br />{price_daily == 'On Request' ? null : 'AED'} {price_daily}</label>
                             </div>
                         </label>
@@ -104,8 +123,10 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 name="pricing_mode"
                                 className="hidden peer"
                                 id="weekly_price"
+                                value={price_weekly}
+                                onChange={handleServices}
                             />
-                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-[12px] border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
                                 <label htmlFor="weekly_price">{languageData[lang]["Weekly"]} <br />{price_weekly == 'On Request' ? null : 'AED'} {price_weekly}</label>
                             </div>
                         </label>
@@ -118,8 +139,10 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 name="pricing_mode"
                                 className="hidden peer"
                                 id="monthly_price"
+                                value={price_monthly}
+                                onChange={handleServices}
                             />
-                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-sm border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
+                            <div className="w-full h-full py-2 flex text-center items-center justify-center text-[12px] border border-gray-400 rounded-lg cursor-pointer peer-checked:border-white peer-checked:text-white peer-checked:bg-secondary">
                                 <label htmlFor="monthly_price">{languageData[lang]["Monthly"]}<br /> {price_monthly == 'On Request' ? null : 'AED'} {price_monthly}</label>
                             </div>
                         </label>
@@ -128,7 +151,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
             </div>
 
             {/* Subscription Length */}
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
                 <div className="flex justify-between items-center">
                     <span className="text-md text-black font-medium">{lang === 'en' ? 'Subscription Length' : 'مدة الاشتراك'}</span>
                 </div>
@@ -173,10 +196,10 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                         </label>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Insurance */}
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
                 <div className="flex justify-between items-center">
                     <span className="text-md text-black font-medium">{lang === 'en' ? 'Insurance' : 'تأمين'}</span>
                 </div>
@@ -210,41 +233,63 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                     </div>
 
                 </div>
-            </div>
+            </div> */}
 
             {/* Additional Services */}
             <div className="grid grid-cols-1 space-y-4">
-                <span className="text-md text-black font-medium">{lang === 'en' ? 'Additional services' : 'خدمات إضافية'}</span>
+                <span className="text-md text-black font-medium">{languageData[lang]["Additional services"]}</span>
                 <div className="inline-flex items-center">
                     <label className="relative flex items-center cursor-pointer" htmlFor="service_1">
                         <input
-                            name="additional_service"
+                            name="baby_set"
                             type="checkbox"
                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                             id="service_1"
+                            value={"Baby Seat"}
+                            onClick={handleServices}
                         />
                         <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
                             <IoCheckmarkCircle />
                         </span>
                     </label>
                     <label className="ml-2 text-[#707070] cursor-pointer text-sm" htmlFor="service_1">
-                        &nbsp;{lang === 'en' ? 'Baby seat (AED 50)' : 'مقعد الطفل (50 درهم)'}
+                        &nbsp;{languageData[lang]["Baby Seat"]} (10 AED) <small>({languageData[lang]["Per Day"]})</small>
                     </label>
                 </div>
                 <div className="inline-flex items-center">
                     <label className="relative flex items-center cursor-pointer" htmlFor="service_2">
                         <input
-                            name="additional_service"
+                            name="additional_driver"
                             type="checkbox"
                             className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
                             id="service_2"
+                            value={"Additional Driver"}
+                            onClick={handleServices}
                         />
                         <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
                             <IoCheckmarkCircle />
                         </span>
                     </label>
                     <label className="ml-2 text-[#707070] cursor-pointer text-sm" htmlFor="service_2">
-                        &nbsp;{lang === 'en' ? 'Airport delivery and pick up (AED 100)' : 'التوصيل من وإلى المطار (100 درهم)'}
+                        &nbsp;{languageData[lang]["Additional Driver"]} (200 AED)
+                    </label>
+                </div>
+                <div className="inline-flex items-center">
+                    <label className="relative flex items-center cursor-pointer" htmlFor="service_3">
+                        <input
+                            name="full_insurance"
+                            type="checkbox"
+                            className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-primary transition-all"
+                            id="service_3"
+                            value={"Full Insurance"}
+                            onClick={handleServices}
+                        />
+                        <span className="absolute w-3 h-3 rounded-full text-primary opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-2 left-2 transform -translate-x-1/2 -translate-y-1/2">
+                            <IoCheckmarkCircle />
+                        </span>
+                    </label>
+                    <label className="ml-2 text-[#707070] cursor-pointer text-sm" htmlFor="service_2">
+                        &nbsp;{languageData[lang]["Full Insurance"]} (300 - 1000 AED)
                     </label>
                 </div>
             </div>
@@ -258,11 +303,11 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                             <FaCheck />
                         </span>
                         <div className="flex flex-row justify-between w-full ml-2">
-                            <span>{lang === 'en' ? 'Security Amount' : 'مبلغ التأمين'}</span>
-                            <span className="font-medium">{lang === 'en' ? '150 AED' : '150 AED'}</span>
+                            <span>{languageData[lang]["Security Amount"]}</span>
+                            <span className="font-medium">{deposit} AED</span>
                         </div>
                     </li>
-                    <li className="flex items-center text-sm font-normal">
+                    {/* <li className="flex items-center text-sm font-normal">
                         <span className="text-primary">
                             <FaCheck />
                         </span>
@@ -270,13 +315,13 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                             <span>{lang === 'en' ? 'Security Type' : 'نوع الأمان'}</span>
                             <span className="font-medium">{lang === 'en' ? 'Card Only' : 'البطاقة فقط'}</span>
                         </div>
-                    </li>
+                    </li> */}
                     <li className="flex items-center text-sm font-normal">
                         <span className="text-primary">
                             <FaCheck />
                         </span>
                         <div className="flex flex-row justify-between w-full ml-2">
-                            <span>{lang === 'en' ? 'Payment Type' : 'نوع الدفع'}</span>
+                            <span>{languageData[lang]["Payment Type"]}</span>
                             <span className="font-medium">{lang === 'en' ? 'Credit Card, Cash' : 'بطاقة الائتمان، نقدا'}</span>
                         </div>
                     </li>
@@ -285,7 +330,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                             <FaCheck />
                         </span>
                         <div className="flex flex-row justify-between w-full ml-2">
-                            <span>{lang === 'en' ? '24x7 Support' : 'دعم 24×7'}</span>
+                            <span>{languageData[lang]["24x7 Support"]}</span>
                             <span className="font-medium">{lang === 'en' ? 'Yes' : 'نعم'}</span>
                         </div>
                     </li>
@@ -295,7 +340,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                             <FaCheck />
                         </span>
                         <div className="flex flex-row justify-between w-full ml-2">
-                            <span>{lang === 'en' ? 'Free Delivery' : 'التوصيل مجاني'}</span>
+                            <span>{languageData[lang]["Free Delivery"]}</span>
                             <span className="font-medium">{lang === 'en' ? 'Yes' : 'نعم'}</span>
                         </div>
                     </li>
@@ -304,7 +349,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                             <FaCheck />
                         </span>
                         <div className="flex flex-row justify-between w-full ml-2">
-                            <span>{lang === 'en' ? 'Free Cancellation' : 'إلغاء مجاني'}</span>
+                            <span>{languageData[lang]["Free Cancellation"]}</span>
                             <span className="font-medium">{lang === 'en' ? 'Yes' : 'نعم'}</span>
                         </div>
                     </li>
@@ -330,7 +375,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
 
                     <div className="lg:w-1/2 w-full bg-white p-4 sm:p-6">
                         <h2 className="uppercase text-[24px] sm:text-[30px] lg:text-[40px] font-light">{title}</h2>
-                        <div className="flex flex-row gap-2">
+                        {/* <div className="flex flex-row gap-2">
                             <div className="w-full">
                                 <label className="relative h-[5rem] sm:h-[5rem] md:h-[5rem] bg-secondary rounded-lg">
                                     <input
@@ -378,13 +423,72 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                     </div>
                                 </label>
                             </div>
-                        </div>
+                        </div> */}
                         {/* <p className="text-primary text-[16px] sm:text-[18px] mt-2">{languageData[lang]["Total Price"]}: AED {price_daily}</p> */}
                         <img
                             src={image}
                             alt="Car"
                             className="rounded-t-md object-contain mx-auto w-full lg:w-80 mt-4"
                         />
+
+                        <h4 className="text-left mt-5 mb-2 underline text-black">Selected Services</h4>
+                        <div className="flex flex-row w-full justify-start items-center">
+                            <div className="selected_details_section">
+
+                                <div className="overflow-x-auto w-full">
+                                    <table className="table-auto w-full text-center border border-gray-300">
+                                        <thead className="bg-gray-100">
+                                            <tr>
+                                                <th className="border border-gray-300 px-4 py-2 text-[12px]">Pricing</th>
+                                                <th className="border border-gray-300 px-4 py-2 text-[12px]">Additional</th>
+                                                <th className="border border-gray-300 px-4 py-2 text-[12px]">Deposit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td
+                                                    rowSpan={3}
+                                                    className="border border-gray-300 px-4 py-2 text-[12px]"
+                                                >
+                                                    {languageData[lang][services?.pricing_mode?.split(',')[0]]}{" "}
+                                                    {services?.pricing_mode?.split(',')[1]} AED
+                                                </td>
+                                                <td className="border border-gray-300 px-4 py-2 text-[12px]">
+                                                    {
+                                                        services?.baby_set ? services?.baby_set : 'No Additional Services Selected'
+                                                    }
+                                                </td>
+                                                <td
+                                                    rowSpan={3}
+                                                    className="border border-gray-300 px-4 py-2 text-[12px]"
+                                                >
+                                                    {deposit}
+                                                </td>
+                                            </tr>
+                                            {
+                                                services?.additional_driver && (
+                                                    <tr>
+                                                        <td className="border border-gray-300 px-4 py-2 text-[12px]">{services?.additional_driver}</td>
+                                                    </tr>
+                                                )
+
+                                            }
+
+                                            {
+                                                services?.full_insurance && (
+                                                    <tr>
+                                                        <td className="border border-gray-300 px-4 py-2 text-[12px]">{services?.full_insurance}</td>
+                                                    </tr>
+                                                )
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
                         <h3 className="mt-6 text-lg text-black font-semibold">{languageData[lang]["Min Requirement"]}</h3>
                         <div className="flex flex-row justify-center">
                             <p className="text-justify leading-6 text-[12px]">{requirements[lang]["MinReq"]}</p>
@@ -410,7 +514,7 @@ const BrandDetailSidebar = ({ lang, model, title, image, car_id, price_daily, pr
                                 </div>
 
                                 <div className="flex-1">
-                                    <label htmlFor="number" className="block text-sm">{languageData[lang]["Number"]}</label>
+                                    <label htmlFor="number" className="block text-sm">{languageData[lang]["Contact Number"]}</label>
                                     <input
                                         type="text"
                                         placeholder="Number"

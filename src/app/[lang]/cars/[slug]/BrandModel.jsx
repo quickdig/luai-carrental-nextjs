@@ -179,7 +179,7 @@ const BrandModel = ({ lang }) => {
 
                 {/* Sidebar Panel Pricing/Other Filtering */}
                 <div className="h-full bg-white border-[.5px] border-gray-400 rounded-md lg:w-4/12 px-4 py-6 sm:px-6 sm:py-8">
-                    <BrandDetailSidebar lang={lang} title={name} image={image?.[0]} car_id={id} price_daily={price_daily} price_weekly={price_weekly} price_monthly={price_monthly} model={model} />
+                    <BrandDetailSidebar lang={lang} title={name} image={image?.[0]} car_id={id} price_daily={price_daily} price_weekly={price_weekly} price_monthly={price_monthly} model={model} deposit={deposit} />
                 </div>
 
             </div>

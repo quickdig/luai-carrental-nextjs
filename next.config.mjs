@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export',
+  assetPrefix: '/frontend',  // Serve static files from this path
   images: {
     unoptimized: true,
+    domains: ['https://api.luaicarrentals.com'],  // External image domains
   },
   async rewrites() {
     return [

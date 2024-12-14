@@ -36,6 +36,7 @@ export async function generateStaticParams() {
 
 export default function page({ params }) {
   const { lang } = params;
+  lang ?? 'en';
   return (
     <div>
       <Home lang={lang} />
